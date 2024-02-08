@@ -1,0 +1,274 @@
+:root {
+  --primary-color: #E63946; /* Red accent */
+  --secondary-color: #333333; /* Darker grey for text, provides better contrast */
+  --explanation-color: #555555; /* Medium grey for explanations, softer than black */
+  --bg-color: #FFFFFF; /* Pure white background for maximum brightness */
+  --bs-border-color: #CCCCCC; /* Light grey borders, subtle and less intrusive */
+  --box-color: #F5F5F5; /* Very light grey for boxes, adds depth with minimal contrast */
+  --tab-btn-color: #EEEEEE; /* Very light grey for inactive tabs, slightly stands out */
+  --tab-btn-hover-color: #DDDDDD; /* Light grey for hover, indicates interactivity */
+  --icon-bg: #E63946; /* Red for active icon backgrounds, matching the accent */
+  --icon-color: #FFFFFF; /* White for icon details, ensures visibility */
+}
+
+[data-theme="dark"] {
+  --primary-color: #E63946; /* Keeping the red accent */
+  --secondary-color: #E0E0E0; /* Lighter grey for secondary text, improves readability */
+  --explanation-color: #BDBDBD; /* Slightly darker grey for explanations, softer on the eyes */
+  --bg-color: #121212; /* Darker background for more depth */
+  --bs-border-color: #373737; /* Dark grey borders, less contrast */
+  --box-color: #1E1E1E; /* Slightly lighter than bg-color for boxes to subtly stand out */
+  --tab-btn-color: #333; /* Darker for inactive tabs, blends with the background */
+  --tab-btn-hover-color: #454545; /* Lighter grey for hover, subtle interaction feedback */
+  --icon-bg: #E63946; /* Red for active icon backgrounds for consistency */
+  --icon-color: #FFFFFF; /* White for icon details, stands out against the red */
+}
+
+
+
+/* for html and body */
+body,
+html {
+  height: 100%;
+  width: 100%;
+  background-color: var(--bg-color) !important;
+  color: var(--primary-color) !important;
+}
+
+/* for all 3 section */
+.center {
+  margin: auto;
+  width: 80%;
+  padding-top: 30px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+}
+
+.result-advance{
+  margin: auto;
+  width: 80%;
+  padding-top: 30px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+}
+
+.scroll {
+  margin: auto;
+  width: 100%;
+  width: 950px;
+  height: 500px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: center;
+  padding: 20px;
+}
+
+/* for tab */
+.tab {
+  overflow: hidden;
+}
+
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: 1px solid var(--bs-border-color) !important;
+  border-bottom: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  height: inherit;
+}
+
+.tab button:hover {
+  background-color: var(--tab-btn-hover-color) !important;
+}
+
+.tab button.active {
+  background-color: var(--tab-btn-color) !important;
+}
+
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid var(--bs-border-color) !important;
+}
+
+
+/* For Nmap result */
+.form-control-plaintext {
+  background-color: var(--bg-color) !important;
+  border: 1px solid !important;
+  border-color: var(--bs-border-color) !important;
+}
+
+/* for copy button */
+.comment {
+  position: relative;
+  display: inline-block;
+}
+
+/* for copy button */
+.comment .commenttext {
+  visibility: hidden;
+  width: 140px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 120%;
+  left: 50%;
+  margin-left: -75px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* for copy button */
+.comment .commenttext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* for copy button */
+.comment:hover .commenttext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* for copy button */
+#Copy {
+  height: 100%;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-color: var(--bs-border-color) !important;
+  color: inherit !important;
+}
+
+/* for explanation text */
+.explanation {
+  margin-bottom: 1rem !important;
+  margin-top: .25rem;
+  font-size: .875em;
+  color: var(--explanation-color) !important;
+}
+
+/* for header part */
+.top {
+  padding: 1rem;
+  background-color: var(--box-color) !important;
+}
+
+/* for content part */
+.mid {
+  border: 1px solid;
+  border-color: #dee2e6;
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* for bottom part */
+.btm {
+  padding: 1rem;
+  background-color: var(--box-color) !important;
+}
+
+/* for input group text */
+.input-group-text {
+  color: inherit !important;
+}
+
+/* for NSE port number */
+#NSE-Port-Number {
+  width: 20%;
+}
+
+/* for input group */
+.input-group {
+  margin-top: 1rem;
+  margin-bottom: .25rem;
+}
+
+/* for form selection */
+.form-select {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* for the explanation of NSE */
+.summary {
+  margin-top: .5rem !important;
+  margin-bottom: .5rem !important;
+}
+
+/* for GitHub icon */
+#Github-Cat {
+  fill: var(--icon-bg);
+  color: var(--icon-color);
+  position: absolute;
+  top: 0;
+  border: 0;
+  right: 0;
+}
+
+/* for GitHub icon */
+.github-corner:hover .octo-arm {
+  animation: octocat-wave 560ms ease-in-out
+}
+
+/* for GitHub icon */
+@keyframes octocat-wave {
+
+  0%,
+  100% {
+    transform: rotate(0)
+  }
+
+  20%,
+  60% {
+    transform: rotate(-25deg)
+  }
+
+  40%,
+  80% {
+    transform: rotate(10deg)
+  }
+}
+
+/* for GitHub icon */
+@media (max-width:500px) {
+  .github-corner:hover .octo-arm {
+    animation: none
+  }
+
+  .github-corner .octo-arm {
+    animation: octocat-wave 560ms ease-in-out
+  }
+}
+
+/* for switching color */
+#Switch-Color {
+  background-color: var(--icon-bg);
+  color: var(--icon-color);
+  position: absolute;
+  padding: 10px;
+  top: 0;
+  border: 0;
+  left: 0;
+  font-size: 20px;
+}
+
+/* for label element */
+label{
+  color:var(--secondary-color);
+}
