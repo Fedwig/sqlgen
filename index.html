@@ -8,7 +8,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
     type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script src="./main.js"></script>
+  <script src="main.js"></script>
 </head>
 
 <body data-theme="light">
@@ -142,214 +142,253 @@
         <div class="scroll">
           <div class="container text-start">
             <div class="row">
-              <!-- Host Discovery -->
+              <!-- General Options -->
               <div class="col">
                 <h5>General Options</h5>
                 
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="SQLmap-General" id="SQLmap-version" checked />
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-General" id="SQLmap-version"  />
                   <label class="form-check-label" for="SQLmap-version">SQLmap Version</label>
                 </div>
 
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" role="switch" id="SQLMap-verbose" />
-                  <label class="form-check-label" for="SQLMap-verbose">Verbosity (Default = 1)</label>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-verbose" />
+                  <label class="form-check-label" for="SQLmap-verbose">Verbosity (Default = 1)</label>
                 </div>
-                <input class="form-control" id="Verbosity" type="text" />
+                <input class="form-control" type="number" id="Verbosity" name="points" step="1" min="1" max="6" placeholder="1">
                 <div class="explanation"> *Verbosity 1-6</div>
 
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="SQLmap-General" id="SQLmap-wizard"  />
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-General" id="SQLmap-wizard"  />
                   <label class="form-check-label" for="SQLmap-wizard">Wizard Interface</label>
                 </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="SQLmap-General" id="SQLmap-update"  />
-                  <label class="form-check-label" for="SQLmap-update">Update</label>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-General" id="SQLmap-update"  />
+                  <label class="form-check-label" for="SQLmap-update">Update SQLmap</label>
                 </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="SQLmap-General" id="SQLmap-purge"  />
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-General" id="SQLmap-purge"  />
                   <label class="form-check-label" for="SQLmap-purge">Purge</label>
                 </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="SQLmap-General" id="SQLmap-tampers"  />
-                  <label class="form-check-label" for="SQLmap-tampers">Tampers</label>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-General" id="SQLmap-tampers"  />
+                  <label class="form-check-label" for="SQLmap-tampers">List Tampers</label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-General" id="SQLmap-dependencies"  />
+                  <label class="form-check-label" for="SQLmap-tampers">Check Dependencies</label>
                 </div>
               </div>
-              <!-- Host Discovery end -->
+              <!-- General Options End-->
 
 
-              <!-- Scan Technique -->
+              <!-- Target Options -->
               <div class="col">
-                <h5>Scan Technique</h5>
+                <h5>Target Options</h5>
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" role="switch" id="SQLMap-URL" />
                   <label class="form-check-label" for="SQLMap-URL">Target URL</label>
                 </div>
-                <input class="form-control" id="Port-Number" type="text" />
+                <input class="form-control" id="target-url" type="text" />
                 <div class="explanation"> *Example: http://www.testing.com</div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Nmap-Scan" id="Nmap-sS" checked />
-                  <label class="form-check-label" for="Nmap-sS">Stealth Scan (Default)</label>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-dorking" />
+                  <label class="form-check-label" for="SQLMap-dorking">Google Dork</label>
                 </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Nmap-Scan" id="Nmap-sT" />
-                  <label class="form-check-label" for="Nmap-sT">Full TCP Scan</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Nmap-Scan" id="Nmap-sW" />
-                  <label class="form-check-label" for="Nmap-sW">Windows Scan</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Nmap-Scan" id="Nmap-sN" />
-                  <label class="form-check-label" for="Nmap-sN">TCP Null Scan</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Nmap-Scan" id="Nmap-sF" />
-                  <label class="form-check-label" for="Nmap-sF">FIN Scan</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Nmap-Scan" id="Nmap-sX" />
-                  <label class="form-check-label" for="Nmap-sX">Xmas Scan</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Nmap-Scan" id="Nmap-sO" />
-                  <label class="form-check-label" for="Nmap-sO">IP protocol Scan</label>
-                </div>
-                <div class="form-check ">
-                  <input class="form-check-input" type="radio" name="Nmap-Scan" id="Nmap-sU" />
-                  <label class="form-check-label" for="Nmap-sU">UDP Scan</label>
-                </div>
+                <input class="form-control" id="googledork" type="text" />
+                <div class="explanation"> *Example: inurl:index.php?id= </div>
               </div>
-              <!-- Scan Techinque end -->
-              <!-- Misc -->
+              <!-- Target Options End-->
+
+
+              <!-- Request Options-->
               <div class="col">
-                <h5>Misc</h5>
+                <h5>Request Options</h5>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="Nmap-sV" />
-                  <label class="form-check-label" for="Nmap-sV">service detection</label>
+                  <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-data" />
+                  <label class="form-check-label" for="SQLmap-data">Data String</label>
+                </div>
+                <input class="form-control" id="request-data" type="text" />
+                <div class="explanation"> *Example: id=1 </div>
+
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-cookie" />
+                  <label class="form-check-label" for="SQLmap-cookie">HTTP Cookie Header</label>
+                </div>
+                <input class="form-control" id="request-cookie" type="text" />
+                <div class="explanation"> *Example: PHPSESSID=a8d127e.. </div>
+
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-random-agent" />
+                  <label class="form-check-label" for="SQLmap-random-agent">Random Agent</label>
                 </div>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="Nmap-sC" />
-                  <label class="form-check-label" for="Nmap-sC">Default Script Scan</label>
+                  <input class="form-check-input" type="checkbox" role="switch" id="SQlmap-proxy" />
+                  <label class="form-check-label" for="SQLmap-proxy">Proxy</label>
                 </div>
+                <input class="form-control" id="request-proxy" type="text" />
+                <div class="explanation"> *Example: http://127.0.0.1:8080 </div>
+
+
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="Nmap-O" />
-                  <label class="form-check-label" for="Nmap-O">OS detection</label>
+                  <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-tor" />
+                  <label class="form-check-label" for="SQLmap-tor">Tor</label>
                 </div>
+                
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="Nmap-A" />
-                  <label class="form-check-label" for="Nmap-A">All (OS detection, version detection, script scan and
-                    traceroute)</label>
-                </div>
-                <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="Nmap-6" />
-                  <label class="form-check-label" for="Nmap-6">IPv6 Scan</label>
-                </div>
-                <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="Nmap-v" />
-                  <label class="form-check-label" for="Nmap-v">verbosity</label>
+                  <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-check-tor" />
+                  <label class="form-check-label" for="SQLmap-check-tor">Check Tor Configuration</label>
                 </div>
               </div>
-              <!-- Misc end -->
+            </div>
+            <!-- Request Options End -->
+
+            </br>
+            
+            <div class="row">
+              <!-- Injection Options -->
+              <div class="col">
+                <h5>Injection Options</h5>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="SQlmap-parameter" />
+                  <label class="form-check-label" for="SQLmap-parameter">Test Parameters</label>
+                </div>
+                <input class="form-control" id="injection-parameter" type="text" />
+                <div class="explanation"> *Example: id </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="SQlmap-dbms" />
+                  <label class="form-check-label" for="SQLmap-dbms">DBMS Type</label>
+                </div>
+                <select class="form-select" id="dbms-types">
+                </select>            
+              </div>
+              <!-- Injection Options end -->
+              
+              
+              <!-- Detection Options -->
+              <div class="col">
+                <h5>Detection Options</h5>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-level" />
+                  <label class="form-check-label" for="SQLmap-level">Level</label>
+                </div>
+                <input class="form-control" type="number" id="Level" name="level" step="1" min="1" max="5" placeholder="1">
+                <div class="explanation"> *Level 1-5 (Default = 1)</div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-risk" />
+                  <label class="form-check-label" for="SQLmap-risk">Risk</label>
+                </div>
+                <input class="form-control" type="number" id="Risk" name="risk" step="1" min="1" max="3" placeholder="1">
+                <div class="explanation"> *Result 1-3 (Default = 1)</div>
+              </div>
+              <!-- Detection Options end -->
+              
+              <!-- Enumeration Options -->
+              <div class="col">
+                <h5>Enumeration Options</h5>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum" id="SQLmap-all" />
+                  <label class="form-check-label" for="SQLmap-all"> Enumerate All </label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum" id="SQLmap-current-user" />
+                  <label class="form-check-label" for="SQLmap-current-user"> Current User </label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum" id="SQLmap-current-db" />
+                  <label class="form-check-label" for="SQLmap-current-db"> Current Database </label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum" id="SQLmap-password" />
+                  <label class="form-check-label" for="SQLmap-password"> Passwords </label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum" id="SQLmap-database" />
+                  <label class="form-check-label" for="SQLmap-database"> Databases </label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum" id="SQLmap-tables" />
+                  <label class="form-check-label" for="SQLmap-tables"> Tables </label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum" id="SQLmap-columns" />
+                  <label class="form-check-label" for="SQLmap-columns"> Columns </label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum" id="SQLmap-schema" />
+                  <label class="form-check-label" for="SQLmap-schema"> Schema </label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum" id="SQLmap-dump" />
+                  <label class="form-check-label" for="SQLmap-dump"> Dump </label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum" id="SQLmap-dump-all" />
+                  <label class="form-check-label" for="SQLmap-dump-all"> Dump All </label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum" id="SQLmap-DB" />
+                  <label class="form-check-label" for="SQLmap-DB"> Database to Enumerate </label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum" id="SQLmap-TBL" />
+                  <label class="form-check-label" for="SQLmap-TBL"> Tables to Enumerate </label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum" id="SQLmap-COL" />
+                  <label class="form-check-label" for="SQLmap-COL"> Columns to Enumerate </label>
+                </div>
+              </div>
+              <!-- Enumeration Options end -->
             </div>
             </br>
             <div class="row">
-              <!-- Port Specification -->
               <div class="col">
-                <h5>Port Specification</h5>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Nmap-Port" id="Nmap-Full-Port" />
-                  <label class="form-check-label" for="Nmap-Full-Port"> Full Port </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Nmap-Port" id="Nmap-1000-Port" checked />
-                  <label class="form-check-label" for="Nmap-1000-Port"> Top 1000 Common Port </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Nmap-Port" id="Nmap-Custom-Port" />
-                  <label class="form-check-label" for="Nmap-Custom-Port"> Custom Port </label>
-                </div>
-                <input class="form-control" id="Port-Number" type="text" />
-                <div class="explanation"> * Multiple port example: 22,80 <br /> * Range example: 1-1000 </div>
+                <!-- Operating System Access -->
+                <h5>Operating System Access</h5>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="Nmap-Exclude-Port" />
-                  <label class="form-check-label" for="Nmap-Exclude-Port">Exclude Port</label>
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-OS" id="SQLmap-Shell" />
+                  <label class="form-check-label" for="SQLmap-Shell"> Interactive OS Shell </label>
                 </div>
-                <input class="form-control" id="Exclude-Port-Number" type="text" />
-                <div class="explanation"> * Multiple port example: 22,80 <br /> * Range example: 1-1000 </div>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="Nmap-Scan-Sequence" />
-                  <label class="form-check-label" for="Nmap-Scan-Sequence">Scan port sequentially</label>
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-OS" id="SQLmap-Pwn" />
+                  <label class="form-check-label" for="SQLmap-Pwn"> OOB Shell, Meterpreter or VNC </label>
                 </div>
-              </div>
-              <!-- Port Sepcification end -->
-              <!-- Timing and Performance -->
+              </div>  
+               <!-- Operating System Access end --> 
+               
+               <div class="col">
+                <!-- General Options -->
+                <h5>General Options</h5>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-General" id="SQLmap-Batch" />
+                  <label class="form-check-label" for="SQLmap-Shell"> Batch (Default Behaviour) </label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-General" id="SQLmap-Flush" />
+                  <label class="form-check-label" for="SQLmap-Pwn"> Flush Session </label>
+                </div>
+              </div>  
+               <!-- General Options -->   
+              
               <div class="col">
-                <h5>Timing and Performance</h5>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Nmap-Timing" id="Nmap-T0" checked />
-                  <label class="form-check-label" for="Nmap-T0"> Disable Timing Template </label>
+                <!-- Operating System Access -->
+                <h5>Operating System Access</h5>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-batch" id="SQLmap-Batch" />
+                  <label class="form-check-label" for="SQLmap-Shell"> Interactive OS Shell </label>
                 </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Nmap-Timing" id="Nmap-T1" />
-                  <label class="form-check-label" for="Nmap-T1"> 1 </label>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-OS" id="SQLmap-Flush" />
+                  <label class="form-check-label" for="SQLmap-Pwn"> OOB Shell, Meterpreter or VNC </label>
                 </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Nmap-Timing" id="Nmap-T2" />
-                  <label class="form-check-label" for="Nmap-T2"> 2 </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Nmap-Timing" id="Nmap-T3" />
-                  <label class="form-check-label" for="Nmap-T3"> 3 </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Nmap-Timing" id="Nmap-T4" />
-                  <label class="form-check-label" for="Nmap-T4"> 4 (Recommended)</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Nmap-Timing" id="Nmap-T5" />
-                  <label class="form-check-label" for="Nmap-T5"> 5 </label>
-                </div>
-                <div class="explanation">* Higher number scan faster</div>
-              </div>
-              <!-- Timing and Performance end -->
-              <!-- File Output -->
-              <div class="col">
-                <h5>File Output</h5>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Nmap-Output" id="Nmap-DOutput" checked />
-                  <label class="form-check-label" for="Nmap-DOutput"> Disable File Output </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Nmap-Output" id="Nmap-oN" />
-                  <label class="form-check-label" for="Nmap-oN"> Normal Output </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Nmap-Output" id="Nmap-oX" />
-                  <label class="form-check-label" for="Nmap-oX"> XML Output </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Nmap-Output" id="Nmap-oS" />
-                  <label class="form-check-label" for="Nmap-oS"> Script Output </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Nmap-Output" id="Nmap-oG" />
-                  <label class="form-check-label" for="Nmap-oG"> Grepable Output</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Nmap-Output" id="Nmap-oA" />
-                  <label class="form-check-label" for="Nmap-oA"> 3 different output in Normal, XML and Grepable
-                    format</label>
-                </div>
-                <input class="form-control" id="Output-Name" type="text" />
-                <div class="explanation">* Output File Name</div>
-              </div>
-              <!-- File Output end -->
+              </div>  
+               <!-- Operating System Access end -->             
             </div>
           </div>
         </div>
         <div class="center">
-            <!-- Advance Nmap Command -->
+            <!-- Advance SQLmap Command -->
           <div class="input-group">
             <span class="input-group-text">Result:</span>
             <div class="form-floating">
@@ -363,7 +402,7 @@
             </div>
             <!-- copy button end -->
           </div>
-          <!-- Advance Nmap Command end -->
+          <!-- Advance SQLmap Command end -->
         </div>
       </div>
 
@@ -451,5 +490,4 @@
     <!-- footer end -->
   </div>
 </body>
-
 </html>

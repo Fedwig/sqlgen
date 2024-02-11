@@ -15,3 +15,27 @@ function ChangeTab(evt, customTab) {
   document.getElementById(customTab).style.display = "block";
   evt.currentTarget.className += " active";
 }
+
+
+function DBMSTypes() {
+  var options = [
+    { value: "mysql", text: "MySQL" },
+    { value: "oracle", text: "OracleDB" },
+  ];
+  var NSECategory = document.getElementById("dbms-types");
+
+  options.forEach(function (option) {
+    var optionElement = document.createElement("option");
+    optionElement.value = option.value;
+    optionElement.text = option.text;
+    NSECategory.appendChild(optionElement);
+  });
+
+  NSECategory.value = "default";
+}
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  DBMSTypes();
+});
