@@ -45,26 +45,6 @@ html {
   padding-right: 10px;
 }
 
-.result-advance{
-  margin: auto;
-  width: 70%;
-  padding-top: 30px;
-  padding-left: 10px;
-  padding-bottom: 10px;
-  padding-right: 10px;
-}
-
-.scroll {
-  margin: auto;
-  width: 82%;
-  /* width: 850; */
-  height: 500px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  text-align: center;
-  padding: 20px;
-}
-
 /* for tab */
 .tab {
   overflow: hidden;
