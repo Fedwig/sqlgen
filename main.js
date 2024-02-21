@@ -259,57 +259,77 @@ function SetSQLmap() {
     }
   }
 
+  // Append value if sqlmap_all is checked
   if (sqlmap_all.checked) {
     sqlmap_result += " " + sqlmap_all.value;
   }
 
+  // Append value if sqlmap_current_user is checked
   if (sqlmap_current_user.checked) {
     sqlmap_result += " " + sqlmap_current_user.value;
   }
 
+  // Append value if sqlmap_current_db is checked
   if (sqlmap_current_db.checked) {
     sqlmap_result += " " + sqlmap_current_db.value;
   }
 
+  // Append value if sqlmap_password is checked
   if (sqlmap_password.checked) {
     sqlmap_result += " " + sqlmap_password.value;
   }
 
+  // Append value if sqlmap_database is checked
   if (sqlmap_database.checked) {
     sqlmap_result += " " + sqlmap_database.value;
   }
 
+  // Append value if sqlmap_tables is checked
   if (sqlmap_tables.checked) {
     sqlmap_result += " " + sqlmap_tables.value;
   }
 
+  // Append value if sqlmap_columns is checked
   if (sqlmap_columns.checked) {
     sqlmap_result += " " + sqlmap_columns.value;
   }
 
+  // Append value if sqlmap_schema is checked
   if (sqlmap_schema.checked) {
     sqlmap_result += " " + sqlmap_schema.value;
   }
 
+  // Append value if sqlmap_dump is checked
   if (sqlmap_dump.checked) {
     sqlmap_result += " " + sqlmap_dump.value;
   }
 
+  // Append value if sqlmap_dump_all is checked
   if (sqlmap_dump_all.checked) {
     sqlmap_result += " " + sqlmap_dump_all.value;
   }
 
+  // Append value if sqlmap_DB is checked
   if (sqlmap_DB.checked) {
     sqlmap_result += " " + sqlmap_DB.value;
   }
 
+  // Append value if sqlmap_TBL is checked
   if (sqlmap_TBL.checked) {
     sqlmap_result += " " + sqlmap_TBL.value;
   }
 
+  // Append value if sqlmap_COL is checked
   if (sqlmap_COL.checked) {
     sqlmap_result += " " + sqlmap_COL.value;
   }
+
+  // Disable or enable specific options checkboxes based on the state of sqlmap_all
+  var specificOptionsCheckboxes = [sqlmap_current_user, sqlmap_current_db, sqlmap_password, sqlmap_database, sqlmap_tables, sqlmap_columns, sqlmap_schema, sqlmap_dump, sqlmap_dump_all, sqlmap_DB, sqlmap_TBL, sqlmap_COL];
+  specificOptionsCheckboxes.forEach(function(checkbox) {
+    checkbox.disabled = sqlmap_all.checked;
+  });
+
 
   if (sqlmap_shell.checked) {
     sqlmap_result += " " + sqlmap_shell.value;
