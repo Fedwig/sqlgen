@@ -36,7 +36,7 @@ function SetSQLmap() {
   var target_url = document.getElementById("target-url");
   var sqlmap_dorking = document.getElementById("SQLmap-dorking");
   var googledork = document.getElementById("googledork");
-  
+
   //Request Variables
   var sqlmap_data = document.getElementById("SQLmap-data");
   var request_data = document.getElementById("request-data");
@@ -60,7 +60,7 @@ function SetSQLmap() {
   var level = document.getElementById("level");
   var sqlmap_risk = document.getElementById("SQLmap-risk");
   var risk = document.getElementById("risk");
-  
+
   //Enumeration Variables
   var sqlmap_all = document.getElementById("SQLmap-all");
   var sqlmap_current_user = document.getElementById("SQLmap-current-user");
@@ -85,7 +85,7 @@ function SetSQLmap() {
   var sqlmap_flush = document.getElementById("SQLmap-Flush");
 
 
-  
+
   // Initialize SQLmap command
   var sqlmap_result = "sqlmap";
 
@@ -145,7 +145,7 @@ function SetSQLmap() {
   if (sqlmap_version.checked) {
     sqlmap_result += " " + sqlmap_version.value;
   }
-  
+
   if (sqlmap_verbose.checked) {
     if (verbosity.value !== "") {
       sqlmap_result += " " + sqlmap_verbose.value + " " + verbosity.value;
@@ -222,7 +222,7 @@ function SetSQLmap() {
   if (sqlmap_tor.checked) {
     sqlmap_result += " " + sqlmap_tor.value;
   }
-  
+
   if (sqlmap_check_tor.checked) {
     sqlmap_result += " " + sqlmap_check_tor.value;
   }
@@ -326,7 +326,7 @@ function SetSQLmap() {
 
   // Disable or enable specific options checkboxes based on the state of sqlmap_all
   var specificOptionsCheckboxes = [sqlmap_current_user, sqlmap_current_db, sqlmap_password, sqlmap_database, sqlmap_tables, sqlmap_columns, sqlmap_schema, sqlmap_dump, sqlmap_dump_all, sqlmap_DB, sqlmap_TBL, sqlmap_COL];
-  specificOptionsCheckboxes.forEach(function(checkbox) {
+  specificOptionsCheckboxes.forEach(function (checkbox) {
     checkbox.disabled = sqlmap_all.checked;
   });
 
@@ -347,9 +347,9 @@ function SetSQLmap() {
     sqlmap_result += " " + sqlmap_flush.value;
   }
 
-  document.getElementById("Advance-SQLmap").value = sqlmap_result;
+  document.getElementById("Simple-SQLmap").value = sqlmap_result;
 }
-  
+
 function CopyToClip(event) {
   var buttonid = event.target.getAttribute("data-id");
   var copyText = document.getElementById(buttonid);
@@ -367,7 +367,7 @@ function ResetToClip(event) {
 }
 
 function DisableEnableInput() {
-  
+
   var verbosity_input = document.getElementById("Verbosity");
   var sqlmap_verbose = document.getElementById("SQLmap-verbose");
 
@@ -406,7 +406,7 @@ function DisableEnableInput() {
   if (!sqlmap_verbose.checked) {
     verbosity_input.value = ""; // Optionally reset value when disabled
   }
-  
+
   // Enable/disable verbosity input based on the verbose checkbox
   target_url_input.disabled = !sqlmap_target.checked;
   if (!sqlmap_target.checked) {
@@ -497,6 +497,7 @@ function DBMSTypes() {
     { value: "virtuoso", text: "Virtuoso" }
   ];
 
+  // Simple Mode
   var dbms_types = document.getElementById("dbms-types");
 
   options.forEach(function (option) {
@@ -507,7 +508,88 @@ function DBMSTypes() {
   });
 
   dbms_types.value = "default";
+
+  // Advanced Mode
+  var dbms_types2 = document.getElementById("dbms-types2");
+
+  options.forEach(function (option) {
+    var optionElement = document.createElement("option");
+    optionElement.value = option.value;
+    optionElement.text = option.text;
+    dbms_types2.appendChild(optionElement);
+  });
+
+  dbms_types2.value = "default";
+
 }
+
+
+function TamperTypes() {
+  var tampersSelect = document.getElementById("injection-tamper");
+
+  var tampers = [
+    "apostrophemask.py",
+    "apostrophenullencode.py",
+    "appendnullbyte.py",
+    "base64encode.py",
+    "between.py",
+    "bluecoat.py",
+    "chardoubleencode.py",
+    "commalesslimit.py",
+    "commalessmid.py",
+    "concat2concatws.py",
+    "charencode.py",
+    "charunicodeencode.py",
+    "equaltolike.py",
+    "escapequotes.py",
+    "greatest.py",
+    "halfversionedmorekeywords.py",
+    "ifnull2ifisnull.py",
+    "modsecurityversioned.py",
+    "modsecurityzeroversioned.py",
+    "multiplespaces.py",
+    "nonrecursivereplacement.py",
+    "percentage.py",
+    "overlongutf8.py",
+    "randomcase.py",
+    "randomcomments.py",
+    "securesphere.py",
+    "sp_password.py",
+    "space2comment.py",
+    "space2dash.py",
+    "space2hash.py",
+    "space2morehash.py",
+    "space2mssqlblank.py",
+    "space2mssqlhash.py",
+    "space2mysqlblank.py",
+    "space2mysqldash.py",
+    "space2plus.py",
+    "space2randomblank.py",
+    "symboliclogical.py",
+    "unionalltounion.py",
+    "unmagicquotes.py",
+    "uppercase.py",
+    "varnish.py",
+    "versionedkeywords.py",
+    "versionedmorekeywords.py",
+    "xforwardedfor.py"
+  ];
+
+  var options = tampers.map(function (tamper) {
+    return { value: tamper.replace(".py", ""), text: tamper };
+  });
+
+  options.forEach(function (option) {
+    var optionElement = document.createElement("option");
+    optionElement.value = option.value;
+    optionElement.text = option.text;
+    tampersSelect.appendChild(optionElement);
+  });
+
+  tampersSelect.value = "default";
+
+}
+
 
 function SwitchColorMode() {
 
@@ -538,9 +620,17 @@ function SwitchColorMode() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-  // Assuming DBMSTypes is correctly defined elsewhere
+function Initial_Setup() {
+
   DBMSTypes();
+  TamperTypes();
+  SetSQLmap();
+  DisableEnableInput();
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  Initial_Setup();
 
   // Default Opening the first tab
   document.getElementById("SimpleOpen").click();
@@ -551,58 +641,56 @@ document.addEventListener("DOMContentLoaded", function() {
     cpbtns[i].addEventListener("mouseleave", ResetToClip);
     cpbtns[i].addEventListener("click", CopyToClip);
   }
-  
-  // Set initial SQLmap command
-  SetSQLmap();
-  DisableEnableInput();
+
+
 
   var elementIDs = [
     { id: "SQLmap-version", event: "change", action: SetSQLmap },
     { id: "SQLmap-verbose", event: "change", action: SetSQLmap },
-    { id: "Verbosity", event: "input"}, // Removed trailing space
-    { id: "SQLmap-wizard", event: "change"},
-    { id: "SQLmap-update", event: "change"},
-    { id: "SQLmap-purge", event: "change"},
-    { id: "SQLmap-tampers", event: "change"},
-    { id: "SQLmap-dependencies", event: "change"},
-    { id: "SQLmap-target", event: "change"},
-    { id: "target-url", event: "input"},
-    { id: "SQLmap-dorking", event: "change"},
-    { id: "googledork", event: "input"},
-    { id: "SQLmap-data", event: "change"},
-    { id: "request-data", event: "input"},
-    { id: "SQLmap-cookie", event: "change"},
-    { id: "request-cookie", event: "input"},
-    { id: "SQLmap-proxy", event: "change"},
-    { id: "request-proxy", event: "input"},
-    { id: "SQLmap-random-agent", event: "change"},
-    { id: "SQLmap-tor", event: "change"},
-    { id: "SQLmap-check-tor", event: "change"},
-    { id: "SQLmap-parameter", event: "change"},
-    { id: "injection-parameter", event: "input"},
-    { id: "SQLmap-dbms", event: "change"},
-    { id: "dbms-types", event: "input"},
-    { id: "SQLmap-level", event: "change"},
-    { id: "level", event: "input"},
-    { id: "SQLmap-risk", event: "change"},
-    { id: "risk", event: "input"},
-    { id: "SQLmap-all", event: "change"},
-    { id: "SQLmap-current-user", event: "change"},
-    { id: "SQLmap-current-db", event: "change"},
-    { id: "SQLmap-password", event: "change"},
-    { id: "SQLmap-database", event: "change"},
-    { id: "SQLmap-tables", event: "change"},
-    { id: "SQLmap-columns", event: "change"},
-    { id: "SQLmap-schema", event: "change"},
-    { id: "SQLmap-dump", event: "change"},
-    { id: "SQLmap-dump-all", event: "change"},
-    { id: "SQLmap-DB", event: "change"},
-    { id: "SQLmap-TBL", event: "change"},
-    { id: "SQLmap-COL", event: "change"},
-    { id: "SQLmap-Shell", event: "change"},
-    { id: "SQLmap-Pwn", event: "change"},
-    { id: "SQLmap-Batch", event: "change"},
-    { id: "SQLmap-Flush", event: "change"},
+    { id: "Verbosity", event: "input" }, // Removed trailing space
+    { id: "SQLmap-wizard", event: "change" },
+    { id: "SQLmap-update", event: "change" },
+    { id: "SQLmap-purge", event: "change" },
+    { id: "SQLmap-tampers", event: "change" },
+    { id: "SQLmap-dependencies", event: "change" },
+    { id: "SQLmap-target", event: "change" },
+    { id: "target-url", event: "input" },
+    { id: "SQLmap-dorking", event: "change" },
+    { id: "googledork", event: "input" },
+    { id: "SQLmap-data", event: "change" },
+    { id: "request-data", event: "input" },
+    { id: "SQLmap-cookie", event: "change" },
+    { id: "request-cookie", event: "input" },
+    { id: "SQLmap-proxy", event: "change" },
+    { id: "request-proxy", event: "input" },
+    { id: "SQLmap-random-agent", event: "change" },
+    { id: "SQLmap-tor", event: "change" },
+    { id: "SQLmap-check-tor", event: "change" },
+    { id: "SQLmap-parameter", event: "change" },
+    { id: "injection-parameter", event: "input" },
+    { id: "SQLmap-dbms", event: "change" },
+    { id: "dbms-types", event: "input" },
+    { id: "SQLmap-level", event: "change" },
+    { id: "level", event: "input" },
+    { id: "SQLmap-risk", event: "change" },
+    { id: "risk", event: "input" },
+    { id: "SQLmap-all", event: "change" },
+    { id: "SQLmap-current-user", event: "change" },
+    { id: "SQLmap-current-db", event: "change" },
+    { id: "SQLmap-password", event: "change" },
+    { id: "SQLmap-database", event: "change" },
+    { id: "SQLmap-tables", event: "change" },
+    { id: "SQLmap-columns", event: "change" },
+    { id: "SQLmap-schema", event: "change" },
+    { id: "SQLmap-dump", event: "change" },
+    { id: "SQLmap-dump-all", event: "change" },
+    { id: "SQLmap-DB", event: "change" },
+    { id: "SQLmap-TBL", event: "change" },
+    { id: "SQLmap-COL", event: "change" },
+    { id: "SQLmap-Shell", event: "change" },
+    { id: "SQLmap-Pwn", event: "change" },
+    { id: "SQLmap-Batch", event: "change" },
+    { id: "SQLmap-Flush", event: "change" },
     // Add other elements and corresponding functions if necessary
   ];
 

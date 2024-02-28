@@ -219,6 +219,13 @@ html {
   background-color: var(--box-color) !important;
 }
 
+.footer {
+  display: flex;
+  justify-content: center;
+}
+
+
+
 /* for input group text */
 .input-group-text {
   color: inherit !important;
