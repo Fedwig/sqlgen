@@ -380,7 +380,7 @@
                     <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-dorking" />
                     <label class="form-check-label" for="SQLmap-adv-dorking">Google Dork</label>
                   </div>
-                  <input class="form-control" id="googledork-adv" type="text" />
+                  <input class="form-control" id="target-adv-googledork" type="text" />
                   <div class="explanation"> *Example: inurl:index.php?id= </div>
 
                   <div class="form-check form-switch">
@@ -532,8 +532,8 @@
                   <div class="explanation"> *Example: user:password </div>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-param-exclude" />
-                    <label class="form-check-label" for="SQLmap-adv-param-exclude">Specify the DBMS operating
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-dbms-os" />
+                    <label class="form-check-label" for="SQLmap-adv-dbms-os">Specify the DBMS operating
                       system</label>
                   </div>
                   <input class="form-control" id="injection-os" type="text" />
@@ -639,11 +639,11 @@
                       =
                       1)</label>
                   </div>
-                  <input class="form-control" type="number" id="Threads" name="points" step="1" min="1" max="10"
+                  <input class="form-control" type="number" id="threads" name="points" step="1" min="1" max="10"
                     placeholder="1">
                   <div class="explanation"> *Threads 1-10</div>
                 </div>
-                <!-- Detection Options -->
+                <!-- Optimization Options -->
 
                 <div class="col">
                   <h5>Detection Options</h5>
@@ -1072,10 +1072,8 @@
                   </div>
                 </div>
                 <div class="col">
-
                 </div>
               </div>
-              <!-- Windows Registry Access end -->
             </div>
 
           </div>
