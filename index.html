@@ -493,14 +493,14 @@
                     <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-parameter" />
                     <label class="form-check-label" for="SQLmap-adv-parameter">Test Parameters</label>
                   </div>
-                  <input class="form-control" id="injection-parameter" type="text" />
+                  <input class="form-control" id="injection-adv-parameter" type="text" />
                   <div class="explanation"> *Example: id </div>
 
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-skip" />
                     <label class="form-check-label" for="SQLmap-adv-skip">Skip Testing for Given Parameters</label>
                   </div>
-                  <input class="form-control" id="injection-skip" type="text" />
+                  <input class="form-control" id="injection-adv-skip" type="text" />
                   <div class="explanation"> *Example: sessionid </div>
 
                   <div class="form-check form-switch">
@@ -513,8 +513,7 @@
                     <label class="form-check-label" for="SQLmap-adv-param-exclude">Exclude Parameters from
                       Testing</label>
                   </div>
-
-                  <input class="form-control" id="injection-param-filter" type="text" />
+                  <input class="form-control" id="injection-adv-param-exclude" type="text" />
                   <div class="explanation"> *Example: POST </div>
 
                   <div class="form-check form-switch">
@@ -528,7 +527,7 @@
                     <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-dbms-cred" />
                     <label class="form-check-label" for="SQLmap-adv-dbms-cred">DBMS Authentication Credentials</label>
                   </div>
-                  <input class="form-control" id="injection-dbms-cred" type="text" />
+                  <input class="form-control" id="injection-adv-dbms-cred" type="text" />
                   <div class="explanation"> *Example: user:password </div>
 
                   <div class="form-check form-switch">
@@ -536,7 +535,7 @@
                     <label class="form-check-label" for="SQLmap-adv-dbms-os">Specify the DBMS operating
                       system</label>
                   </div>
-                  <input class="form-control" id="injection-os" type="text" />
+                  <input class="form-control" id="injection-adv-os" type="text" />
                   <div class="explanation"> *Example: Windows </div>
 
                   <div class="form-check form-switch">
@@ -546,7 +545,7 @@
                   </div>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-invalid-logical" />
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-invalid-logical" />
                     <label class="form-check-label" for="SQLmap-adv-invalid-logical">Use Logical Operations for
                       Invalidating Values</label>
                   </div>
@@ -574,21 +573,21 @@
                     <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-inj-prefix" />
                     <label class="form-check-label" for="SQLmap-adv-inj-prefix">Use Injection Prefix</label>
                   </div>
-                  <input class="form-control" id="injection-prefix" type="text" />
+                  <input class="form-control" id="injection-adv-prefix" type="text" />
                   <div class="explanation"> *Example: %23 </div>
 
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-inj-suffix" />
                     <label class="form-check-label" for="SQLmap-adv-inj-suffix">Use Injection Suffix</label>
                   </div>
-                  <input class="form-control" id="injection-suffix" type="text" />
+                  <input class="form-control" id="injection-adv-suffix" type="text" />
                   <div class="explanation"> *Example: -- </div>
 
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-inj-tamper" />
                     <label class="form-check-label" for="SQLmap-adv-inj-tamper">Tamper Scripts</label>
                   </div>
-                  <select class="form-select" id="injection-tamper">
+                  <select class="form-select" id="injection-adv-tamper">
                   </select>
 
                 </div>
