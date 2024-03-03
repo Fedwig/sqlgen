@@ -341,10 +341,42 @@ function SetSimpleSQLmap() {
   }
 
   // Disable or enable specific options checkboxes based on the state of sqlmap_all
-  var specificOptionsCheckboxes = [sqlmap_current_user, sqlmap_current_db, sqlmap_password, sqlmap_database, sqlmap_tables, sqlmap_columns, sqlmap_schema, sqlmap_dump, sqlmap_dump_all, sqlmap_DB, sqlmap_TBL, sqlmap_COL];
-  specificOptionsCheckboxes.forEach(function (checkbox) {
-    checkbox.disabled = sqlmap_all.checked;
+  // var specificOptionsCheckboxes = [sqlmap_current_user, sqlmap_current_db, sqlmap_password, sqlmap_database, sqlmap_tables, sqlmap_columns, sqlmap_schema, sqlmap_dump, sqlmap_dump_all, sqlmap_DB, sqlmap_TBL, sqlmap_COL];
+  // specificOptionsCheckboxes.forEach(function (checkbox) {
+  //   checkbox.disabled = sqlmap_all.checked;
+  // });
+
+  var specificOptionsCheckboxes = [
+    sqlmap_current_user, sqlmap_current_db, sqlmap_password,
+    sqlmap_database, sqlmap_tables, sqlmap_columns,
+    sqlmap_schema, sqlmap_dump, sqlmap_dump_all,
+    sqlmap_DB, sqlmap_TBL, sqlmap_COL
+  ];
+
+  // Function to handle checkbox change events
+  function handleCheckboxChange() {
+    var anyChecked = specificOptionsCheckboxes.some(function (checkbox) {
+      return checkbox.checked;
+    });
+    sqlmap_all.disabled = anyChecked;
+
+    if (sqlmap_all.disabled) {
+      sqlmap_all.checked = false; // Uncheck sqlmap_all if any specific option is checked
+    }
+  }
+
+  // Disable specific options checkboxes when sqlmap_all is checked
+  sqlmap_all.addEventListener("change", function () {
+    specificOptionsCheckboxes.forEach(function (checkbox) {
+      checkbox.disabled = sqlmap_all.checked;
+    });
   });
+
+  // Add event listener to each specific option checkbox
+  specificOptionsCheckboxes.forEach(function (checkbox) {
+    checkbox.addEventListener("change", handleCheckboxChange);
+  });
+
 
   document.getElementById("Simple-SQLmap").value = sqlmap_result;
 }
@@ -527,9 +559,9 @@ function SetAdvanceSQLmap() {
   var sqlmap_adv_os_cmd = document.getElementById("SQLmap-adv-os-cmd");
   var os_cmd_input = document.getElementById("os-cmd-input");
 
-  var sqlmap_os_shell = document.getElementById("SQLmap-os-shell");
+  var sqlmap_adv_os_shell = document.getElementById("SQLmap-os-shell");
 
-  var sqlmap_os_pwn = document.getElementById("SQLmap-os-pwn");
+  var sqlmap_adv_os_pwn = document.getElementById("SQLmap-os-pwn");
 
   var sqlmap_adv_os_smbrelay = document.getElementById("SQLmap-adv-os-smbrelay");
 
@@ -630,7 +662,7 @@ function SetAdvanceSQLmap() {
   sqlmap_adv_dbms_cred.value = "--dbms-cred";
   sqlmap_adv_dbms_os.value = "--os";
   sqlmap_adv_invalid_bignum.value = "--invalid-bignum";
-  sqlmap_adv_invalid_logical.value = "--invalid-logical"; // Check the ID for correctness. Should it be "--invalid-logical"?
+  sqlmap_adv_invalid_logical.value = "--invalid-logical";
   sqlmap_adv_invalid_string.value = "--invalid-string";
   sqlmap_adv_no_cast.value = "--no-cast";
   sqlmap_adv_no_escape.value = "--no-escape";
@@ -645,6 +677,16 @@ function SetAdvanceSQLmap() {
   sqlmap_adv_keep_alive.value = "--keep-alive";
   sqlmap_adv_null_connection.value = "--null-connection";
   sqlmap_adv_threads.value = "--threads";
+
+  // Detection Option Values
+  sqlmap_adv_level = "--level";
+  sqlmap_adv_risk = "--risk";
+  sqlmap_adv_string = "--not-string";
+  sqlmap_adv_regexp = "--regexp";
+  sqlmap_adv_code = "--code";
+  sqlmap_adv_smart = "--smart";
+  sqlmap_adv_text_only = "--text-only";
+  sqlmap_adv_titles = "--titles";
 
   // Enumeration Option Values
   sqlmap_adv_all.value = "--all";
@@ -673,8 +715,8 @@ function SetAdvanceSQLmap() {
 
   //Operating System Access Values
   sqlmap_adv_os_cmd.value = "--os-cmd";
-  sqlmap_os_shell.value = "--os-shell";
-  sqlmap_os_pwn.value = "--os-pwn";
+  sqlmap_adv_os_shell.value = "--os-shell";
+  sqlmap_adv_os_pwn.value = "--os-pwn";
   sqlmap_adv_os_smbrelay.value = "--os-smbrelay";
   sqlmap_adv_os_bof.value = "--os-bof";
   sqlmap_adv_priv_esc.value = "--priv-esc";
@@ -1103,11 +1145,223 @@ function SetAdvanceSQLmap() {
     sqlmap_result += " " + sqlmap_adv_common_files.value;
   }
 
+  // Disable or enable specific options checkboxes based on the state of sqlmap_all
+  var specificOptionsCheckboxes = [sqlmap_adv_current_user, sqlmap_adv_current_db, sqlmap_adv_password, sqlmap_adv_database, sqlmap_adv_tables, sqlmap_adv_columns, sqlmap_adv_schema, sqlmap_adv_dump, sqlmap_adv_dump_all, sqlmap_adv_DB, sqlmap_adv_TBL, sqlmap_adv_COL];
+  specificOptionsCheckboxes.forEach(function (checkbox) {
+    checkbox.disabled = sqlmap_adv_all.checked;
+  });
 
-  // ----------------------------------
+  // File System Access
+
+  if (sqlmap_adv_file_read.checked) {
+    if (file_read_name.value !== "") {
+      sqlmap_result += " " + sqlmap_adv_file_read.value + " " + file_read_name.value;
+    } else {
+      sqlmap_result += " " + sqlmap_adv_file_read.value;
+    }
+  }
+
+  if (sqlmap_adv_file_write.checked) {
+    if (file_write_name.value !== "") {
+      sqlmap_result += " " + sqlmap_adv_file_write.value + " " + file_write_name.value;
+    } else {
+      sqlmap_result += " " + sqlmap_adv_file_write.value;
+    }
+  }
+
+  if (sqlmap_adv_file_dest.checked) {
+    if (file_dest_name.value !== "") {
+      sqlmap_result += " " + sqlmap_adv_file_dest.value + " " + file_dest_name.value;
+    } else {
+      sqlmap_result += " " + sqlmap_adv_file_dest.value;
+    }
+  }
+
+  // Operating System Access
+
+  if (sqlmap_adv_os_cmd.checked) {
+    if (os_cmd_input.value !== "") {
+      sqlmap_result += " " + sqlmap_adv_os_cmd.value + " " + os_cmd_input.value;
+    } else {
+      sqlmap_result += " " + sqlmap_adv_os_cmd.value;
+    }
+  }
+
+  if (sqlmap_adv_os_shell.checked) {
+    sqlmap_result += " " + sqlmap_adv_os_shell.value;
+  }
+
+  if (sqlmap_adv_os_pwn.checked) {
+    sqlmap_result += " " + sqlmap_adv_os_pwn.value;
+  }
+
+  if (sqlmap_adv_os_smbrelay.checked) {
+    sqlmap_result += " " + sqlmap_adv_os_smbrelay.value;
+  }
+
+  if (sqlmap_adv_os_bof.checked) {
+    sqlmap_result += " " + sqlmap_adv_os_bof.value;
+  }
+
+  if (sqlmap_adv_msf_path.checked) {
+    if (msf_path_input.value !== "") {
+      sqlmap_result += " " + sqlmap_adv_msf_path.value + " " + msf_path_input.value;
+    }
+    else {
+      sqlmap_result += " " + sqlmap_adv_msf_path.value;
+    }
+  }
+
+  if (sqlmap_adv_tmp_path.checked) {
+    if (tmp_path_input.value !== "") {
+      sqlmap_result += " " + sqlmap_adv_tmp_path.value + " " + tmp_path_input.value;
+    }
+    else {
+      sqlmap_result += " " + sqlmap_adv_tmp_path.value;
+    }
+  }
+
+
+  // Windows Registry Access
+  if (sqlmap_adv_reg_read.checked) {
+    sqlmap_result += " " + sqlmap_adv_reg_read.value;
+  }
+
+  if (sqlmap_adv_reg_add.checked) {
+    sqlmap_result += " " + sqlmap_adv_reg_add.value;
+  }
+
+  if (sqlmap_adv_reg_del.checked) {
+    sqlmap_result += " " + sqlmap_adv_reg_del.value;
+  }
+
+  if (sqlmap_adv_reg_value.checked) {
+    if (reg_value_input.value !== "") {
+      sqlmap_result += " " + sqlmap_adv_reg_value.value + " " + reg_value_input.value;
+    }
+    else {
+      sqlmap_result += " " + sqlmap_adv_reg_value.value;
+    }
+  }
+
+  if (sqlmap_adv_reg_key.checked) {
+    if (reg_key_input.value !== "") {
+      sqlmap_result += " " + sqlmap_adv_reg_key.value + " " + reg_key_input.value;
+    }
+    else {
+      sqlmap_result += " " + sqlmap_adv_reg_key.value;
+    }
+  }
+
+
+  if (sqlmap_adv_reg_value.checked) {
+    if (reg_value_input.value !== "") {
+      sqlmap_result += " " + sqlmap_adv_reg_value.value + " " + reg_value_input.value;
+    }
+    else {
+      sqlmap_result += " " + sqlmap_adv_reg_value.value;
+    }
+  }
+
+  if (sqlmap_adv_reg_data.checked) {
+    if (reg_data_input.value !== "") {
+      sqlmap_result += " " + sqlmap_adv_reg_data.value + " " + reg_data_input.value;
+    }
+    else {
+      sqlmap_result += " " + sqlmap_adv_reg_data.value;
+    }
+  }
+
+  if (sqlmap_adv_reg_type.checked) {
+    if (reg_type_input.value !== "") {
+      sqlmap_result += " " + sqlmap_adv_reg_type.value + " " + reg_type_input.value;
+    }
+    else {
+      sqlmap_result += " " + sqlmap_adv_reg_type.value;
+    }
+  }
+
+
+  // Miscellaneous Options
+
+  if (sqlmap_adv_mnemonics.checked) {
+    if (mnemonics_input.value !== "") {
+      sqlmap_result += " " + sqlmap_adv_mnemonics.value + " " + mnemonics_input.value;
+    }
+    else {
+      sqlmap_result += " " + sqlmap_adv_mnemonics.value;
+    }
+  }
+
+  if (sqlmap_adv_alert.checked) {
+    if (alert_input.value !== "") {
+      sqlmap_result += " " + sqlmap_adv_alert.value + " " + alert_input.value;
+    }
+    else {
+      sqlmap_result += " " + sqlmap_adv_alert.value;
+    }
+  }
+
+  if (sqlmap_adv_beep.checked) {
+    sqlmap_result += " " + sqlmap_adv_beep.value;
+  }
+
+  if (sqlmap_adv_dependencies.checked) {
+    sqlmap_result += " " + sqlmap_adv_dependencies.value;
+  }
+
+  if (sqlmap_adv_disable_coloring.checked) {
+    sqlmap_result += " " + sqlmap_adv_disable_coloring.value;
+  }
+
+  if (sqlmap_adv_list_tampers.checked) {
+    sqlmap_result += " " + sqlmap_adv_reg_add.value;
+  }
+
+  if (sqlmap_adv_no_logging.checked) {
+    sqlmap_result += " " + sqlmap_adv_no_logging.value;
+  }
+
+  if (sqlmap_adv_offline.checked) {
+    sqlmap_result += " " + sqlmap_adv_offline.value;
+  }
+
+  if (sqlmap_adv_purge.checked) {
+    sqlmap_result += " " + sqlmap_adv_purge.value;
+  }
+
+  if (sqlmap_adv_results_file.checked) {
+    if (results_file_input !== "") {
+      sqlmap_result += " " + sqlmap_adv_results_file.value + " " + results_file_input.value;
+    }
+    else {
+      sqlmap_result += " " + sqlmap_adv_results_file.value;
+    }
+  }
+
+  if (sqlmap_adv_shell.checked) {
+    sqlmap_result += " " + sqlmap_adv_shell.value;
+  }
+
+  if (sqlmap_adv_tmp_dir.checked) {
+    if (tmp_dir_input !== "") {
+      sqlmap_result += " " + sqlmap_adv_tmp_dir.value + " " + tmp_dir_input.value;
+    }
+    else {
+      sqlmap_result += " " + sqlmap_adv_results_file.value;
+    }
+  }
+
+  if (sqlmap_adv_unstable.checked) {
+    sqlmap_result += " " + sqlmap_adv_unstable.value;
+  }
 
   if (sqlmap_adv_update.checked) {
     sqlmap_result += " " + sqlmap_adv_update.value;
+  }
+
+  if (sqlmap_adv_wizard.checked) {
+    sqlmap_result += " " + sqlmap_adv_wizard.value;
   }
 
   document.getElementById("Advance-SQLmap").value = sqlmap_result;
@@ -1130,7 +1384,10 @@ function ResetToClip(event) {
   comment.innerHTML = "Copy to Clipboard";
 }
 
+
 function DisableEnableInput() {
+
+  // Simple Options
 
   var verbosity_input = document.getElementById("Verbosity");
   var sqlmap_verbose = document.getElementById("SQLmap-verbose");
@@ -1216,6 +1473,391 @@ function DisableEnableInput() {
   if (!sqlmap_risk.checked) {
     risk.value = ""; // Optionally reset value when disabled
   }
+
+  //Advanced Options
+
+  //Target Options Disable/Enable
+  var sqlmap_adv_target = document.getElementById("SQLmap-adv-target");
+  var target_adv_url = document.getElementById("target-adv-url");
+
+  var sqlmap_adv_direct = document.getElementById("SQLmap-adv-direct");
+  var target_adv_direct = document.getElementById("target-adv-direct");
+
+  var sqlmap_adv_logfile = document.getElementById("SQLmap-adv-logfile");
+  var target_adv_logfile = document.getElementById("target-adv-logfile");
+
+  var sqlmap_adv_bulkfile = document.getElementById("SQLmap-adv-bulkfile");
+  var target_adv_bulkfile = document.getElementById("target-adv-bulkfile");
+
+  var sqlmap_adv_requestfile = document.getElementById("SQLmap-adv-requestfile");
+  var target_adv_requestfile = document.getElementById("target-adv-requestfile");
+
+  var sqlmap_adv_dorking = document.getElementById("SQLmap-adv-dorking");
+  var target_adv_googledork = document.getElementById("target-adv-googledork");
+
+  var sqlmap_adv_configfile = document.getElementById("SQLmap-adv-configfile");
+  var target_adv_configfile = document.getElementById("target-adv-configfile");
+
+  target_adv_url.disabled = !sqlmap_adv_target.checked;
+  if (!sqlmap_adv_target.checked) {
+    target_adv_url.value = ""; // Reset value when disabled
+  }
+
+  target_adv_direct.disabled = !sqlmap_adv_direct.checked;
+  if (!sqlmap_adv_direct.checked) {
+    target_adv_direct.value = ""; // Reset value when disabled
+  }
+
+  target_adv_logfile.disabled = !sqlmap_adv_logfile.checked;
+  if (!sqlmap_adv_logfile.checked) {
+    target_adv_logfile.value = ""; // Reset value when disabled
+  }
+
+  target_adv_bulkfile.disabled = !sqlmap_adv_bulkfile.checked;
+  if (!sqlmap_adv_bulkfile.checked) {
+    target_adv_bulkfile.value = ""; // Reset value when disabled
+  }
+
+  target_adv_requestfile.disabled = !sqlmap_adv_requestfile.checked;
+  if (!sqlmap_adv_requestfile.checked) {
+    target_adv_requestfile.value = ""; // Reset value when disabled
+  }
+
+  target_adv_googledork.disabled = !sqlmap_adv_dorking.checked;
+  if (!sqlmap_adv_dorking.checked) {
+    target_adv_googledork.value = ""; // Reset value when disabled
+  }
+
+  target_adv_configfile.disabled = !sqlmap_adv_configfile.checked;
+  if (!sqlmap_adv_configfile.checked) {
+    target_adv_configfile.value = ""; // Reset value when disabled
+  }
+
+  // Request Options Disable/Enable
+  var sqlmap_adv_agent = document.getElementById("SQLmap-adv-agent");
+  var request_adv_agent = document.getElementById("request-adv-agent");
+
+  var sqlmap_adv_header = document.getElementById("SQLmap-adv-header");
+  var request_adv_header = document.getElementById("request-adv-header");
+
+  var sqlmap_adv_method = document.getElementById("SQLmap-adv-method");
+  var request_adv_method = document.getElementById("request-adv-method");
+
+  var sqlmap_adv_data = document.getElementById("SQLmap-adv-data");
+  var request_adv_data = document.getElementById("request-adv-data");
+
+  var sqlmap_adv_param_del = document.getElementById("SQLmap-adv-param-del");
+  var request_adv_param_del = document.getElementById("request-adv-param-del");
+
+  var sqlmap_adv_cookie = document.getElementById("SQLmap-adv-cookie");
+  var request_adv_cookie = document.getElementById("request-adv-cookie");
+
+  var sqlmap_adv_cookie_del = document.getElementById("SQLmap-adv-cookie-del");
+  var request_adv_cookie_del = document.getElementById("request-adv-cookie-del");
+
+  var sqlmap_adv_live_cookies = document.getElementById("SQLmap-adv-live-cookies");
+  var request_adv_live_cookies = document.getElementById("request-adv-live-cookies");
+
+  var sqlmap_adv_load_cookies = document.getElementById("SQLmap-adv-load-cookies");
+  var request_adv_load_cookies = document.getElementById("request-adv-load-cookies");
+
+  request_adv_agent.disabled = !sqlmap_adv_agent.checked;
+  if (!sqlmap_adv_agent.checked) {
+    request_adv_agent.value = ""; // Reset value when enabled
+  }
+
+  request_adv_header.disabled = !sqlmap_adv_header.checked;
+  if (!sqlmap_adv_header.checked) {
+    request_adv_header.value = ""; // Reset value when enabled
+  }
+
+  request_adv_method.disabled = !sqlmap_adv_method.checked;
+  if (!sqlmap_adv_method.checked) {
+    request_adv_method.value = ""; // Reset value when enabled
+  }
+
+  request_adv_data.disabled = !sqlmap_adv_data.checked;
+  if (!sqlmap_adv_data.checked) {
+    request_adv_data.value = ""; // Reset value when enabled
+  }
+
+  request_adv_param_del.disabled = !sqlmap_adv_param_del.checked;
+  if (!sqlmap_adv_param_del.checked) {
+    request_adv_param_del.value = ""; // Reset value when enabled
+  }
+
+  request_adv_cookie.disabled = !sqlmap_adv_cookie.checked;
+  if (!sqlmap_adv_cookie.checked) {
+    request_adv_cookie.value = ""; // Reset value when enabled
+  }
+
+  request_adv_cookie_del.disabled = !sqlmap_adv_cookie_del.checked;
+  if (!sqlmap_adv_cookie_del.checked) {
+    request_adv_cookie_del.value = ""; // Reset value when enabled
+  }
+
+  request_adv_live_cookies.disabled = !sqlmap_adv_live_cookies.checked;
+  if (!sqlmap_adv_live_cookies.checked) {
+    request_adv_live_cookies.value = ""; // Reset value when enabled
+  }
+
+  request_adv_load_cookies.disabled = !sqlmap_adv_load_cookies.checked;
+  if (!sqlmap_adv_load_cookies.checked) {
+    request_adv_load_cookies.value = ""; // Reset value when enabled
+  }
+
+  // Injection Options Disable/Enable
+  var sqlmap_adv_parameter = document.getElementById("SQLmap-adv-parameter");
+  var injection_adv_parameter = document.getElementById("injection-adv-parameter");
+
+  var sqlmap_adv_skip = document.getElementById("SQLmap-adv-skip");
+  var injection_adv_skip = document.getElementById("injection-adv-skip");
+
+  var sqlmap_adv_param_exclude = document.getElementById("SQLmap-adv-param-exclude");
+  var injection_adv_param_exclude = document.getElementById("injection-adv-param-exclude");
+
+  var sqlmap_adv_dbms = document.getElementById("SQLmap-adv-dbms");
+  var dbms_types2 = document.getElementById("dbms-types2");
+
+  var sqlmap_adv_dbms_cred = document.getElementById("SQLmap-adv-dbms-cred");
+  var injection_adv_dbms_cred = document.getElementById("injection-adv-dbms-cred");
+
+  var sqlmap_adv_dbms_os = document.getElementById("SQLmap-adv-dbms-os");
+  var injection_adv_os = document.getElementById("injection-adv-os");
+
+  var sqlmap_adv_inj_prefix = document.getElementById("SQLmap-adv-inj-prefix");
+  var injection_adv_prefix = document.getElementById("injection-adv-prefix");
+
+  var sqlmap_adv_inj_suffix = document.getElementById("SQLmap-adv-inj-suffix");
+  var injection_adv_suffix = document.getElementById("injection-adv-suffix");
+
+  var sqlmap_adv_inj_tamper = document.getElementById("SQLmap-adv-inj-tamper");
+  var injection_adv_tamper = document.getElementById("injection-adv-tamper");
+
+  // Set the disabled state of inputs based on the checkbox state
+  injection_adv_parameter.disabled = !sqlmap_adv_parameter.checked;
+  if (!sqlmap_adv_parameter.checked) {
+    injection_adv_parameter.value = ""; // Reset value when enabled
+  }
+
+  injection_adv_skip.disabled = !sqlmap_adv_skip.checked;
+  if (!sqlmap_adv_skip.checked) {
+    injection_adv_skip.value = ""; // Reset value when enabled
+  }
+
+  injection_adv_param_exclude.disabled = !sqlmap_adv_param_exclude.checked;
+  if (!sqlmap_adv_param_exclude.checked) {
+    injection_adv_param_exclude.value = ""; // Reset value when enabled
+  }
+
+  dbms_types2.disabled = !sqlmap_adv_dbms.checked;
+  if (!sqlmap_adv_dbms.checked) {
+    dbms_types2.value = ""; // Reset value when enabled
+  }
+
+  injection_adv_dbms_cred.disabled = !sqlmap_adv_dbms_cred.checked;
+  if (!sqlmap_adv_dbms_cred.checked) {
+    injection_adv_dbms_cred.value = ""; // Reset value when enabled
+  }
+
+  injection_adv_os.disabled = !sqlmap_adv_dbms_os.checked;
+  if (!sqlmap_adv_dbms_os.checked) {
+    injection_adv_os.value = ""; // Reset value when enabled
+  }
+
+  injection_adv_prefix.disabled = !sqlmap_adv_inj_prefix.checked;
+  if (!sqlmap_adv_inj_prefix.checked) {
+    injection_adv_prefix.value = ""; // Reset value when enabled
+  }
+
+  injection_adv_suffix.disabled = !sqlmap_adv_inj_suffix.checked;
+  if (!sqlmap_adv_inj_suffix.checked) {
+    injection_adv_suffix.value = ""; // Reset value when enabled
+  }
+
+  injection_adv_tamper.disabled = !sqlmap_adv_inj_tamper.checked;
+  if (!sqlmap_adv_inj_tamper.checked) {
+    injection_adv_tamper.value = ""; // Reset value when enabled
+  }
+
+  // Detection Options Disable/Enable
+  var sqlmap_adv_level = document.getElementById("SQLmap-adv-level");
+  var detection_level = document.getElementById("detection-level");
+
+  var sqlmap_adv_risk = document.getElementById("SQLmap-adv-risk");
+  var detection_risk = document.getElementById("detection-risk");
+
+  var sqlmap_adv_string = document.getElementById("SQLmap-adv-string");
+  var detection_string = document.getElementById("detection-string");
+
+  var sqlmap_adv_not_string = document.getElementById("SQLmap-adv-not-string");
+  var detection_not_string = document.getElementById("detection-not-string");
+
+  var sqlmap_adv_regexp = document.getElementById("SQLmap-adv-regexp");
+  var detection_regexp = document.getElementById("detection-regexp");
+
+  var sqlmap_adv_code = document.getElementById("SQLmap-adv-code");
+  var detection_code = document.getElementById("detection-code");
+
+  // Set the disabled state of inputs based on the checkbox state
+  detection_level.disabled = !sqlmap_adv_level.checked;
+  if (!sqlmap_adv_level.checked) {
+    detection_level.value = ""; // Reset value when enabled
+  }
+
+  detection_risk.disabled = !sqlmap_adv_risk.checked;
+  if (!sqlmap_adv_risk.checked) {
+    detection_risk.value = ""; // Reset value when enabled
+  }
+
+  detection_string.disabled = !sqlmap_adv_string.checked;
+  if (!sqlmap_adv_string.checked) {
+    detection_string.value = ""; // Reset value when enabled
+  }
+
+  detection_not_string.disabled = !sqlmap_adv_not_string.checked;
+  if (!sqlmap_adv_not_string.checked) {
+    detection_not_string.value = ""; // Reset value when enabled
+  }
+
+  detection_regexp.disabled = !sqlmap_adv_regexp.checked;
+  if (!sqlmap_adv_regexp.checked) {
+    detection_regexp.value = ""; // Reset value when enabled
+  }
+
+  detection_code.disabled = !sqlmap_adv_code.checked;
+  if (!sqlmap_adv_code.checked) {
+    detection_code.value = ""; // Reset value when enabled
+  }
+
+  // File Access Disable/Enable
+  var sqlmap_adv_file_read = document.getElementById("SQLmap-adv-file-read");
+  var file_read_name = document.getElementById("file-read-name");
+
+  var sqlmap_adv_file_write = document.getElementById("SQLmap-adv-file-write");
+  var file_write_name = document.getElementById("file-write-name");
+
+  var sqlmap_adv_file_dest = document.getElementById("SQLmap-adv-file-dest");
+  var file_dest_name = document.getElementById("file-dest-name");
+
+  // Set the disabled state of inputs based on the checkbox state
+  file_read_name.disabled = !sqlmap_adv_file_read.checked;
+  if (!sqlmap_adv_file_read.checked) {
+    file_read_name.value = ""; // Reset value when enabled
+  }
+
+  file_write_name.disabled = !sqlmap_adv_file_write.checked;
+  if (!sqlmap_adv_file_write.checked) {
+    file_write_name.value = ""; // Reset value when enabled
+  }
+
+  file_dest_name.disabled = !sqlmap_adv_file_dest.checked;
+  if (!sqlmap_adv_file_dest.checked) {
+    file_dest_name.value = ""; // Reset value when enabled
+  }
+
+  // Optimization Option Disable/Enable
+  var sqlmap_adv_threads = document.getElementById("SQLmap-adv-threads");
+  var threads_input = document.getElementById("threads");
+
+  // Set the disabled state of input based on the checkbox state
+  threads_input.disabled = !sqlmap_adv_threads.checked;
+  if (!sqlmap_adv_threads.checked) {
+    threads_input.value = ""; // Reset value when enabled
+  }
+
+  // Operating System Access Disble/Enable
+  var sqlmap_adv_os_cmd = document.getElementById("SQLmap-adv-os-cmd");
+  var os_cmd_input = document.getElementById("os-cmd-input");
+
+  var sqlmap_adv_msf_path = document.getElementById("SQLmap-adv-msf-path");
+  var msf_path_input = document.getElementById("msf-path-input");
+
+  var sqlmap_adv_tmp_path = document.getElementById("SQLmap-adv-tmp-path");
+  var tmp_path_input = document.getElementById("tmp-path-input");
+
+  os_cmd_input.disabled = !sqlmap_adv_os_cmd.checked;
+  if (!sqlmap_adv_os_cmd.checked) {
+    os_cmd_input.value = ""; // Reset value when disabled
+  }
+
+  msf_path_input.disabled = !sqlmap_adv_msf_path.checked;
+  if (!sqlmap_adv_msf_path.checked) {
+    msf_path_input.value = ""; // Reset value when disabled
+  }
+
+  tmp_path_input.disabled = !sqlmap_adv_tmp_path.checked;
+  if (!sqlmap_adv_tmp_path.checked) {
+    tmp_path_input.value = ""; // Reset value when disabled
+  }
+
+  // Windows Registry Access Disable/Enable
+  var sqlmap_adv_reg_key = document.getElementById("SQLmap-adv-reg-key");
+  var reg_key_input = document.getElementById("reg-key-input");
+
+  var sqlmap_adv_reg_value = document.getElementById("SQLmap-adv-reg-value");
+  var reg_value_input = document.getElementById("reg-value-input");
+
+  var sqlmap_adv_reg_data = document.getElementById("SQLmap-adv-reg-data");
+  var reg_data_input = document.getElementById("reg-data-input");
+
+  var sqlmap_adv_reg_type = document.getElementById("SQLmap-adv-reg-type");
+  var reg_type_input = document.getElementById("reg-type-input");
+
+  reg_key_input.disabled = !sqlmap_adv_reg_key.checked;
+  if (!sqlmap_adv_reg_key.checked) {
+    reg_key_input.value = ""; // Reset value when disabled
+  }
+
+  reg_value_input.disabled = !sqlmap_adv_reg_value.checked;
+  if (!sqlmap_adv_reg_value.checked) {
+    reg_value_input.value = ""; // Reset value when disabled
+  }
+
+  reg_data_input.disabled = !sqlmap_adv_reg_data.checked;
+  if (!sqlmap_adv_reg_data.checked) {
+    reg_data_input.value = ""; // Reset value when disabled
+  }
+
+  reg_type_input.disabled = !sqlmap_adv_reg_type.checked;
+  if (!sqlmap_adv_reg_type.checked) {
+    reg_type_input.value = ""; // Reset value when disabled
+  }
+
+  // Miscellaneous Options Disable/Enable
+  var sqlmap_adv_mnemonics = document.getElementById("SQLmap-adv-mnemonics");
+  var mnemonics_input = document.getElementById("mnemonics-input");
+
+  var sqlmap_adv_alert = document.getElementById("SQLmap-adv-alert");
+  var alert_input = document.getElementById("alert-input");
+
+  var sqlmap_adv_results_file = document.getElementById("SQLmap-adv-results-file");
+  var results_file_input = document.getElementById("results-file-input");
+
+  var sqlmap_adv_tmp_dir = document.getElementById("SQLmap-adv-tmp-dir");
+  var tmp_dir_input = document.getElementById("tmp-dir-input");
+
+  mnemonics_input.disabled = !sqlmap_adv_mnemonics.checked;
+  if (!sqlmap_adv_mnemonics.checked) {
+    mnemonics_input.value = ""; // Reset value when disabled
+  }
+
+  alert_input.disabled = !sqlmap_adv_alert.checked;
+  if (!sqlmap_adv_alert.checked) {
+    alert_input.value = ""; // Reset value when disabled
+  }
+
+  results_file_input.disabled = !sqlmap_adv_results_file.checked;
+  if (!sqlmap_adv_results_file.checked) {
+    results_file_input.value = ""; // Reset value when disabled
+  }
+
+  tmp_dir_input.disabled = !sqlmap_adv_tmp_dir.checked;
+  if (!sqlmap_adv_tmp_dir.checked) {
+    tmp_dir_input.value = ""; // Reset value when disabled
+  }
+
+
 }
 
 function DBMSTypes() {
@@ -1340,7 +1982,7 @@ function TamperTypes() {
   ];
 
   var options = tampers.map(function (tamper) {
-    return { value: tamper.replace(".py", ""), text: tamper };
+    return { value: tamper, text: tamper };
   });
 
   options.forEach(function (option) {
@@ -1551,14 +2193,53 @@ document.addEventListener("DOMContentLoaded", function () {
     { id: "SQLmap-adv-common-tables", event: "change" },
     { id: "SQLmap-adv-common-columns", event: "change" },
     { id: "SQLmap-adv-common-files", event: "change" },
-
-
-
+    { id: "SQLmap-adv-file-read", event: "change" },
+    { id: "file-read-name", event: "input" },
+    { id: "SQLmap-adv-file-write", event: "change" },
+    { id: "file-write-name", event: "input" },
+    { id: "SQLmap-adv-file-dest", event: "change" },
+    { id: "file-dest-name", event: "input" },
+    { id: "SQLmap-adv-os-cmd", event: "change" },
+    { id: "os-cmd-input", event: "input" },
+    { id: "SQLmap-os-shell", event: "change" },
+    { id: "SQLmap-os-pwn", event: "change" },
+    { id: "SQLmap-adv-os-smbrelay", event: "change" },
+    { id: "SQLmap-adv-os-bof", event: "change" },
+    { id: "SQLmap-adv-priv-esc", event: "change" },
+    { id: "SQLmap-adv-msf-path", event: "change" },
+    { id: "msf-path-input", event: "input" },
+    { id: "SQLmap-adv-tmp-path", event: "change" },
+    { id: "tmp-path-input", event: "input" },
+    { id: "SQLmap-adv-reg-read", event: "change" },
+    { id: "SQLmap-adv-reg-add", event: "change" },
+    { id: "SQLmap-adv-reg-del", event: "change" },
+    { id: "SQLmap-adv-reg-key", event: "change" },
+    { id: "reg-key-input", event: "input" },
+    { id: "SQLmap-adv-reg-value", event: "change" },
+    { id: "reg-value-input", event: "input" },
+    { id: "SQLmap-adv-reg-data", event: "change" },
+    { id: "reg-data-input", event: "input" },
+    { id: "SQLmap-adv-reg-type", event: "change" },
+    { id: "reg-type-input", event: "input" },
+    { id: "SQLmap-adv-mnemonics", event: "change" },
+    { id: "mnemonics-input", event: "input" },
+    { id: "SQLmap-adv-alert", event: "change" },
+    { id: "alert-input", event: "input" },
+    { id: "SQLmap-adv-beep", event: "change" },
+    { id: "SQLmap-adv-dependencies", event: "change" },
+    { id: "SQLmap-adv-disable-coloring", event: "change" },
+    { id: "SQLmap-adv-list-tampers", event: "change" },
+    { id: "SQLmap-adv-no-logging", event: "change" },
+    { id: "SQLmap-adv-offline", event: "change" },
+    { id: "SQLmap-adv-purge", event: "change" },
+    { id: "SQLmap-adv-results-file", event: "change" },
+    { id: "results-file-input", event: "input" },
+    { id: "SQLmap-adv-shell", event: "change" },
+    { id: "SQLmap-adv-tmp-dir", event: "change" },
+    { id: "tmp-dir-input", event: "input" },
+    { id: "SQLmap-adv-unstable", event: "change" },
     { id: "SQLmap-adv-update", event: "change" },
-
-
-
-    // Add other elements and corresponding functions if necessary
+    { id: "SQLmap-adv-wizard", event: "change" }
   ];
 
   elementIDs.forEach(function (elementID) {

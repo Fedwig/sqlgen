@@ -593,7 +593,7 @@
                 </div>
                 <!-- Injection Options end -->
               </div>
-              
+
               </br></br>
 
               <div class="row">
@@ -641,8 +641,34 @@
                   <input class="form-control" type="number" id="threads" name="points" step="1" min="1" max="10"
                     placeholder="1">
                   <div class="explanation"> *Threads 1-10</div>
+                  <!-- Optimization Options end-->
+
+                  <!-- File System Access Start -->
+                  <h5>File System Access</h5>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-file-read" />
+                    <label class="form-check-label" for="SQLmap-adv-file-read">Read a file from DBMS File System</label>
+                  </div>
+                  <input class="form-control" id="file-read-name" type="text" />
+                  <div class="explanation"> *Example: testing.txt </div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-file-write" />
+                    <label class="form-check-label" for="SQLmap-adv-file-write">Write a local file on the back-end DBMS
+                      file system</label>
+                  </div>
+                  <input class="form-control" id="file-write-name" type="text" />
+                  <div class="explanation"> *Example: testing.txt </div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-file-dest" />
+                    <label class="form-check-label" for="SQLmap-adv-file-dest">Back-end DBMS absolute filepath to write
+                      to</label>
+                  </div>
+                  <input class="form-control" id="file-dest-name" type="text" />
+                  <div class="explanation"> *Example: testing.txt </div>
                 </div>
-                <!-- Optimization Options -->
+                <!-- File System Access end -->
 
                 <div class="col">
                   <h5>Detection Options</h5>
@@ -783,14 +809,9 @@
                       id="SQLmap-adv-COL" />
                     <label class="form-check-label" for="SQLmap-adv-COL"> Columns to Enumerate </label>
                   </div>
-                </div>
-                <!-- Enumeration Options end -->
-              </div>
-              
-              </br></br>
-              
-              <div class="row">
-                <div class="col">
+                  <!-- Enumeration Options End -->
+
+                  </br>
                   <!-- Brute Force Options -->
                   <h5>Brute Force Options</h5>
                   <div class="form-check form-switch">
@@ -811,37 +832,13 @@
                     <label class="form-check-label" for="SQLmap-adv-common-files"> Check existence of common files
                     </label>
                   </div>
-                  <!-- Brute Force Options-->
                 </div>
+                <!-- Brute Force Options end -->
+              </div>
 
-                <div class="col">
-                  <!-- File System Access -->
-                  <h5>File System Access</h5>
-                  <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-file-read" />
-                    <label class="form-check-label" for="SQLmap-adv-file-read">Read a file from DBMS File System</label>
-                  </div>
-                  <input class="form-control" id="file-read-name" type="text" />
-                  <div class="explanation"> *Example: testing.txt </div>
+              </br></br>
 
-                  <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-file-write" />
-                    <label class="form-check-label" for="SQLmap-adv-file-write">Write a local file on the back-end DBMS
-                      file system</label>
-                  </div>
-                  <input class="form-control" id="file-write-name" type="text" />
-                  <div class="explanation"> *Example: testing.txt </div>
-
-                  <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-file-dest" />
-                    <label class="form-check-label" for="SQLmap-adv-file-dest">Back-end DBMS absolute filepath to write
-                      to</label>
-                  </div>
-                  <input class="form-control" id="file-dest-name" type="text" />
-                  <div class="explanation"> *Example: testing.txt </div>
-                </div>
-
-
+              <div class="row">
                 <!-- Operating System Access -->
                 <div class="col">
                   <h5>Operating System Access</h5>
@@ -905,11 +902,7 @@
                   <div class="explanation">*Example: /remote/temp/directory</div>
                 </div>
                 <!-- Operating System Access End -->
-              </div>
-              
-              </br></br>
 
-              <div class="row">
                 <div class="col">
                   <!-- Windows Registry Access -->
                   <h5>Windows Registry Access</h5>
@@ -980,7 +973,8 @@
                   <!-- Run host OS command(s) when SQL injection is found -->
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-alert" />
-                    <label class="form-check-label" for="SQLmap-adv-alert">Host OS Command on SQL Injection Alert</label>
+                    <label class="form-check-label" for="SQLmap-adv-alert">Host OS Command on SQL Injection
+                      Alert</label>
                   </div>
                   <input class="form-control" id="alert-input" type="text" placeholder="Enter command" />
                   <div class="explanation">*Example: sudo systemctl restart apache2</div>
@@ -1070,9 +1064,9 @@
                     <label class="form-check-label" for="SQLmap-adv-wizard">Wizard Interface</label>
                   </div>
                 </div>
-                <div class="col">
-                </div>
               </div>
+
+              </br></br>
             </div>
 
           </div>
@@ -1103,7 +1097,9 @@
   </div>
   <!-- body end -->
   <!-- footer -->
-  <div class="btm light footer"><p>Created by Fedwig</p></div>
+  <div class="btm light footer">
+    <p>Created by Fedwig</p>
+  </div>
   <!-- footer end -->
   </div>
 </body>
