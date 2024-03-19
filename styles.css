@@ -1,31 +1,51 @@
 /* Root styles for light and dark mode */
 :root {
-  --primary-color: #E63946; /* Red accent */
-  --secondary-color: #333333; /* Darker grey for text, provides better contrast */
-  --explanation-color: #555555; /* Medium grey for explanations, softer than black */
-  --bg-color: #F7F7F7; /* Slightly off-white background for light mode */
-  --bs-border-color: #CCCCCC; /* Light grey borders, subtle and less intrusive */
-  --box-color: #F5F5F5; /* Very light grey for boxes, adds depth with minimal contrast */
-  --tab-btn-color: #EEEEEE; /* Very light grey for inactive tabs, slightly stands out */
-  --tab-btn-hover-color: #DDDDDD; /* Light grey for hover, indicates interactivity */
-  --icon-bg: #E63946; /* Red for active icon backgrounds, matching the accent */
-  --icon-color: #FFFFFF; /* White for icon details, ensures visibility */
+  --primary-color: #E63946;
+  /* Red accent */
+  --secondary-color: #333333;
+  /* Darker grey for text, provides better contrast */
+  --explanation-color: #555555;
+  /* Medium grey for explanations, softer than black */
+  --bg-color: #F7F7F7;
+  /* Slightly off-white background for light mode */
+  --bs-border-color: #CCCCCC;
+  /* Light grey borders, subtle and less intrusive */
+  --box-color: #F5F5F5;
+  /* Very light grey for boxes, adds depth with minimal contrast */
+  --tab-btn-color: #EEEEEE;
+  /* Very light grey for inactive tabs, slightly stands out */
+  --tab-btn-hover-color: #DDDDDD;
+  /* Light grey for hover, indicates interactivity */
+  --icon-bg: #E63946;
+  /* Red for active icon backgrounds, matching the accent */
+  --icon-color: #FFFFFF;
+  /* White for icon details, ensures visibility */
 }
 
 /* Rest of your CSS styles remain unchanged */
 
 
 [data-theme="dark"] {
-  --primary-color: #E63946; /* Keeping the red accent */
-  --secondary-color: #E0E0E0; /* Lighter grey for secondary text, improves readability */
-  --explanation-color: #BDBDBD; /* Slightly darker grey for explanations, softer on the eyes */
-  --bg-color: #121212; /* Darker background for more depth */
-  --bs-border-color: #373737; /* Dark grey borders, less contrast */
-  --box-color: #1E1E1E; /* Slightly lighter than bg-color for boxes to subtly stand out */
-  --tab-btn-color: #333; /* Darker for inactive tabs, blends with the background */
-  --tab-btn-hover-color: #454545; /* Lighter grey for hover, subtle interaction feedback */
-  --icon-bg: #E63946; /* Red for active icon backgrounds for consistency */
-  --icon-color: #FFFFFF; /* White for icon details, stands out against the red */
+  --primary-color: #E63946;
+  /* Keeping the red accent */
+  --secondary-color: #E0E0E0;
+  /* Lighter grey for secondary text, improves readability */
+  --explanation-color: #BDBDBD;
+  /* Slightly darker grey for explanations, softer on the eyes */
+  --bg-color: #121212;
+  /* Darker background for more depth */
+  --bs-border-color: #373737;
+  /* Dark grey borders, less contrast */
+  --box-color: #1E1E1E;
+  /* Slightly lighter than bg-color for boxes to subtly stand out */
+  --tab-btn-color: #333;
+  /* Darker for inactive tabs, blends with the background */
+  --tab-btn-hover-color: #454545;
+  /* Lighter grey for hover, subtle interaction feedback */
+  --icon-bg: #E63946;
+  /* Red for active icon backgrounds for consistency */
+  --icon-color: #FFFFFF;
+  /* White for icon details, stands out against the red */
 }
 
 
@@ -37,13 +57,28 @@ html {
   width: 100%;
   background-color: var(--bg-color) !important;
   color: var(--primary-color) !important;
-  font-family: 'Open Sans', sans-serif; /* Set font family to Open Sans */
+  font-family: 'Open Sans', sans-serif;
+  /* Set font family to Open Sans */
 }
 
 
 /* Other relevant selectors */
-.center, .result-advance, .scroll, .tab button, .tabcontent, .form-control-plaintext, .comment .commenttext, .explanation, .top, .mid, .btm, .input-group-text, .summary, .dark-mode-button {
-  font-family: 'Open Sans', sans-serif; /* Set font family to Open Sans */
+.center,
+.result-advance,
+.scroll,
+.tab button,
+.tabcontent,
+.form-control-plaintext,
+.comment .commenttext,
+.explanation,
+.top,
+.mid,
+.btm,
+.input-group-text,
+.summary,
+.dark-mode-button {
+  font-family: 'Open Sans', sans-serif;
+  /* Set font family to Open Sans */
 }
 
 /* for all 3 section */
@@ -56,7 +91,7 @@ html {
   padding-right: 10px;
 }
 
-.result-advance{
+.result-advance {
   margin: auto;
   width: 70%;
   padding-top: 30px;
@@ -84,14 +119,18 @@ html {
 
 /* Customize scrollbar thumb */
 .scroll::-webkit-scrollbar-thumb {
-  background-color: var(--primary-color); /* Color of the thumb */
-  border-radius: 10px; /* Roundness of the thumb */
+  background-color: var(--primary-color);
+  /* Color of the thumb */
+  border-radius: 10px;
+  /* Roundness of the thumb */
 }
 
 /* Customize scrollbar track */
 .scroll::-webkit-scrollbar-track {
-  background-color: var(--bs-border-color); /* Color of the track */
-  border-radius: 10px; /* Adjust border radius as needed */
+  background-color: var(--bs-border-color);
+  /* Color of the track */
+  border-radius: 10px;
+  /* Adjust border radius as needed */
 }
 
 /* Optional: Hide scrollbar buttons */
@@ -132,6 +171,64 @@ html {
   border-radius: 0.5%;
 }
 
+.season_tabs {
+  position: relative;
+  min-height: 360px;
+  /* This part sucks */
+  clear: both;
+  margin: 25px 0;
+  border-radius: 25px;
+}
+
+.season_tab {
+  float: left;
+  clear: both;
+  width: 286px;
+  border-radius: 25px;
+}
+
+.season_tab label {
+  padding: 10px;
+  border: 1px solid;
+  margin-left: -1px;
+  font-size: 21px;
+  vertical-align: middle;
+  position: relative;
+  left: 1px;
+  width: 264px;
+  height: 68px;
+  display: table-cell;
+  border-radius: 10px;
+}
+
+.season_tab [type=radio] {
+  display: none;
+}
+
+.season_content {
+  position: absolute;
+  top: 0;
+  left: 286px;
+  background: white;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+}
+
+.season_content span {
+  animation: 0.5s ease-out 0s 1 slideInFromTop;
+}
+
+[type=radio]:checked~label {
+  border-bottom: 2px solid #8bc34a;
+  z-index: 2;
+}
+
+[type=radio]:checked~label~.season_content {
+  z-index: 1;
+}
 
 /* For Nmap result */
 .form-control-plaintext {
@@ -312,8 +409,8 @@ html {
 }
 
 /* for label element */
-label{
-  color:var(--secondary-color);
+label {
+  color: var(--secondary-color);
 }
 
 
@@ -330,5 +427,68 @@ label{
 }
 
 .dark-mode-button:hover {
-  background-color: #c74a4a; /* Darken the background color on hover */
+  background-color: #c74a4a;
+  /* Darken the background color on hover */
+}
+
+.tabs-container {
+  max-width: 1200px;
+  min-height: 650px;
+  margin: 30px auto;
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--box-color); /* Use box color for tab background */
+}
+
+.tabs-container .tabs {
+  width: 300px;
+  background: var(--tab-btn-color); /* Updated background color for tabs */
+  color: var(--secondary-color); /* Updated text color for better contrast */
+  text-transform: uppercase;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.tabs-container .tabs .tab {
+  padding: 16px 24px;
+  background: transparent;
+  cursor: pointer;
+  font-weight: bold;
+  border-bottom: 2px solid transparent;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.tabs-container .tabs .tab:hover,
+.tabs-container .tabs .tab.active {
+  background: var(--tab-btn-hover-color); /* Background for hover/active state */
+  color: var(--primary-color); /* Color for text in hover/active state */
+  border-bottom: 2px solid var(--primary-color); /* Border color for hover/active state */
+}
+
+.tabs-container .content-container {
+  flex-grow: 1;
+  background: var(--tab-btn-color); /* Updated background color for content */
+  color: var(--secondary-color); /* Updated text color for content */
+  padding: 20px;
+  border-left: 1px solid var(--bs-border-color);
+}
+
+.tabs-container .content-container .content {
+  display: none;
+  padding: 20px;
+}
+
+.tabs-container .content-container .content.active {
+  display: block;
+}
+
+.tabs-container .content-container h3 {
+  margin-top: 0;
+  color: var(--primary-color); /* Updated color for headers to stand out */
+}
+
+.tabs-container .content-container p {
+  line-height: 1.6;
+  color: var(--explanation-color); /* Updated color for explanatory text */
 }
