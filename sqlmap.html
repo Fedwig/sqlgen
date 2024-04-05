@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>SQLGen</title>
+  <link rel="shortcut icon" href="https://fedwig.pages.dev/notion/38caf215-7cd7-4adc-9b63-11d58130f724/Fedwig.png" />
+  <link rel="stylesheet" type="text/css" href="./css/styles.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="js/sqlmap_commands.js"></script>
+</head>
+
+<body data-theme="light">
+  <div class="text-center">
+    <!-- header -->
+    <div class="top light">
+      <!-- github icon -->
+      <a href="https://github.com/fedwig/" class="github-corner" aria-label="View source on GitHub">
+        <svg width="80" height="80" viewBox="0 0 250 250" id="Github-Cat">
+          <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+          <path
+            d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+            fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+          <path
+            d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+            fill="currentColor" class="octo-body"></path>
+        </svg>
+      </a>
+      <!-- github icon end -->
+
+      <!-- Dark/Light Mode -->
+      <div>
+        <button class="fa-solid dark-mode-button" id="Switch-Color"> Dark Mode</button>
+      </div>
+      <!-- Dark/Light Mode end -->
+
+      <h1>SQLGen</h1>
+
+      <div class="body">
+        <!-- Tab links -->
+        <div class="tab">
+          <button class="tablinks" onclick="ChangeTab(event, 'Simple')" id="SimpleOpen"> Simple </button>
+          <button class="tablinks" onclick="ChangeTab(event, 'Advance')"> Advance </button>
+        </div>
+        <!--Tab links end -->
+
+
+        <!-- Simple Mode -->
+        <div id="Simple" class="tabcontent">
+          <h3>Simple Mode</h3>
+          <div class="scroll">
+            <div class="container text-start">
+              <div class="row">
+                <!-- General Options -->
+                <div class="col">
+                  <h5>General Options</h5>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-General"
+                      id="SQLmap-version" />
+                    <label class="form-check-label" for="SQLmap-version">SQLmap Version</label>
+                  </div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-verbose" />
+                    <label class="form-check-label" for="SQLmap-verbose">Verbosity (Default = 1)</label>
+                  </div>
+                  <input class="form-control" type="number" id="Verbosity" name="points" step="1" min="1" max="6"
+                    placeholder="1">
+                  <div class="explanation"> *Verbosity 1-6</div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-General"
+                      id="SQLmap-wizard" />
+                    <label class="form-check-label" for="SQLmap-wizard">Wizard Interface</label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-General"
+                      id="SQLmap-update" />
+                    <label class="form-check-label" for="SQLmap-update">Update SQLmap</label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-General"
+                      id="SQLmap-purge" />
+                    <label class="form-check-label" for="SQLmap-purge">Purge</label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-General"
+                      id="SQLmap-tampers" />
+                    <label class="form-check-label" for="SQLmap-tampers">List Tampers</label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-General"
+                      id="SQLmap-dependencies" />
+                    <label class="form-check-label" for="SQLmap-dependencies">Check Dependencies</label>
+                  </div>
+                </div>
+                <!-- General Options End-->
+
+
+                <!-- Target Options -->
+                <div class="col">
+                  <h5>Target Options</h5>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-target" />
+                    <label class="form-check-label" for="SQLmap-target">Target URL</label>
+                  </div>
+                  <input class="form-control" id="target-url" type="text" />
+                  <div class="explanation"> *Example: http://www.testing.com</div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-dorking" />
+                    <label class="form-check-label" for="SQLmap-dorking">Google Dork</label>
+                  </div>
+                  <input class="form-control" id="googledork" type="text" />
+                  <div class="explanation"> *Example: inurl:index.php?id= </div>
+                </div>
+                <!-- Target Options End-->
+
+
+                <!-- Request Options-->
+                <div class="col">
+                  <h5>Request Options</h5>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-data" />
+                    <label class="form-check-label" for="SQLmap-data">Data String</label>
+                  </div>
+                  <input class="form-control" id="request-data" type="text" />
+                  <div class="explanation"> *Example: id=1 </div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-cookie" />
+                    <label class="form-check-label" for="SQLmap-cookie">HTTP Cookie Header</label>
+                  </div>
+                  <input class="form-control" id="request-cookie" type="text" />
+                  <div class="explanation"> *Example: PHPSESSID=a8d127e.. </div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-random-agent" />
+                    <label class="form-check-label" for="SQLmap-random-agent">Random Agent</label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-proxy" />
+                    <label class="form-check-label" for="SQLmap-proxy">Proxy</label>
+                  </div>
+                  <input class="form-control" id="request-proxy" type="text" />
+                  <div class="explanation"> *Example: http://127.0.0.1:8080 </div>
+
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-tor" />
+                    <label class="form-check-label" for="SQLmap-tor">Tor</label>
+                  </div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-check-tor" />
+                    <label class="form-check-label" for="SQLmap-check-tor">Check Tor Configuration</label>
+                  </div>
+                </div>
+              </div>
+              <!-- Request Options End -->
+
+              </br></br>
+
+              <div class="row">
+                <!-- Injection Options -->
+                <div class="col">
+                  <h5>Injection Options</h5>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-parameter" />
+                    <label class="form-check-label" for="SQLmap-parameter">Test Parameters</label>
+                  </div>
+                  <input class="form-control" id="injection-parameter" type="text" />
+                  <div class="explanation"> *Example: id </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-dbms" />
+                    <label class="form-check-label" for="SQLmap-dbms">DBMS Type</label>
+                  </div>
+                  <select class="form-select" id="dbms-types">
+                  </select>
+                </div>
+                <!-- Injection Options end -->
+
+
+                <!-- Detection Options -->
+                <div class="col">
+                  <h5>Detection Options</h5>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-level" />
+                    <label class="form-check-label" for="SQLmap-level">Level</label>
+                  </div>
+                  <input class="form-control" type="number" id="level" name="level" step="1" min="1" max="5"
+                    placeholder="1">
+                  <div class="explanation"> *Level 1-5 (Default = 1)</div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-risk" />
+                    <label class="form-check-label" for="SQLmap-risk">Risk</label>
+                  </div>
+                  <input class="form-control" type="number" id="risk" name="risk" step="1" min="1" max="3"
+                    placeholder="1">
+                  <div class="explanation"> *Result 1-3 (Default = 1)</div>
+                </div>
+                <!-- Detection Options end -->
+
+                <!-- Enumeration Options -->
+                <div class="col">
+                  <h5>Enumeration Options</h5>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum" id="SQLmap-all" />
+                    <label class="form-check-label" for="SQLmap-all"> Enumerate All </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum"
+                      id="SQLmap-current-user" />
+                    <label class="form-check-label" for="SQLmap-current-user"> Current User </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum"
+                      id="SQLmap-current-db" />
+                    <label class="form-check-label" for="SQLmap-current-db"> Current Database </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum"
+                      id="SQLmap-password" />
+                    <label class="form-check-label" for="SQLmap-password"> Passwords </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum"
+                      id="SQLmap-database" />
+                    <label class="form-check-label" for="SQLmap-database"> Databases </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum"
+                      id="SQLmap-tables" />
+                    <label class="form-check-label" for="SQLmap-tables"> Tables </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum"
+                      id="SQLmap-columns" />
+                    <label class="form-check-label" for="SQLmap-columns"> Columns </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum"
+                      id="SQLmap-schema" />
+                    <label class="form-check-label" for="SQLmap-schema"> Schema </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum" id="SQLmap-dump" />
+                    <label class="form-check-label" for="SQLmap-dump"> Dump </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum"
+                      id="SQLmap-dump-all" />
+                    <label class="form-check-label" for="SQLmap-dump-all"> Dump All </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum" id="SQLmap-DB" />
+                    <label class="form-check-label" for="SQLmap-DB"> Database to Enumerate </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum" id="SQLmap-TBL" />
+                    <label class="form-check-label" for="SQLmap-TBL"> Tables to Enumerate </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-Enum" id="SQLmap-COL" />
+                    <label class="form-check-label" for="SQLmap-COL"> Columns to Enumerate </label>
+                  </div>
+                </div>
+                <!-- Enumeration Options end -->
+              </div>
+
+              </br></br>
+
+              <div class="row">
+                <div class="col">
+                  <!-- Operating System Access -->
+                  <h5>Operating System Access</h5>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-OS" id="SQLmap-Shell" />
+                    <label class="form-check-label" for="SQLmap-Shell"> Interactive OS Shell </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-OS" id="SQLmap-Pwn" />
+                    <label class="form-check-label" for="SQLmap-Pwn"> OOB Shell, Meterpreter or VNC </label>
+                  </div>
+                </div>
+                <!-- Operating System Access end -->
+
+                <div class="col">
+                  <!-- General Options -->
+                  <h5>General Options</h5>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-General"
+                      id="SQLmap-Batch" />
+                    <label class="form-check-label" for="SQLmap-Shell"> Batch (Default Behaviour) </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-General"
+                      id="SQLmap-Flush" />
+                    <label class="form-check-label" for="SQLmap-Pwn"> Flush Session </label>
+                  </div>
+                </div>
+                <!-- General Options -->
+
+                <div class="col">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="center">
+            <!-- Advance SQLmap Command -->
+            <div class="input-group">
+              <span class="input-group-text">Result:</span>
+              <div class="form-floating">
+                <input type="text" class="form-control-plaintext" id="Simple-SQLmap" readonly />
+                <label for="Simple-SQLmap">SQLMap Command</label>
+              </div>
+              <!-- copy button -->
+              <div class="copy">
+                <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Simple-SQLmap">
+                  <span class="copytext">Copy to clipboard</span> Copy text </button>
+              </div>
+              <!-- copy button end -->
+            </div>
+            <!-- Advance SQLmap Command end -->
+          </div>
+        </div>
+        <!-- Simple Mode end -->
+
+
+        <!-- Advance Mode -->
+        <div id="Advance" class="tabcontent">
+          <h3>Advance Mode</h3>
+          <div class="scroll">
+            <div class="container text-start">
+              <div class="row">
+
+                <!-- Target Options -->
+                <div class="col">
+                  <h5>Target Options</h5>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-target" />
+                    <label class="form-check-label" for="SQLmap-adv-target">Target URL</label>
+                  </div>
+                  <input class="form-control" id="target-adv-url" type="text" />
+                  <div class="explanation"> *Example: http://www.testing.com</div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-direct" />
+                    <label class="form-check-label" for="SQLmap-adv-direct">Direct Connection String</label>
+                  </div>
+                  <input class="form-control" id="target-adv-direct" type="text" />
+                  <div class="explanation"> *Example: mysql://user:password@hostname:port/database
+                  </div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-logfile" />
+                    <label class="form-check-label" for="SQLmap-adv-logfile">Log File</label>
+                  </div>
+                  <input class="form-control" id="target-adv-logfile" type="text" />
+                  <div class="explanation"> *Example: logs.txt</div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-bulkfile" />
+                    <label class="form-check-label" for="SQLmap-adv-bulkfile">Bulk File</label>
+                  </div>
+                  <input class="form-control" id="target-adv-bulkfile" type="text" />
+                  <div class="explanation"> *Example: bulk.txt</div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-requestfile" />
+                    <label class="form-check-label" for="SQLmap-adv-requestfile">Request File</label>
+                  </div>
+                  <input class="form-control" id="target-adv-requestfile" type="text" />
+                  <div class="explanation"> *Example: request.txt</div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-dorking" />
+                    <label class="form-check-label" for="SQLmap-adv-dorking">Google Dork</label>
+                  </div>
+                  <input class="form-control" id="target-adv-googledork" type="text" />
+                  <div class="explanation"> *Example: inurl:index.php?id= </div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-configfile" />
+                    <label class="form-check-label" for="SQLmap-adv-configfile">Configuration File</label>
+                  </div>
+                  <input class="form-control" id="target-adv-configfile" type="text" />
+                  <div class="explanation"> *Example: config.txt</div>
+                </div>
+                <!-- Target Options End-->
+
+
+                <!-- Request Options-->
+                <div class="col">
+                  <h5>Request Options</h5>
+
+                  <!-- HTTP User-Agent header value -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-agent" />
+                    <label class="form-check-label" for="SQLmap-adv-agent">HTTP User-Agent</label>
+                  </div>
+                  <input class="form-control" id="request-adv-agent" type="text" />
+                  <div class="explanation"> *Example: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
+                    (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36</div>
+
+                  <!-- Extra header -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-header" />
+                    <label class="form-check-label" for="SQLmap-adv-header">Extra Header</label>
+                  </div>
+                  <input class="form-control" id="request-adv-header" type="text" />
+                  <div class="explanation"> *Example: X-Forwarded-For: 127.0.0.1</div>
+
+                  <!-- Force usage of given HTTP method -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-method" />
+                    <label class="form-check-label" for="SQLmap-adv-method">Force HTTP Method</label>
+                  </div>
+                  <input class="form-control" id="request-adv-method" type="text" />
+                  <div class="explanation"> *Example: PUT, GET, POST</div>
+
+                  <!-- Data string to be sent through POST -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-data" />
+                    <label class="form-check-label" for="SQLmap-adv-data">Data String for POST</label>
+                  </div>
+                  <input class="form-control" id="request-adv-data" type="text" />
+                  <div class="explanation"> *Example: id=1&amp;name=admin</div>
+
+                  <!-- Character used for splitting parameter values -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-param-del" />
+                    <label class="form-check-label" for="SQLmap-adv-param-del">Parameter Delimiter</label>
+                  </div>
+                  <input class="form-control" id="request-adv-param-del" type="text" />
+                  <div class="explanation"> *Example: &</div>
+
+                  <!-- HTTP Cookie header value -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-cookie" />
+                    <label class="form-check-label" for="SQLmap-adv-cookie">HTTP Cookie</label>
+                  </div>
+                  <input class="form-control" id="request-adv-cookie" type="text" />
+                  <div class="explanation"> *Example: PHPSESSID=a8d127e..</div>
+
+                  <!-- Character used for splitting cookie values -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-cookie-del" />
+                    <label class="form-check-label" for="SQLmap-adv-cookie-del">Cookie Delimiter</label>
+                  </div>
+                  <input class="form-control" id="request-adv-cookie-del" type="text" />
+                  <div class="explanation"> *Example: ;, &, etc...</div>
+
+                  <!-- Live cookies file used for loading up-to-date values -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-live-cookies" />
+                    <label class="form-check-label" for="SQLmap-adv-live-cookies">Live Cookies File</label>
+                  </div>
+                  <input class="form-control" id="request-adv-live-cookies" type="text" />
+                  <div class="explanation"> *Example: /path/to/live-cookies.txt</div>
+
+                  <!-- File containing cookies in Netscape/wget format -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-load-cookies" />
+                    <label class="form-check-label" for="SQLmap-adv-load-cookies">Cookie File in Netscape/wget
+                      format</label>
+                  </div>
+                  <input class="form-control" id="request-adv-load-cookies" type="text" />
+                  <div class="explanation"> *Example: /path/to/cookies.txt</div>
+
+                  <!-- Ignore Set-Cookie header from response -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-drop-set-cookie" />
+                    <label class="form-check-label" for="SQLmap-adv-drop-set-cookie">Ignore Set-Cookie Header</label>
+                  </div>
+
+                  <!-- Imitate smartphone through HTTP User-Agent header -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-mobile" />
+                    <label class="form-check-label" for="SQLmap-adv-mobile">Imitate Smartphone</label>
+                  </div>
+                </div>
+                <!-- Request Options End -->
+
+                <!-- Injection Options -->
+                <div class="col">
+                  <h5>Injection Options</h5>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-parameter" />
+                    <label class="form-check-label" for="SQLmap-adv-parameter">Test Parameters</label>
+                  </div>
+                  <input class="form-control" id="injection-adv-parameter" type="text" />
+                  <div class="explanation"> *Example: id </div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-skip" />
+                    <label class="form-check-label" for="SQLmap-adv-skip">Skip Testing for Given Parameters</label>
+                  </div>
+                  <input class="form-control" id="injection-adv-skip" type="text" />
+                  <div class="explanation"> *Example: sessionid </div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-skip-static" />
+                    <label class="form-check-label" for="SQLmap-adv-skip-static">Skip Static Parameters</label>
+                  </div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-param-exclude" />
+                    <label class="form-check-label" for="SQLmap-adv-param-exclude">Exclude Parameters from
+                      Testing</label>
+                  </div>
+                  <input class="form-control" id="injection-adv-param-exclude" type="text" />
+                  <div class="explanation"> *Example: POST </div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-dbms" />
+                    <label class="form-check-label" for="SQLmap-adv-dbms">DBMS Type</label>
+                  </div>
+                  <select class="form-select" id="dbms-types2">
+                  </select>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-dbms-cred" />
+                    <label class="form-check-label" for="SQLmap-adv-dbms-cred">DBMS Authentication Credentials</label>
+                  </div>
+                  <input class="form-control" id="injection-adv-dbms-cred" type="text" />
+                  <div class="explanation"> *Example: user:password </div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-dbms-os" />
+                    <label class="form-check-label" for="SQLmap-adv-dbms-os">Specify the DBMS operating
+                      system</label>
+                  </div>
+                  <input class="form-control" id="injection-adv-os" type="text" />
+                  <div class="explanation"> *Example: Windows </div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-invalid-bignum" />
+                    <label class="form-check-label" for="SQLmap-adv-invalid-bignum">Use Big Numbers for Invalidating
+                      Values</label>
+                  </div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-invalid-logical" />
+                    <label class="form-check-label" for="SQLmap-adv-invalid-logical">Use Logical Operations for
+                      Invalidating Values</label>
+                  </div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-invalid-string" />
+                    <label class="form-check-label" for="SQLmap-adv-invalid-string">Use Random Strings for
+                      Invalidating
+                      Values</label>
+                  </div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-no-cast" />
+                    <label class="form-check-label" for="SQLmap-adv-no-cast">Turn Off Payload Casting
+                      Mechanism</label>
+                  </div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-no-escape" />
+                    <label class="form-check-label" for="SQLmap-adv-no-escape">Turn Off String Escaping
+                      Mechanism</label>
+                  </div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-inj-prefix" />
+                    <label class="form-check-label" for="SQLmap-adv-inj-prefix">Use Injection Prefix</label>
+                  </div>
+                  <input class="form-control" id="injection-adv-prefix" type="text" />
+                  <div class="explanation"> *Example: %23 </div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-inj-suffix" />
+                    <label class="form-check-label" for="SQLmap-adv-inj-suffix">Use Injection Suffix</label>
+                  </div>
+                  <input class="form-control" id="injection-adv-suffix" type="text" />
+                  <div class="explanation"> *Example: -- </div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-inj-tamper" />
+                    <label class="form-check-label" for="SQLmap-adv-inj-tamper">Tamper Scripts</label>
+                  </div>
+                  <select class="form-select" id="injection-adv-tamper">
+                  </select>
+
+                </div>
+                <!-- Injection Options end -->
+              </div>
+
+              </br></br>
+
+              <div class="row">
+
+                <!-- Optimization Options -->
+                <div class="col">
+                  <h5>Optimization Options</h5>
+
+                  <!-- Turn on all optimization switches -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-optimization" />
+                    <label class="form-check-label" for="SQLmap-adv-optimization">Turn On All Optimization
+                      Switches</label>
+                  </div>
+
+                  <!-- Predict common queries output -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-predict-output" />
+                    <label class="form-check-label" for="SQLmap-adv-predict-output">Predict Common Queries
+                      Output</label>
+                  </div>
+
+                  <!-- Use persistent HTTP(s) connections -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-keep-alive" />
+                    <label class="form-check-label" for="SQLmap-adv-keep-alive">Use Persistent HTTP(s)
+                      Connections</label>
+                  </div>
+
+                  <!-- Retrieve page length without actual HTTP response body -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-null-connection" />
+                    <label class="form-check-label" for="SQLmap-adv-null-connection">Retrieve Page Length Without
+                      Actual
+                      HTTP Response Body</label>
+                  </div>
+
+                  <!-- Max number of concurrent HTTP(s) requests -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-threads" />
+                    <label class="form-check-label" for="SQLmap-adv-threads">Max number of concurrent threads (Default
+                      =
+                      1)</label>
+                  </div>
+                  <input class="form-control" type="number" id="threads" name="points" step="1" min="1" max="10"
+                    placeholder="1">
+                  <div class="explanation"> *Threads 1-10</div>
+                  <!-- Optimization Options end-->
+
+                  <!-- File System Access Start -->
+                  <h5>File System Access</h5>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-file-read" />
+                    <label class="form-check-label" for="SQLmap-adv-file-read">Read a file from DBMS File System</label>
+                  </div>
+                  <input class="form-control" id="file-read-name" type="text" />
+                  <div class="explanation"> *Example: testing.txt </div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-file-write" />
+                    <label class="form-check-label" for="SQLmap-adv-file-write">Write a local file on the back-end DBMS
+                      file system</label>
+                  </div>
+                  <input class="form-control" id="file-write-name" type="text" />
+                  <div class="explanation"> *Example: testing.txt </div>
+
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-file-dest" />
+                    <label class="form-check-label" for="SQLmap-adv-file-dest">Back-end DBMS absolute filepath to write
+                      to</label>
+                  </div>
+                  <input class="form-control" id="file-dest-name" type="text" />
+                  <div class="explanation"> *Example: testing.txt </div>
+                </div>
+                <!-- File System Access end -->
+
+                <div class="col">
+                  <h5>Detection Options</h5>
+
+                  <!-- Level of tests to perform -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-level" />
+                    <label class="form-check-label" for="SQLmap-adv-level">Level of Tests</label>
+                  </div>
+                  <input class="form-control" id="detection-level" type="number" min="1" max="5" />
+                  <div class="explanation"> *Range: 1-5, default: 1</div>
+
+                  <!-- Risk of tests to perform -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-risk" />
+                    <label class="form-check-label" for="SQLmap-adv-risk">Risk of Tests</label>
+                  </div>
+                  <input class="form-control" id="detection-risk" type="number" min="1" max="3" />
+                  <div class="explanation"> *Range: 1-3, default: 1</div>
+
+                  <!-- String to match when query is evaluated to True -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-string" />
+                    <label class="form-check-label" for="SQLmap-adv-string">String to Match (True)</label>
+                  </div>
+                  <input class="form-control" id="detection-string" type="text" />
+                  <div class="explanation"> *Example: Success</div>
+
+                  <!-- String to match when query is evaluated to False -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-not-string" />
+                    <label class="form-check-label" for="SQLmap-adv-not-string">String to Match (False)</label>
+                  </div>
+                  <input class="form-control" id="detection-not-string" type="text" />
+                  <div class="explanation"> *Example: Error</div>
+
+                  <!-- Regexp to match when query is evaluated to True -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-regexp" />
+                    <label class="form-check-label" for="SQLmap-adv-regexp">Regexp to Match (True)</label>
+                  </div>
+                  <input class="form-control" id="detection-regexp" type="text" />
+                  <div class="explanation"> *Example: \d+</div>
+
+                  <!-- HTTP code to match when query is evaluated to True -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-code" />
+                    <label class="form-check-label" for="SQLmap-adv-code">HTTP Code to Match (True)</label>
+                  </div>
+                  <input class="form-control" id="detection-code" type="text" />
+                  <div class="explanation"> *Example: 200</div>
+
+                  <!-- Perform thorough tests only if positive heuristic(s) -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-smart" />
+                    <label class="form-check-label" for="SQLmap-adv-smart">Perform Thorough Tests</label>
+                  </div>
+
+                  <!-- Compare pages based only on the textual content -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-text-only" />
+                    <label class="form-check-label" for="SQLmap-adv-text-only">Text-Only Comparison</label>
+                  </div>
+
+                  <!-- Compare pages based only on their titles -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-titles" />
+                    <label class="form-check-label" for="SQLmap-adv-titles">Title-Based Comparison</label>
+                  </div>
+                </div>
+                <!-- Detection Options End -->
+
+                <!-- Enumeration Options -->
+                <div class="col">
+                  <h5>Enumeration Options</h5>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-adv-enum"
+                      id="SQLmap-adv-all" />
+                    <label class="form-check-label" for="SQLmap-adv-all"> Enumerate All </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-adv-enum"
+                      id="SQLmap-adv-current-user" />
+                    <label class="form-check-label" for="SQLmap-adv-current-user"> Current User </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-adv-enum"
+                      id="SQLmap-adv-current-db" />
+                    <label class="form-check-label" for="SQLmap-adv-current-db"> Current Database </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-adv-enum"
+                      id="SQLmap-adv-password" />
+                    <label class="form-check-label" for="SQLmap-adv-password"> Passwords </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-adv-enum"
+                      id="SQLmap-adv-database" />
+                    <label class="form-check-label" for="SQLmap-adv-database"> Databases </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-adv-enum"
+                      id="SQLmap-adv-tables" />
+                    <label class="form-check-label" for="SQLmap-adv-tables"> Tables </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-adv-enum"
+                      id="SQLmap-adv-columns" />
+                    <label class="form-check-label" for="SQLmap-adv-columns"> Columns </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-adv-enum"
+                      id="SQLmap-adv-schema" />
+                    <label class="form-check-label" for="SQLmap-adv-schema"> Schema </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-adv-enum"
+                      id="SQLmap-adv-dump" />
+                    <label class="form-check-label" for="SQLmap-adv-dump"> Dump </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-adv-enum"
+                      id="SQLmap-adv-dump-all" />
+                    <label class="form-check-label" for="SQLmap-adv-dump-all"> Dump All </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-adv-enum"
+                      id="SQLmap-adv-DB" />
+                    <label class="form-check-label" for="SQLmap-adv-DB"> Database to Enumerate </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-adv-enum"
+                      id="SQLmap-adv-TBL" />
+                    <label class="form-check-label" for="SQLmap-adv-TBL"> Tables to Enumerate </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-adv-enum"
+                      id="SQLmap-adv-COL" />
+                    <label class="form-check-label" for="SQLmap-adv-COL"> Columns to Enumerate </label>
+                  </div>
+                  <!-- Enumeration Options End -->
+
+                  </br>
+                  <!-- Brute Force Options -->
+                  <h5>Brute Force Options</h5>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-bruteforce"
+                      id="SQLmap-adv-common-tables" />
+                    <label class="form-check-label" for="SQLmap-adv-common-tables"> Check existence of common tables
+                    </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-bruteforce"
+                      id="SQLmap-adv-common-columns" />
+                    <label class="form-check-label" for="SQLmap-adv-common-columns"> Check existence of common columns
+                    </label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-bruteforce"
+                      id="SQLmap-adv-common-files" />
+                    <label class="form-check-label" for="SQLmap-adv-common-files"> Check existence of common files
+                    </label>
+                  </div>
+                </div>
+                <!-- Brute Force Options end -->
+              </div>
+
+              </br></br>
+
+              <div class="row">
+                <!-- Operating System Access -->
+                <div class="col">
+                  <h5>Operating System Access</h5>
+
+                  <!-- Execute an operating system command -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-os-cmd" />
+                    <label class="form-check-label" for="SQLmap-adv-os-cmd">Execute an Operating System Command</label>
+                  </div>
+                  <input class="form-control" id="os-cmd-input" type="text" placeholder="Enter command" />
+                  <div class="explanation"> *Example: ls -la </div>
+
+                  <!-- Prompt for an interactive operating system shell -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-os-shell" />
+                    <label class="form-check-label" for="SQLmap-adv-os-shell">Interactive OS Shell</label>
+                  </div>
+
+                  <!-- Prompt for an OOB shell, Meterpreter or VNC -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-os-pwn" />
+                    <label class="form-check-label" for="SQLmap-adv-os-pwn">OOB Shell, Meterpreter or VNC</label>
+                  </div>
+
+                  <!-- One click prompt for an OOB shell, Meterpreter or VNC -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-os-smbrelay" />
+                    <label class="form-check-label" for="SQLmap-adv-os-smbrelay">One Click OOB Shell, Meterpreter or
+                      VNC</label>
+                  </div>
+
+                  <!-- Stored procedure buffer overflow exploitation -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-os-bof" />
+                    <label class="form-check-label" for="SQLmap-adv-os-bof">Stored Procedure Buffer Overflow
+                      Exploitation</label>
+                  </div>
+
+                  <!-- Database process user privilege escalation -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-priv-esc" />
+                    <label class="form-check-label" for="SQLmap-adv-priv-esc">Database Process User Privilege
+                      Escalation</label>
+                  </div>
+
+                  <!-- Local path where Metasploit Framework is installed -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-msf-path" />
+                    <label class="form-check-label" for="SQLmap-adv-msf-path">Metasploit Framework Local Path</label>
+                  </div>
+                  <input class="form-control" id="msf-path-input" type="text" placeholder="Enter Metasploit path" />
+                  <div class="explanation"> *Example: /path/to/metasploit </div>
+
+                  <!-- Remote absolute path of temporary files directory -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-tmp-path" />
+                    <label class="form-check-label" for="SQLmap-adv-tmp-path">Remote Temporary Files Directory</label>
+                  </div>
+                  <input class="form-control" id="tmp-path-input" type="text"
+                    placeholder="Enter temporary files directory path" />
+                  <div class="explanation">*Example: /remote/temp/directory</div>
+                </div>
+                <!-- Operating System Access End -->
+
+                <div class="col">
+                  <!-- Windows Registry Access -->
+                  <h5>Windows Registry Access</h5>
+
+                  <!-- Read a Windows registry key value -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-reg-read" />
+                    <label class="form-check-label" for="SQLmap-adv-reg-read">Read Registry Key Value</label>
+                  </div>
+
+                  <!-- Write a Windows registry key value data -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-reg-add" />
+                    <label class="form-check-label" for="SQLmap-adv-reg-add">Write Registry Key Value Data</label>
+                  </div>
+
+                  <!-- Delete a Windows registry key value -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-reg-del" />
+                    <label class="form-check-label" for="SQLmap-adv-reg-del">Delete Registry Key Value</label>
+                  </div>
+
+                  <!-- Windows registry key -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-reg-key" />
+                    <label class="form-check-label" for="SQLmap-adv-reg-key">Registry Key</label>
+                  </div>
+                  <input class="form-control" id="reg-key-input" type="text" placeholder="Enter Registry Key" />
+                  <div class="explanation">*Example: HKEY_LOCAL_MACHINE\SOFTWARE\sqlmap</div>
+
+                  <!-- Windows registry key value -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-reg-value" />
+                    <label class="form-check-label" for="SQLmap-adv-reg-value">Registry Value</label>
+                  </div>
+                  <input class="form-control" id="reg-value-input" type="text" placeholder="Enter Registry Value" />
+                  <div class="explanation">*Example: Test</div>
+
+                  <!-- Windows registry key value data -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-reg-data" />
+                    <label class="form-check-label" for="SQLmap-adv-reg-data">Registry Data</label>
+                  </div>
+                  <input class="form-control" id="reg-data-input" type="text" placeholder="Enter Registry Data" />
+                  <div class="explanation">*Example: 1</div>
+
+                  <!-- Windows registry key value type -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-reg-type" />
+                    <label class="form-check-label" for="SQLmap-adv-reg-type">Registry Type</label>
+                  </div>
+                  <input class="form-control" id="reg-type-input" type="text"
+                    placeholder="Enter Registry Type (e.g., REG_SZ, REG_DWORD)" />
+                  <div class="explanation">*Example: REG_SZ</div>
+                </div>
+
+                <div class="col">
+                  <h5>Miscellaneous Options</h5>
+
+                  <!-- Use short mnemonics -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-mnemonics" />
+                    <label class="form-check-label" for="SQLmap-adv-mnemonics">Use Short Mnemonics</label>
+                  </div>
+                  <input class="form-control" id="mnemonics-input" type="text" placeholder="e.g., flu,bat,ban,tec=EU" />
+                  <div class="explanation">*Example: flu,bat,ban,tec=EU</div>
+
+                  <!-- Run host OS command(s) when SQL injection is found -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-alert" />
+                    <label class="form-check-label" for="SQLmap-adv-alert">Host OS Command on SQL Injection
+                      Alert</label>
+                  </div>
+                  <input class="form-control" id="alert-input" type="text" placeholder="Enter command" />
+                  <div class="explanation">*Example: sudo systemctl restart apache2</div>
+
+                  <!-- Beep on question and/or when vulnerability is found -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-beep" />
+                    <label class="form-check-label" for="SQLmap-adv-beep">Beep on Question/Vulnerability Found</label>
+                  </div>
+
+                  <!-- Check for missing (optional) sqlmap dependencies -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-dependencies" />
+                    <label class="form-check-label" for="SQLmap-adv-dependencies">Check Missing Dependencies</label>
+                  </div>
+
+                  <!-- Disable console output coloring -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-disable-coloring" />
+                    <label class="form-check-label" for="SQLmap-adv-disable-coloring">Disable Console Output
+                      Coloring</label>
+                  </div>
+
+                  <!-- Display list of available tamper scripts -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-list-tampers" />
+                    <label class="form-check-label" for="SQLmap-adv-list-tampers">List Available Tamper Scripts</label>
+                  </div>
+
+                  <!-- Disable logging to a file -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-no-logging" />
+                    <label class="form-check-label" for="SQLmap-adv-no-logging">Disable Logging to File</label>
+                  </div>
+
+                  <!-- Work in offline mode -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-offline" />
+                    <label class="form-check-label" for="SQLmap-adv-offline">Offline Mode</label>
+                  </div>
+
+                  <!-- Safely remove all content from sqlmap data directory -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-purge" />
+                    <label class="form-check-label" for="SQLmap-adv-purge">Purge Sqlmap Data Directory</label>
+                  </div>
+
+                  <!-- Location of CSV results file in multiple targets mode -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-results-file" />
+                    <label class="form-check-label" for="SQLmap-adv-results-file">Results File Location</label>
+                  </div>
+                  <input class="form-control" id="results-file-input" type="text"
+                    placeholder="Enter CSV file location" />
+                  <div class="explanation">*Example: /path/to/results.csv</div>
+
+                  <!-- Prompt for an interactive sqlmap shell -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-shell" />
+                    <label class="form-check-label" for="SQLmap-adv-shell">Interactive Sqlmap Shell</label>
+                  </div>
+
+                  <!-- Local directory for storing temporary files -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-tmp-dir" />
+                    <label class="form-check-label" for="SQLmap-adv-tmp-dir">Temporary Files Directory</label>
+                  </div>
+                  <input class="form-control" id="tmp-dir-input" type="text"
+                    placeholder="Enter temporary directory path" />
+                  <div class="explanation">*Example: */path/to/temporary/files</div>
+
+                  <!-- Adjust options for unstable connections -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-unstable" />
+                    <label class="form-check-label" for="SQLmap-adv-unstable">Unstable Connection Adjustments</label>
+                  </div>
+
+                  <!-- Update sqlmap -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-update" />
+                    <label class="form-check-label" for="SQLmap-adv-update">Update Sqlmap</label>
+                  </div>
+
+                  <!-- Simple wizard interface for beginner users -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-wizard" />
+                    <label class="form-check-label" for="SQLmap-adv-wizard">Wizard Interface</label>
+                  </div>
+                </div>
+              </div>
+
+              </br></br>
+            </div>
+
+          </div>
+          <div class="center">
+            <!-- Advance SQLmap Command -->
+            <div class="input-group">
+              <span class="input-group-text">Result:</span>
+              <div class="form-floating">
+                <input type="text" class="form-control-plaintext" id="Advance-SQLmap" readonly />
+                <label for="Advance-SQLmap">SQLMap Command</label>
+              </div>
+              <!-- copy button -->
+              <div class="copy">
+                <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Advance-SQLmap">
+                  <span class="copytext">Copy to clipboard</span> Copy text </button>
+              </div>
+              <!-- copy button end -->
+            </div>
+            <!-- Advance SQLmap Command end -->
+          </div>
+          <!-- Advance Mode end -->
+        </div>
+
+
+      </div>
+      <!-- NSE Mode end -->
+    </div>
+  </div>
+
+  <!-- body end -->
+
+  <div class="btm">
+    <form action="index.html" method="GET">
+      <button type="submit" class="back-button">&laquo; Back</button>
+    </form>
+  </div>
+
+  <!-- footer -->
+  <div class="btm light footer">
+    <p>Created by Fedwig</p>
+  </div>
+  <!-- footer end -->
+
+  </div>
+</body>
+
+</html>

