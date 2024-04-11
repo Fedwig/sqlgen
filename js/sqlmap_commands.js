@@ -73,8 +73,11 @@ function SetSimpleSQLmap() {
   var sqlmap_dump = document.getElementById("SQLmap-dump");
   var sqlmap_dump_all = document.getElementById("SQLmap-dump-all");
   var sqlmap_DB = document.getElementById("SQLmap-DB");
+  var db_enum = document.getElementById("db-enum");
   var sqlmap_TBL = document.getElementById("SQLmap-TBL");
+  var tbl_enum = document.getElementById("tbl-enum");
   var sqlmap_COL = document.getElementById("SQLmap-COL");
+  var col_enum = document.getElementById("col-enum");
 
   //OS Access Variables
   var sqlmap_shell = document.getElementById("SQLmap-Shell");
@@ -122,20 +125,20 @@ function SetSimpleSQLmap() {
   sqlmap_all.value = "--all";
   sqlmap_current_user.value = "--current-user";
   sqlmap_current_db.value = "--current-db";
-  sqlmap_password.value = "--password";
+  sqlmap_password.value = "--passwords";
   sqlmap_database.value = "--database";
   sqlmap_tables.value = "--tables";
   sqlmap_columns.value = "--columns";
   sqlmap_schema.value = "--schema";
   sqlmap_dump.value = "--dump";
   sqlmap_dump_all.value = "--dump-all";
-  sqlmap_DB.value = "-DB";
-  sqlmap_TBL.value = "-TBL";
-  sqlmap_COL.value = "-COL";
+  sqlmap_DB.value = "-D";
+  sqlmap_TBL.value = "-T";
+  sqlmap_COL.value = "-C";
 
   //Operating System Access
-  sqlmap_shell.value = "--os";
-  sqlmap_pwn.value = "--pwn";
+  sqlmap_shell.value = "--os-shell";
+  sqlmap_pwn.value = "--os-pwn";
 
   //General Options
   sqlmap_batch.value = "--batch";
@@ -177,7 +180,7 @@ function SetSimpleSQLmap() {
   //Target Option Conditions
   if (sqlmap_target.checked) {
     if (target_url.value !== "") {
-      sqlmap_result += " " + sqlmap_target.value + " " + target_url.value;
+      sqlmap_result += " " + sqlmap_target.value + " " + "\"" + target_url.value + "\"";
     } else {
       sqlmap_result += " " + sqlmap_target.value;
     }
@@ -185,7 +188,7 @@ function SetSimpleSQLmap() {
 
   if (sqlmap_dorking.checked) {
     if (googledork.value !== "") {
-      sqlmap_result += " " + sqlmap_dorking.value + " " + googledork.value;
+      sqlmap_result += " " + sqlmap_dorking.value + " " + "\"" + googledork.value + "\"";
     } else {
       sqlmap_result += " " + sqlmap_dorking.value;
     }
@@ -193,7 +196,7 @@ function SetSimpleSQLmap() {
 
   if (sqlmap_data.checked) {
     if (request_data.value !== "") {
-      sqlmap_result += " " + sqlmap_data.value + " " + request_data.value;
+      sqlmap_result += " " + sqlmap_data.value + "=" + "\"" + request_data.value + "\"";
     } else {
       sqlmap_result += " " + sqlmap_data.value;
     }
@@ -201,7 +204,7 @@ function SetSimpleSQLmap() {
 
   if (sqlmap_cookie.checked) {
     if (request_cookie.value !== "") {
-      sqlmap_result += " " + sqlmap_cookie.value + " " + request_cookie.value;
+      sqlmap_result += " " + sqlmap_cookie.value + "=" + "\"" + request_cookie.value + "\"";
     } else {
       sqlmap_result += " " + sqlmap_cookie.value;
     }
@@ -229,7 +232,7 @@ function SetSimpleSQLmap() {
 
   if (sqlmap_parameter.checked) {
     if (injection_parameter.value !== "") {
-      sqlmap_result += " " + sqlmap_parameter.value + " " + injection_parameter.value;
+      sqlmap_result += " " + sqlmap_parameter.value + " " + "\"" + injection_parameter.value + "\"";
     } else {
       sqlmap_result += " " + sqlmap_parameter.value;
     }
@@ -311,17 +314,28 @@ function SetSimpleSQLmap() {
 
   // Append value if sqlmap_DB is checked
   if (sqlmap_DB.checked) {
-    sqlmap_result += " " + sqlmap_DB.value;
+    if (db_enum.value !== "") {
+      sqlmap_result += " " + sqlmap_DB.value + " " + db_enum.value;
+    } else {
+      sqlmap_result += " " + sqlmap_DB.value + " ";
+    }
   }
 
   // Append value if sqlmap_TBL is checked
   if (sqlmap_TBL.checked) {
-    sqlmap_result += " " + sqlmap_TBL.value;
+    if (tbl_enum.value !== "") {
+      sqlmap_result += " " + sqlmap_TBL.value + " " + tbl_enum.value;
+    } else {
+      sqlmap_result += " " + sqlmap_TBL.value + " ";
+    }
   }
 
-  // Append value if sqlmap_COL is checked
   if (sqlmap_COL.checked) {
-    sqlmap_result += " " + sqlmap_COL.value;
+    if (col_enum.value !== "") {
+      sqlmap_result += " " + sqlmap_COL.value + " " + col_enum.value;
+    } else {
+      sqlmap_result += " " + sqlmap_COL.value;
+    }
   }
 
   if (sqlmap_shell.checked) {
@@ -414,9 +428,29 @@ function SetAdvanceSQLmap() {
   var target_adv_configfile = document.getElementById("target-adv-configfile");
 
 
+  // Technique Option Variables
+
+  var sqlmap_adv_technique = document.getElementById("SQLmap-adv-technique");
+  var technique_adv_options = document.getElementById("technique-adv-options");
+
+  var sqlmap_adv_time_sec = document.getElementById("SQLmap-adv-time-sec");
+  var time_adv_sec = document.getElementById("time-adv-sec");
+
+  var sqlmap_adv_union_cols = document.getElementById("SQLmap-adv-union-cols");
+  var union_adv_cols = document.getElementById("union-adv-cols");
+
+  var sqlmap_adv_union_char = document.getElementById("SQLmap-adv-union-char");
+  var union_adv_char = document.getElementById("union-adv-char");
+
+  var sqlmap_adv_union_from = document.getElementById("SQLmap-adv-union-from");
+  var union_adv_from = document.getElementById("union-adv-from");
+
+
   // Request Option Variables  
   var sqlmap_adv_agent = document.getElementById("SQLmap-adv-agent");
   var request_adv_agent = document.getElementById("request-adv-agent");
+
+  var sqlmap_adv_random_agent = document.getElementById("SQLmap-adv-random-agent");
 
   var sqlmap_adv_header = document.getElementById("SQLmap-adv-header");
   var request_adv_header = document.getElementById("request-adv-header");
@@ -444,6 +478,12 @@ function SetAdvanceSQLmap() {
 
   var sqlmap_adv_drop_set_cookie = document.getElementById("SQLmap-adv-drop-set-cookie");
 
+  var sqlmap_adv_delay = document.getElementById("SQLmap-adv-delay");
+  var request_adv_delay = document.getElementById("request-adv-delay");
+
+  var sqlmap_adv_timeout = document.getElementById("SQLmap-adv-timeout");
+  var request_adv_timeout = document.getElementById("request-adv-timeout");
+
   var sqlmap_adv_mobile = document.getElementById("SQLmap-adv-mobile");
 
 
@@ -470,7 +510,7 @@ function SetAdvanceSQLmap() {
 
   var sqlmap_adv_invalid_bignum = document.getElementById("SQLmap-adv-invalid-bignum");
 
-  var sqlmap_adv_invalid_logical = document.getElementById("SQLmap-adv-invalid-logical"); // Check the ID for correctness. Should it be "SQLmap-adv-invalid-logical"?
+  var sqlmap_adv_invalid_logical = document.getElementById("SQLmap-adv-invalid-logical");
 
   var sqlmap_adv_invalid_string = document.getElementById("SQLmap-adv-invalid-string");
 
@@ -523,9 +563,15 @@ function SetAdvanceSQLmap() {
 
   //Enumeration Options
   var sqlmap_adv_all = document.getElementById("SQLmap-adv-all");
+  var sqlmap_adv_banner = document.getElementById("SQLmap-adv-banner");
   var sqlmap_adv_current_user = document.getElementById("SQLmap-adv-current-user");
   var sqlmap_adv_current_db = document.getElementById("SQLmap-adv-current-db");
+  var sqlmap_adv_hostname = document.getElementById("SQLmap-adv-hostname");
+  var sqlmap_adv_is_dba = document.getElementById("SQLmap-adv-is-dba");
+  var sqlmap_adv_users = document.getElementById("SQLmap-adv-users");
   var sqlmap_adv_password = document.getElementById("SQLmap-adv-password");
+  var sqlmap_adv_privileges = document.getElementById("SQLmap-adv-privileges");
+  var sqlmap_adv_roles = document.getElementById("SQLmap-adv-roles");
   var sqlmap_adv_database = document.getElementById("SQLmap-adv-database");
   var sqlmap_adv_tables = document.getElementById("SQLmap-adv-tables");
   var sqlmap_adv_columns = document.getElementById("SQLmap-adv-columns");
@@ -533,10 +579,12 @@ function SetAdvanceSQLmap() {
   var sqlmap_adv_dump = document.getElementById("SQLmap-adv-dump");
   var sqlmap_adv_dump_all = document.getElementById("SQLmap-adv-dump-all");
   var sqlmap_adv_DB = document.getElementById("SQLmap-adv-DB");
+  var db_adv_enum = document.getElementById("db-adv-enum");
   var sqlmap_adv_TBL = document.getElementById("SQLmap-adv-TBL");
+  var tbl_adv_enum = document.getElementById("tbl-adv-enum");
   var sqlmap_adv_COL = document.getElementById("SQLmap-adv-COL");
-
-
+  var col_adv_enum = document.getElementById("col-adv-enum");
+  var sqlmap_adv_exclude_db = document.getElementById("SQLmap-adv-exclude-db");
 
   // Brute Force Options
   var sqlmap_adv_common_tables = document.getElementById("SQLmap-adv-common-tables");
@@ -597,6 +645,14 @@ function SetAdvanceSQLmap() {
 
 
   //Miscellaneous Options
+
+  var sqlmap_adv_verbose = document.getElementById("SQLmap-adv-verbose");
+  var adv_verbosity = document.getElementById("adv-verbosity");
+
+  var sqlmap_adv_batch = document.getElementById("SQLmap-adv-batch");
+
+  var sqlmap_adv_flush = document.getElementById("SQLmap-adv-flush");
+
   var sqlmap_adv_mnemonics = document.getElementById("SQLmap-adv-mnemonics");
   var mnemonics_input = document.getElementById("mnemonics-input");
 
@@ -633,16 +689,25 @@ function SetAdvanceSQLmap() {
 
   //Target Option Values
   sqlmap_adv_target.value = "-u";
-  sqlmap_adv_direct.value = "-r";
-  sqlmap_adv_logfile.value = "--log-file";
-  sqlmap_adv_bulkfile.value = "--bulk-file";
-  sqlmap_adv_requestfile.value = "--load-cookie";
-  sqlmap_adv_dorking.value = "--google-dork";
-  sqlmap_adv_configfile.value = "--config-file";
+  sqlmap_adv_direct.value = "-d";
+  sqlmap_adv_logfile.value = "--l";
+  sqlmap_adv_bulkfile.value = "--b";
+  sqlmap_adv_requestfile.value = "-r";
+  sqlmap_adv_dorking.value = "-g";
+  sqlmap_adv_configfile.value = "-c";
+
+  //Technique Option Values
+  sqlmap_adv_technique.value = "--technique";
+  sqlmap_adv_time_sec.value = "--time-sec";
+  sqlmap_adv_union_cols.value = "--union-cols";
+  sqlmap_adv_union_char.value = "--union-char";
+  sqlmap_adv_union_from.value = "--union-from";
+
 
   //Request Option Values
   sqlmap_adv_agent.value = "--user-agent";
-  sqlmap_adv_header.value = "--header";
+  sqlmap_adv_random_agent.value = "--random-agent";
+  sqlmap_adv_header.value = "--headers";
   sqlmap_adv_method.value = "--method";
   sqlmap_adv_data.value = "--data";
   sqlmap_adv_param_del.value = "--param-del";
@@ -651,10 +716,12 @@ function SetAdvanceSQLmap() {
   sqlmap_adv_live_cookies.value = "--live-cookies";
   sqlmap_adv_load_cookies.value = "--load-cookies";
   sqlmap_adv_drop_set_cookie.value = "--drop-set-cookie";
+  sqlmap_adv_delay.value = "--delay";
+  sqlmap_adv_timeout.value = "--timeout";
   sqlmap_adv_mobile.value = "--mobile";
 
   // Injection Option Values
-  sqlmap_adv_parameter.value = "--param";
+  sqlmap_adv_parameter.value = "--p";
   sqlmap_adv_skip.value = "--skip";
   sqlmap_adv_skip_static.value = "--skip-static";
   sqlmap_adv_param_exclude.value = "--param-exclude";
@@ -672,36 +739,44 @@ function SetAdvanceSQLmap() {
 
 
   // Optimization Option Values
-  sqlmap_adv_optimization.value = "--optimization";
+  sqlmap_adv_optimization.value = "-o";
   sqlmap_adv_predict_output.value = "--predict-output";
   sqlmap_adv_keep_alive.value = "--keep-alive";
   sqlmap_adv_null_connection.value = "--null-connection";
   sqlmap_adv_threads.value = "--threads";
 
   // Detection Option Values
-  sqlmap_adv_level = "--level";
-  sqlmap_adv_risk = "--risk";
-  sqlmap_adv_string = "--not-string";
-  sqlmap_adv_regexp = "--regexp";
-  sqlmap_adv_code = "--code";
-  sqlmap_adv_smart = "--smart";
-  sqlmap_adv_text_only = "--text-only";
-  sqlmap_adv_titles = "--titles";
+  sqlmap_adv_level.value = "--level";
+  sqlmap_adv_risk.value = "--risk";
+  sqlmap_adv_string.value = "--string";
+  sqlmap_adv_not_string.value = "--not-string";
+  sqlmap_adv_regexp.value = "--regexp";
+  sqlmap_adv_code.value = "--code";
+  sqlmap_adv_smart.value = "--smart";
+  sqlmap_adv_text_only.value = "--text-only";
+  sqlmap_adv_titles.value = "--titles";
 
   // Enumeration Option Values
   sqlmap_adv_all.value = "--all";
+  sqlmap_adv_banner.value = "--banner";
   sqlmap_adv_current_user.value = "--current-user";
   sqlmap_adv_current_db.value = "--current-db";
-  sqlmap_adv_password.value = "--password";
-  sqlmap_adv_database.value = "--database";
+  sqlmap_adv_hostname.value = "--hostname";
+  sqlmap_adv_is_dba.value = "--is-dba";
+  sqlmap_adv_users.value = "--users";
+  sqlmap_adv_password.value = "--passwords";
+  sqlmap_adv_privileges.value = "--privileges";
+  sqlmap_adv_roles.value = "--roles";
+  sqlmap_adv_database.value = "--dbs";
   sqlmap_adv_tables.value = "--tables";
   sqlmap_adv_columns.value = "--columns";
   sqlmap_adv_schema.value = "--schema";
   sqlmap_adv_dump.value = "--dump";
   sqlmap_adv_dump_all.value = "--dump-all";
-  sqlmap_adv_DB.value = "-DB";
-  sqlmap_adv_TBL.value = "-TBL";
-  sqlmap_adv_COL.value = "-COL";
+  sqlmap_adv_DB.value = "-D";
+  sqlmap_adv_TBL.value = "-T";
+  sqlmap_adv_COL.value = "-C";
+  sqlmap_adv_exclude_db.value = "--exclude-sysdbs";
 
   //Brute Force Option Values
   sqlmap_adv_common_tables.value = "--common-tables";
@@ -733,7 +808,11 @@ function SetAdvanceSQLmap() {
   sqlmap_adv_reg_data.value = "--reg-data";
   sqlmap_adv_reg_type.value = "--reg-type";
 
+
   //Miscellaneous Options
+  sqlmap_adv_verbose.value = "-v";
+  sqlmap_adv_batch.value = "--batch";
+  sqlmap_adv_flush.value = "--flush";
   sqlmap_adv_mnemonics.value = "--mnemonics";
   sqlmap_adv_alert.value = "--alert";
   sqlmap_adv_beep.value = "--beep";
@@ -744,7 +823,7 @@ function SetAdvanceSQLmap() {
   sqlmap_adv_offline.value = "--offline";
   sqlmap_adv_purge.value = "--purge";
   sqlmap_adv_results_file.value = "--results-file";
-  sqlmap_adv_shell.value = "--shell";
+  sqlmap_adv_shell.value = "--os-shell";
   sqlmap_adv_tmp_dir.value = "--tmp-dir";
   sqlmap_adv_unstable.value = "--unstable";
   sqlmap_adv_update.value = "--update";
@@ -753,7 +832,7 @@ function SetAdvanceSQLmap() {
   //Target Options
   if (sqlmap_adv_target.checked) {
     if (target_adv_url.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_target.value + " " + target_adv_url.value;
+      sqlmap_result += " " + sqlmap_adv_target.value + " " + "\"" + target_adv_url.value + "\"";
     } else {
       sqlmap_result += " " + sqlmap_adv_target.value;
     }
@@ -793,7 +872,7 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_dorking.checked) {
     if (target_adv_googledork.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_dorking.value + " " + target_adv_googledork.value;
+      sqlmap_result += " " + sqlmap_adv_dorking.value + " " + "\"" + target_adv_googledork.value + "\"";
     } else {
       sqlmap_result += " " + sqlmap_adv_dorking.value;
     }
@@ -801,25 +880,69 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_configfile.checked) {
     if (target_adv_configfile.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_configfile.value + " " + target_adv_configfile.value;
+      sqlmap_result += " " + sqlmap_adv_configfile.value + "=" + target_adv_configfile.value;
     } else {
       sqlmap_result += " " + sqlmap_adv_configfile.value;
     }
   }
 
+  // Technique Options
+  if (sqlmap_adv_technique.checked) {
+    if (technique_adv_options.value !== "") {
+      sqlmap_result += " " + sqlmap_adv_technique.value + "=" + technique_adv_options.value;
+    } else {
+      sqlmap_result += " " + sqlmap_adv_technique.value;
+    }
+  }
+
+  if (sqlmap_adv_time_sec.checked) {
+    if (time_adv_sec.value !== "") {
+      sqlmap_result += " " + sqlmap_adv_time_sec.value + "=" + time_adv_sec.value;
+    } else {
+      sqlmap_result += " " + sqlmap_adv_time_sec.value;
+    }
+  }
+
+  if (sqlmap_adv_union_cols.checked) {
+    if (union_adv_cols.value !== "") {
+      sqlmap_result += " " + sqlmap_adv_union_cols.value + "=" + union_adv_cols.value;
+    } else {
+      sqlmap_result += " " + sqlmap_adv_union_cols.value;
+    }
+  }
+
+  if (sqlmap_adv_union_char.checked) {
+    if (union_adv_char.value !== "") {
+      sqlmap_result += " " + sqlmap_adv_union_char.value + "=" + union_adv_char.value;
+    } else {
+      sqlmap_result += " " + sqlmap_adv_union_char.value;
+    }
+  }
+
+  if (sqlmap_adv_union_from.checked) {
+    if (union_adv_from.value !== "") {
+      sqlmap_result += " " + sqlmap_adv_union_from.value + "=" + union_adv_from.value;
+    } else {
+      sqlmap_result += " " + sqlmap_adv_union_from.value;
+    }
+  }
 
   // Request Options
   if (sqlmap_adv_agent.checked) {
     if (request_adv_agent.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_agent.value + " " + request_adv_agent.value;
+      sqlmap_result += " " + sqlmap_adv_agent.value + " " + "\"" + request_adv_agent.value + "\"";
     } else {
       sqlmap_result += " " + sqlmap_adv_agent.value;
     }
   }
 
+  if (sqlmap_adv_random_agent.checked) {
+    sqlmap_result += " " + sqlmap_adv_random_agent.value;
+  }
+
   if (sqlmap_adv_header.checked) {
     if (request_adv_header.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_header.value + " " + request_adv_header.value;
+      sqlmap_result += " " + sqlmap_adv_header.value + "=" + "\"" + request_adv_header.value + "\"";
     } else {
       sqlmap_result += " " + sqlmap_adv_header.value;
     }
@@ -835,7 +958,7 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_data.checked) {
     if (request_adv_data.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_data.value + " " + request_adv_data.value;
+      sqlmap_result += " " + sqlmap_adv_data.value + " " + "\"" + request_adv_data.value + "\"";
     } else {
       sqlmap_result += " " + sqlmap_adv_data.value;
     }
@@ -843,7 +966,7 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_param_del.checked) {
     if (request_adv_param_del.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_param_del.value + " " + request_adv_param_del.value;
+      sqlmap_result += " " + sqlmap_adv_param_del.value + "=" + "\"" + request_adv_param_del.value + "\"";
     } else {
       sqlmap_result += " " + sqlmap_adv_param_del.value;
     }
@@ -851,7 +974,7 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_cookie.checked) {
     if (request_adv_cookie.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_cookie.value + " " + request_adv_cookie.value;
+      sqlmap_result += " " + sqlmap_adv_cookie.value + "=" + "\"" + request_adv_cookie.value + "\"";
     } else {
       sqlmap_result += " " + sqlmap_adv_cookie.value;
     }
@@ -859,7 +982,7 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_cookie_del.checked) {
     if (request_adv_cookie_del.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_cookie_del.value + " " + request_adv_cookie_del.value;
+      sqlmap_result += " " + sqlmap_adv_cookie_del.value + "=" + "\"" + request_adv_cookie_del.value + "\"";
     } else {
       sqlmap_result += " " + sqlmap_adv_cookie_del.value;
     }
@@ -885,16 +1008,32 @@ function SetAdvanceSQLmap() {
     sqlmap_result += " " + sqlmap_adv_drop_set_cookie.value;
   }
 
+  if (sqlmap_adv_delay.checked) {
+    if (request_adv_delay.value !== "") {
+      sqlmap_result += " " + sqlmap_adv_delay.value + "=" + request_adv_delay.value;
+    } else {
+      sqlmap_result += " " + sqlmap_adv_delay.value;
+    }
+  }
+
+  if (sqlmap_adv_timeout.checked) {
+    if (request_adv_timeout.value !== "") {
+      sqlmap_result += " " + sqlmap_adv_timeout.value + "=" + request_adv_timeout.value;
+    } else {
+      sqlmap_result += " " + sqlmap_adv_timeout.value;
+    }
+  }
+
+
   if (sqlmap_adv_mobile.checked) {
     sqlmap_result += " " + sqlmap_adv_mobile.value;
   }
 
 
   // Injection Option
-
   if (sqlmap_adv_parameter.checked) {
     if (injection_adv_parameter.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_parameter.value + " " + injection_adv_parameter.value;
+      sqlmap_result += " " + sqlmap_adv_parameter.value + " " + "\"" + injection_adv_parameter.value + "\"";
     } else {
       sqlmap_result += " " + sqlmap_adv_parameter.value;
     }
@@ -914,7 +1053,7 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_param_exclude.checked) {
     if (injection_adv_param_exclude.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_param_exclude.value + " " + injection_adv_param_exclude.value;
+      sqlmap_result += " " + sqlmap_adv_param_exclude.value + "=" + "\"" + injection_adv_param_exclude.value + "\"";
     } else {
       sqlmap_result += " " + sqlmap_adv_param_exclude.value;
     }
@@ -922,7 +1061,7 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_dbms.checked) {
     if (dbms_types2.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_dbms.value + " " + dbms_types2.value;
+      sqlmap_result += " " + sqlmap_adv_dbms.value + "=" + dbms_types2.value;
     } else {
       sqlmap_result += " " + sqlmap_adv_dbms.value;
     }
@@ -930,7 +1069,7 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_dbms_cred.checked) {
     if (injection_adv_dbms_cred.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_dbms_cred.value + " " + injection_adv_dbms_cred.value;
+      sqlmap_result += " " + sqlmap_adv_dbms_cred.value + "=" + injection_adv_dbms_cred.value;
     } else {
       sqlmap_result += " " + sqlmap_adv_dbms_cred.value;
     }
@@ -938,7 +1077,7 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_dbms_os.checked) {
     if (injection_adv_os.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_dbms_os.value + " " + injection_adv_os.value;
+      sqlmap_result += " " + sqlmap_adv_dbms_os.value + "=" + injection_adv_os.value;
     } else {
       sqlmap_result += " " + sqlmap_adv_dbms_os.value;
     }
@@ -952,9 +1091,6 @@ function SetAdvanceSQLmap() {
     sqlmap_result += " " + sqlmap_adv_invalid_logical.value;
   }
 
-  if (sqlmap_adv_invalid_logical.checked) {
-    sqlmap_result += " " + sqlmap_adv_invalid_logical.value;
-  }
 
   if (sqlmap_adv_invalid_string.checked) {
     sqlmap_result += " " + sqlmap_adv_invalid_string.value;
@@ -970,7 +1106,7 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_inj_prefix.checked) {
     if (injection_adv_prefix.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_inj_prefix.value + " " + injection_adv_prefix.value;
+      sqlmap_result += " " + sqlmap_adv_inj_prefix.value + "=" + "\"" + injection_adv_prefix.value + "\"";
     } else {
       sqlmap_result += " " + sqlmap_adv_inj_prefix.value;
     }
@@ -978,7 +1114,7 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_inj_suffix.checked) {
     if (injection_adv_suffix.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_inj_suffix.value + " " + injection_adv_suffix.value;
+      sqlmap_result += " " + sqlmap_adv_inj_suffix.value + "=" + "\"" + injection_adv_suffix.value + "\"";
     } else {
       sqlmap_result += " " + sqlmap_adv_inj_suffix.value;
     }
@@ -1013,33 +1149,32 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_threads.checked) {
     if (threads_input.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_threads.value + " " + threads_input.value;
+      sqlmap_result += " " + sqlmap_adv_threads.value + "=" + threads_input.value;
     } else {
       sqlmap_result += " " + sqlmap_adv_threads.value;
     }
   }
 
   // Detection Options
-
   if (sqlmap_adv_level.checked) {
     if (detection_level.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_risk.value + " " + detection_level.value;
+      sqlmap_result += " " + sqlmap_adv_level.value + "=" + detection_level.value;
     } else {
-      sqlmap_result += " " + detection_level.value;
+      sqlmap_result += " " + sqlmap_adv_level.value + "=" + "1";
     }
   }
 
   if (sqlmap_adv_risk.checked) {
     if (detection_risk.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_risk.value + " " + detection_risk.value;
+      sqlmap_result += " " + sqlmap_adv_risk.value + "=" + detection_risk.value;
     } else {
-      sqlmap_result += " " + sqlmap_adv_risk.value;
+      sqlmap_result += " " + sqlmap_adv_risk.value + "=" + "1";
     }
   }
 
   if (sqlmap_adv_string.checked) {
     if (detection_string.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_string.value + " " + detection_string.value;
+      sqlmap_result += " " + sqlmap_adv_string.value + "=" + "\"" + detection_string.value + "\"";
     } else {
       sqlmap_result += " " + sqlmap_adv_string.value;
     }
@@ -1047,7 +1182,7 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_not_string.checked) {
     if (detection_not_string.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_not_string.value + " " + detection_not_string.value;
+      sqlmap_result += " " + sqlmap_adv_not_string.value + "=" + "\"" + detection_not_string.value + "\"";
     } else {
       sqlmap_result += " " + sqlmap_adv_not_string.value;
     }
@@ -1055,7 +1190,7 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_regexp.checked) {
     if (detection_regexp.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_regexp.value + " " + detection_regexp.value;
+      sqlmap_result += " " + sqlmap_adv_regexp.value + "=" + "\"" + detection_regexp.value + "\"";
     } else {
       sqlmap_result += " " + sqlmap_adv_regexp.value;
     }
@@ -1063,7 +1198,7 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_code.checked) {
     if (detection_code.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_code.value + " " + detection_code.value;
+      sqlmap_result += " " + sqlmap_adv_code.value + "=" + detection_code.value;
     } else {
       sqlmap_result += " " + sqlmap_adv_code.value;
     }
@@ -1087,6 +1222,10 @@ function SetAdvanceSQLmap() {
     sqlmap_result += " " + sqlmap_adv_all.value;
   }
 
+  if (sqlmap_adv_banner.checked) {
+    sqlmap_result += " " + sqlmap_adv_banner.value;
+  }
+
   if (sqlmap_adv_current_user.checked) {
     sqlmap_result += " " + sqlmap_adv_current_user.value;
   }
@@ -1095,8 +1234,28 @@ function SetAdvanceSQLmap() {
     sqlmap_result += " " + sqlmap_adv_current_db.value;
   }
 
+  if (sqlmap_adv_hostname.checked) {
+    sqlmap_result += " " + sqlmap_adv_hostname.value;
+  }
+
+  if (sqlmap_adv_is_dba.checked) {
+    sqlmap_result += " " + sqlmap_adv_is_dba.value;
+  }
+
+  if (sqlmap_adv_users.checked) {
+    sqlmap_result += " " + sqlmap_adv_users.value;
+  }
+
   if (sqlmap_adv_password.checked) {
     sqlmap_result += " " + sqlmap_adv_password.value;
+  }
+
+  if (sqlmap_adv_privileges.checked) {
+    sqlmap_result += " " + sqlmap_adv_privileges.value;
+  }
+
+  if (sqlmap_adv_roles.checked) {
+    sqlmap_result += " " + sqlmap_adv_roles.value;
   }
 
   if (sqlmap_adv_database.checked) {
@@ -1115,24 +1274,44 @@ function SetAdvanceSQLmap() {
     sqlmap_result += " " + sqlmap_adv_schema.value;
   }
 
+  if (sqlmap_adv_dump.checked) {
+    sqlmap_result += " " + sqlmap_adv_dump.value;
+  }
+
   if (sqlmap_adv_dump_all.checked) {
     sqlmap_result += " " + sqlmap_adv_dump_all.value;
   }
 
   if (sqlmap_adv_DB.checked) {
-    sqlmap_result += " " + sqlmap_adv_DB.value;
+    if (db_adv_enum.value !== "") {
+      sqlmap_result += " " + sqlmap_adv_DB.value + " " + db_adv_enum.value;
+    } else {
+      sqlmap_result += " " + sqlmap_adv_DB.value + " ";
+    }
   }
 
+  // Append value if sqlmap_TBL is checked
   if (sqlmap_adv_TBL.checked) {
-    sqlmap_result += " " + sqlmap_adv_TBL.value;
+    if (tbl_adv_enum.value !== "") {
+      sqlmap_result += " " + sqlmap_adv_TBL.value + " " + tbl_adv_enum.value;
+    } else {
+      sqlmap_result += " " + sqlmap_adv_TBL.value + " ";
+    }
   }
 
   if (sqlmap_adv_COL.checked) {
-    sqlmap_result += " " + sqlmap_adv_COL.value;
+    if (col_adv_enum.value !== "") {
+      sqlmap_result += " " + sqlmap_adv_COL.value + " " + col_adv_enum.value;
+    } else {
+      sqlmap_result += " " + sqlmap_adv_COL.value;
+    }
+  }
+
+  if (sqlmap_adv_exclude_db.checked) {
+    sqlmap_result += " " + sqlmap_adv_exclude_db.value;
   }
 
   //Brute Force Options
-
   if (sqlmap_adv_common_tables.checked) {
     sqlmap_result += " " + sqlmap_adv_common_tables.value;
   }
@@ -1146,7 +1325,9 @@ function SetAdvanceSQLmap() {
   }
 
   // Disable or enable specific options checkboxes based on the state of sqlmap_all
-  var specificOptionsCheckboxes = [sqlmap_adv_current_user, sqlmap_adv_current_db, sqlmap_adv_password, sqlmap_adv_database, sqlmap_adv_tables, sqlmap_adv_columns, sqlmap_adv_schema, sqlmap_adv_dump, sqlmap_adv_dump_all, sqlmap_adv_DB, sqlmap_adv_TBL, sqlmap_adv_COL];
+  var specificOptionsCheckboxes = [sqlmap_adv_banner, sqlmap_adv_current_user, sqlmap_adv_current_db, sqlmap_adv_hostname, sqlmap_adv_is_dba, sqlmap_adv_users,
+    sqlmap_adv_password, sqlmap_adv_privileges, sqlmap_adv_roles, sqlmap_adv_database, sqlmap_adv_tables, sqlmap_adv_columns, sqlmap_adv_schema, sqlmap_adv_dump,
+    sqlmap_adv_dump_all, sqlmap_adv_DB, sqlmap_adv_TBL, sqlmap_adv_COL, sqlmap_adv_exclude_db];
   specificOptionsCheckboxes.forEach(function (checkbox) {
     checkbox.disabled = sqlmap_adv_all.checked;
   });
@@ -1155,7 +1336,7 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_file_read.checked) {
     if (file_read_name.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_file_read.value + " " + file_read_name.value;
+      sqlmap_result += " " + sqlmap_adv_file_read.value + "=" + "\"" + file_read_name.value + "\"";
     } else {
       sqlmap_result += " " + sqlmap_adv_file_read.value;
     }
@@ -1163,7 +1344,7 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_file_write.checked) {
     if (file_write_name.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_file_write.value + " " + file_write_name.value;
+      sqlmap_result += " " + sqlmap_adv_file_write.value + "=" + "\"" + file_write_name.value + "\"";
     } else {
       sqlmap_result += " " + sqlmap_adv_file_write.value;
     }
@@ -1171,17 +1352,18 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_file_dest.checked) {
     if (file_dest_name.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_file_dest.value + " " + file_dest_name.value;
+      sqlmap_result += " " + sqlmap_adv_file_dest.value + "=" + "\"" + file_dest_name.value + "\"";
     } else {
       sqlmap_result += " " + sqlmap_adv_file_dest.value;
     }
   }
 
+
   // Operating System Access
 
   if (sqlmap_adv_os_cmd.checked) {
     if (os_cmd_input.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_os_cmd.value + " " + os_cmd_input.value;
+      sqlmap_result += " " + sqlmap_adv_os_cmd.value + "=" + "\"" + os_cmd_input.value + "\"";
     } else {
       sqlmap_result += " " + sqlmap_adv_os_cmd.value;
     }
@@ -1203,9 +1385,13 @@ function SetAdvanceSQLmap() {
     sqlmap_result += " " + sqlmap_adv_os_bof.value;
   }
 
+  if (sqlmap_adv_priv_esc.checked) {
+    sqlmap_result += " " + sqlmap_adv_priv_esc.value;
+  }
+
   if (sqlmap_adv_msf_path.checked) {
     if (msf_path_input.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_msf_path.value + " " + msf_path_input.value;
+      sqlmap_result += " " + sqlmap_adv_msf_path.value + "=" + msf_path_input.value;
     }
     else {
       sqlmap_result += " " + sqlmap_adv_msf_path.value;
@@ -1237,7 +1423,7 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_reg_value.checked) {
     if (reg_value_input.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_reg_value.value + " " + reg_value_input.value;
+      sqlmap_result += " " + sqlmap_adv_reg_value.value + "=" + "\"" + reg_value_input.value + "\"";
     }
     else {
       sqlmap_result += " " + sqlmap_adv_reg_value.value;
@@ -1246,7 +1432,7 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_reg_key.checked) {
     if (reg_key_input.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_reg_key.value + " " + reg_key_input.value;
+      sqlmap_result += " " + sqlmap_adv_reg_key.value + "=" + "\"" + reg_key_input.value + "\"";
     }
     else {
       sqlmap_result += " " + sqlmap_adv_reg_key.value;
@@ -1256,7 +1442,7 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_reg_value.checked) {
     if (reg_value_input.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_reg_value.value + " " + reg_value_input.value;
+      sqlmap_result += " " + sqlmap_adv_reg_value.value + "=" + "\"" + reg_value_input.value + "\"";
     }
     else {
       sqlmap_result += " " + sqlmap_adv_reg_value.value;
@@ -1265,7 +1451,7 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_reg_data.checked) {
     if (reg_data_input.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_reg_data.value + " " + reg_data_input.value;
+      sqlmap_result += " " + sqlmap_adv_reg_data.value + "=" + "\"" + reg_data_input.value + "\"";
     }
     else {
       sqlmap_result += " " + sqlmap_adv_reg_data.value;
@@ -1274,19 +1460,33 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_reg_type.checked) {
     if (reg_type_input.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_reg_type.value + " " + reg_type_input.value;
+      sqlmap_result += " " + sqlmap_adv_reg_type.value + "=" + "\"" + reg_type_input.value + "\"";
     }
     else {
       sqlmap_result += " " + sqlmap_adv_reg_type.value;
     }
   }
 
-
   // Miscellaneous Options
+  if (sqlmap_adv_verbose.checked) {
+    if (adv_verbosity.value !== "") {
+      sqlmap_result += " " + sqlmap_adv_verbose.value + " " + adv_verbosity.value;
+    } else {
+      sqlmap_result += " " + sqlmap_adv_verbose.value;
+    }
+  }
+
+  if (sqlmap_adv_batch.checked) {
+    sqlmap_result += " " + sqlmap_adv_batch.value;
+  }
+
+  if (sqlmap_adv_flush.checked) {
+    sqlmap_result += " " + sqlmap_adv_flush.value;
+  }
 
   if (sqlmap_adv_mnemonics.checked) {
     if (mnemonics_input.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_mnemonics.value + " " + mnemonics_input.value;
+      sqlmap_result += " " + sqlmap_adv_mnemonics.value + "=" + "\"" + mnemonics_input.value + "\"";
     }
     else {
       sqlmap_result += " " + sqlmap_adv_mnemonics.value;
@@ -1295,7 +1495,7 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_alert.checked) {
     if (alert_input.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_alert.value + " " + alert_input.value;
+      sqlmap_result += " " + sqlmap_adv_alert.value + "=" + "\"" + alert_input.value + "\"";
     }
     else {
       sqlmap_result += " " + sqlmap_adv_alert.value;
@@ -1315,7 +1515,7 @@ function SetAdvanceSQLmap() {
   }
 
   if (sqlmap_adv_list_tampers.checked) {
-    sqlmap_result += " " + sqlmap_adv_reg_add.value;
+    sqlmap_result += " " + sqlmap_adv_list_tampers.value;
   }
 
   if (sqlmap_adv_no_logging.checked) {
@@ -1332,7 +1532,7 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_results_file.checked) {
     if (results_file_input !== "") {
-      sqlmap_result += " " + sqlmap_adv_results_file.value + " " + results_file_input.value;
+      sqlmap_result += " " + sqlmap_adv_results_file.value + "=" + "\"" + results_file_input.value + "\"";
     }
     else {
       sqlmap_result += " " + sqlmap_adv_results_file.value;
@@ -1345,10 +1545,10 @@ function SetAdvanceSQLmap() {
 
   if (sqlmap_adv_tmp_dir.checked) {
     if (tmp_dir_input !== "") {
-      sqlmap_result += " " + sqlmap_adv_tmp_dir.value + " " + tmp_dir_input.value;
+      sqlmap_result += " " + sqlmap_adv_tmp_dir.value + "=" + "\"" + tmp_dir_input.value + "\"";
     }
     else {
-      sqlmap_result += " " + sqlmap_adv_results_file.value;
+      sqlmap_result += " " + sqlmap_adv_tmp_dir.value;
     }
   }
 
@@ -1388,7 +1588,6 @@ function ResetToClip(event) {
 function DisableEnableInput() {
 
   // Simple Options
-
   var verbosity_input = document.getElementById("Verbosity");
   var sqlmap_verbose = document.getElementById("SQLmap-verbose");
 
@@ -1422,6 +1621,15 @@ function DisableEnableInput() {
   var risk = document.getElementById("risk");
   var sqlmap_risk = document.getElementById("SQLmap-risk");
 
+  var sqlmap_DB = document.getElementById("SQLmap-DB");
+  var db_enum = document.getElementById("db-enum");
+
+  var sqlmap_TBL = document.getElementById("SQLmap-TBL");
+  var tbl_enum = document.getElementById("tbl-enum");
+
+  var sqlmap_COL = document.getElementById("SQLmap-COL");
+  var col_enum = document.getElementById("col-enum");
+
   // Enable/disable verbosity input based on the verbose checkbox
   verbosity_input.disabled = !sqlmap_verbose.checked;
   if (!sqlmap_verbose.checked) {
@@ -1431,37 +1639,37 @@ function DisableEnableInput() {
   // Enable/disable verbosity input based on the verbose checkbox
   target_url_input.disabled = !sqlmap_target.checked;
   if (!sqlmap_target.checked) {
-    target_url_input.value = ""; // Reset value when disabled
+    target_url_input.value = ""; 
   }
 
   googledork_input.disabled = !sqlmap_dorking.checked;
   if (!sqlmap_dorking.checked) {
-    googledork_input.value = ""; // Reset value when disabled
+    googledork_input.value = ""; 
   }
 
   request_data_input.disabled = !sqlmap_data.checked;
   if (!sqlmap_data.checked) {
-    request_data_input.value = ""; // Reset value when disabled
+    request_data_input.value = ""; 
   }
 
   request_cookie_input.disabled = !sqlmap_cookie.checked;
   if (!sqlmap_cookie.checked) {
-    request_cookie_input.value = ""; // Reset value when disabled
+    request_cookie_input.value = ""; 
   }
 
   request_proxy_input.disabled = !sqlmap_proxy.checked;
   if (!sqlmap_proxy.checked) {
-    request_proxy_input.value = ""; // Reset value when disabled
+    request_proxy_input.value = ""; 
   }
 
   injection_parameter.disabled = !sqlmap_parameter.checked;
   if (!sqlmap_parameter.checked) {
-    injection_parameter.value = ""; // Reset value when disabled
+    injection_parameter.value = ""; 
   }
 
   dbms_types.disabled = !sqlmap_dbms.checked;
   if (!sqlmap_dbms.checked) {
-    dbms_types.value = ""; // Reset value when disabled
+    dbms_types.value = ""; 
   }
 
   level.disabled = !sqlmap_level.checked;
@@ -1474,6 +1682,20 @@ function DisableEnableInput() {
     risk.value = ""; // Optionally reset value when disabled
   }
 
+  db_enum.disabled = !sqlmap_DB.checked;
+  if (!sqlmap_DB.checked) {
+    db_enum.value = ""; // Optionally reset value when disabled
+  }
+
+  tbl_enum.disabled = !sqlmap_TBL.checked;
+  if (!sqlmap_TBL.checked) {
+    tbl_enum.value = ""; // Optionally reset value when disabled
+  }
+
+  col_enum.disabled = !sqlmap_COL.checked;
+  if (!sqlmap_COL.checked) {
+    col_enum.value = ""; // Optionally reset value when disabled
+  }
   //Advanced Options
 
   //Target Options Disable/Enable
@@ -1500,38 +1722,81 @@ function DisableEnableInput() {
 
   target_adv_url.disabled = !sqlmap_adv_target.checked;
   if (!sqlmap_adv_target.checked) {
-    target_adv_url.value = ""; // Reset value when disabled
+    target_adv_url.value = ""; 
   }
 
   target_adv_direct.disabled = !sqlmap_adv_direct.checked;
   if (!sqlmap_adv_direct.checked) {
-    target_adv_direct.value = ""; // Reset value when disabled
+    target_adv_direct.value = ""; 
   }
 
   target_adv_logfile.disabled = !sqlmap_adv_logfile.checked;
   if (!sqlmap_adv_logfile.checked) {
-    target_adv_logfile.value = ""; // Reset value when disabled
+    target_adv_logfile.value = ""; 
   }
 
   target_adv_bulkfile.disabled = !sqlmap_adv_bulkfile.checked;
   if (!sqlmap_adv_bulkfile.checked) {
-    target_adv_bulkfile.value = ""; // Reset value when disabled
+    target_adv_bulkfile.value = ""; 
   }
 
   target_adv_requestfile.disabled = !sqlmap_adv_requestfile.checked;
   if (!sqlmap_adv_requestfile.checked) {
-    target_adv_requestfile.value = ""; // Reset value when disabled
+    target_adv_requestfile.value = ""; 
   }
 
   target_adv_googledork.disabled = !sqlmap_adv_dorking.checked;
   if (!sqlmap_adv_dorking.checked) {
-    target_adv_googledork.value = ""; // Reset value when disabled
+    target_adv_googledork.value = ""; 
   }
 
   target_adv_configfile.disabled = !sqlmap_adv_configfile.checked;
   if (!sqlmap_adv_configfile.checked) {
-    target_adv_configfile.value = ""; // Reset value when disabled
+    target_adv_configfile.value = ""; 
   }
+
+
+  //Techniques
+  var sqlmap_adv_technique = document.getElementById("SQLmap-adv-technique");
+  var technique_adv_options = document.getElementById("technique-adv-options");
+
+  var sqlmap_adv_time_sec = document.getElementById("SQLmap-adv-time-sec");
+  var time_adv_sec = document.getElementById("time-adv-sec");
+
+  var sqlmap_adv_union_cols = document.getElementById("SQLmap-adv-union-cols");
+  var union_adv_cols = document.getElementById("union-adv-cols");
+
+  var sqlmap_adv_union_char = document.getElementById("SQLmap-adv-union-char");
+  var union_adv_char = document.getElementById("union-adv-char");
+
+  var sqlmap_adv_union_from = document.getElementById("SQLmap-adv-union-from");
+  var union_adv_from = document.getElementById("union-adv-from");
+
+  technique_adv_options.disabled = !sqlmap_adv_technique.checked;
+  if (!sqlmap_adv_technique.checked) {
+    technique_adv_options.value = ""; 
+  }
+
+  time_adv_sec.disabled = !sqlmap_adv_time_sec.checked;
+  if (!sqlmap_adv_time_sec.checked) {
+    time_adv_sec.value = ""; 
+  }
+
+  union_adv_cols.disabled = !sqlmap_adv_union_cols.checked;
+  if (!sqlmap_adv_union_cols.checked) {
+    union_adv_cols.value = ""; 
+  }
+
+  union_adv_char.disabled = !sqlmap_adv_union_char.checked;
+  if (!sqlmap_adv_union_char.checked) {
+    union_adv_char.value = ""; 
+  }
+
+  union_adv_from.disabled = !sqlmap_adv_union_from.checked;
+  if (!sqlmap_adv_union_from.checked) {
+    union_adv_from.value = ""; 
+  }
+
 
   // Request Options Disable/Enable
   var sqlmap_adv_agent = document.getElementById("SQLmap-adv-agent");
@@ -1561,49 +1826,65 @@ function DisableEnableInput() {
   var sqlmap_adv_load_cookies = document.getElementById("SQLmap-adv-load-cookies");
   var request_adv_load_cookies = document.getElementById("request-adv-load-cookies");
 
+  var sqlmap_adv_delay = document.getElementById("SQLmap-adv-delay");
+  var request_adv_delay = document.getElementById("request-adv-delay");
+
+  var sqlmap_adv_timeout = document.getElementById("SQLmap-adv-timeout");
+  var request_adv_timeout = document.getElementById("request-adv-timeout");
+
   request_adv_agent.disabled = !sqlmap_adv_agent.checked;
   if (!sqlmap_adv_agent.checked) {
-    request_adv_agent.value = ""; // Reset value when enabled
+    request_adv_agent.value = ""; 
   }
 
   request_adv_header.disabled = !sqlmap_adv_header.checked;
   if (!sqlmap_adv_header.checked) {
-    request_adv_header.value = ""; // Reset value when enabled
+    request_adv_header.value = ""; 
   }
 
   request_adv_method.disabled = !sqlmap_adv_method.checked;
   if (!sqlmap_adv_method.checked) {
-    request_adv_method.value = ""; // Reset value when enabled
+    request_adv_method.value = ""; 
   }
 
   request_adv_data.disabled = !sqlmap_adv_data.checked;
   if (!sqlmap_adv_data.checked) {
-    request_adv_data.value = ""; // Reset value when enabled
+    request_adv_data.value = ""; 
   }
 
   request_adv_param_del.disabled = !sqlmap_adv_param_del.checked;
   if (!sqlmap_adv_param_del.checked) {
-    request_adv_param_del.value = ""; // Reset value when enabled
+    request_adv_param_del.value = ""; 
   }
 
   request_adv_cookie.disabled = !sqlmap_adv_cookie.checked;
   if (!sqlmap_adv_cookie.checked) {
-    request_adv_cookie.value = ""; // Reset value when enabled
+    request_adv_cookie.value = ""; 
   }
 
   request_adv_cookie_del.disabled = !sqlmap_adv_cookie_del.checked;
   if (!sqlmap_adv_cookie_del.checked) {
-    request_adv_cookie_del.value = ""; // Reset value when enabled
+    request_adv_cookie_del.value = ""; 
   }
 
   request_adv_live_cookies.disabled = !sqlmap_adv_live_cookies.checked;
   if (!sqlmap_adv_live_cookies.checked) {
-    request_adv_live_cookies.value = ""; // Reset value when enabled
+    request_adv_live_cookies.value = ""; 
   }
 
   request_adv_load_cookies.disabled = !sqlmap_adv_load_cookies.checked;
   if (!sqlmap_adv_load_cookies.checked) {
-    request_adv_load_cookies.value = ""; // Reset value when enabled
+    request_adv_load_cookies.value = ""; 
+  }
+
+  request_adv_delay.disabled = !sqlmap_adv_delay.checked;
+  if (!sqlmap_adv_delay.checked) {
+    request_adv_delay.value = ""; 
+  }
+
+  request_adv_timeout.disabled = !sqlmap_adv_timeout.checked;
+  if (!sqlmap_adv_timeout.checked) {
+    request_adv_timeout.value = ""; 
   }
 
   // Injection Options Disable/Enable
@@ -1637,47 +1918,47 @@ function DisableEnableInput() {
   // Set the disabled state of inputs based on the checkbox state
   injection_adv_parameter.disabled = !sqlmap_adv_parameter.checked;
   if (!sqlmap_adv_parameter.checked) {
-    injection_adv_parameter.value = ""; // Reset value when enabled
+    injection_adv_parameter.value = ""; 
   }
 
   injection_adv_skip.disabled = !sqlmap_adv_skip.checked;
   if (!sqlmap_adv_skip.checked) {
-    injection_adv_skip.value = ""; // Reset value when enabled
+    injection_adv_skip.value = ""; 
   }
 
   injection_adv_param_exclude.disabled = !sqlmap_adv_param_exclude.checked;
   if (!sqlmap_adv_param_exclude.checked) {
-    injection_adv_param_exclude.value = ""; // Reset value when enabled
+    injection_adv_param_exclude.value = ""; 
   }
 
   dbms_types2.disabled = !sqlmap_adv_dbms.checked;
   if (!sqlmap_adv_dbms.checked) {
-    dbms_types2.value = ""; // Reset value when enabled
+    dbms_types2.value = ""; 
   }
 
   injection_adv_dbms_cred.disabled = !sqlmap_adv_dbms_cred.checked;
   if (!sqlmap_adv_dbms_cred.checked) {
-    injection_adv_dbms_cred.value = ""; // Reset value when enabled
+    injection_adv_dbms_cred.value = ""; 
   }
 
   injection_adv_os.disabled = !sqlmap_adv_dbms_os.checked;
   if (!sqlmap_adv_dbms_os.checked) {
-    injection_adv_os.value = ""; // Reset value when enabled
+    injection_adv_os.value = ""; 
   }
 
   injection_adv_prefix.disabled = !sqlmap_adv_inj_prefix.checked;
   if (!sqlmap_adv_inj_prefix.checked) {
-    injection_adv_prefix.value = ""; // Reset value when enabled
+    injection_adv_prefix.value = ""; 
   }
 
   injection_adv_suffix.disabled = !sqlmap_adv_inj_suffix.checked;
   if (!sqlmap_adv_inj_suffix.checked) {
-    injection_adv_suffix.value = ""; // Reset value when enabled
+    injection_adv_suffix.value = ""; 
   }
 
   injection_adv_tamper.disabled = !sqlmap_adv_inj_tamper.checked;
   if (!sqlmap_adv_inj_tamper.checked) {
-    injection_adv_tamper.value = ""; // Reset value when enabled
+    injection_adv_tamper.value = ""; 
   }
 
   // Detection Options Disable/Enable
@@ -1702,32 +1983,55 @@ function DisableEnableInput() {
   // Set the disabled state of inputs based on the checkbox state
   detection_level.disabled = !sqlmap_adv_level.checked;
   if (!sqlmap_adv_level.checked) {
-    detection_level.value = ""; // Reset value when enabled
+    detection_level.value = ""; 
   }
 
   detection_risk.disabled = !sqlmap_adv_risk.checked;
   if (!sqlmap_adv_risk.checked) {
-    detection_risk.value = ""; // Reset value when enabled
+    detection_risk.value = ""; 
   }
 
   detection_string.disabled = !sqlmap_adv_string.checked;
   if (!sqlmap_adv_string.checked) {
-    detection_string.value = ""; // Reset value when enabled
+    detection_string.value = ""; 
   }
 
   detection_not_string.disabled = !sqlmap_adv_not_string.checked;
   if (!sqlmap_adv_not_string.checked) {
-    detection_not_string.value = ""; // Reset value when enabled
+    detection_not_string.value = ""; 
   }
 
   detection_regexp.disabled = !sqlmap_adv_regexp.checked;
   if (!sqlmap_adv_regexp.checked) {
-    detection_regexp.value = ""; // Reset value when enabled
+    detection_regexp.value = ""; 
   }
 
   detection_code.disabled = !sqlmap_adv_code.checked;
   if (!sqlmap_adv_code.checked) {
-    detection_code.value = ""; // Reset value when enabled
+    detection_code.value = ""; 
+  }
+
+  //Enumeration Disable/Enable
+  var sqlmap_adv_DB = document.getElementById("SQLmap-adv-DB");
+  var db_adv_enum = document.getElementById("db-adv-enum");
+  var sqlmap_adv_TBL = document.getElementById("SQLmap-adv-TBL");
+  var tbl_adv_enum = document.getElementById("tbl-adv-enum");
+  var sqlmap_adv_COL = document.getElementById("SQLmap-adv-COL");
+  var col_adv_enum = document.getElementById("col-adv-enum");
+
+  db_adv_enum.disabled = !sqlmap_adv_DB.checked;
+  if (!sqlmap_adv_DB.checked) {
+    db_adv_enum.value = ""; // Optionally reset value when disabled
+  }
+
+  tbl_adv_enum.disabled = !sqlmap_adv_TBL.checked;
+  if (!sqlmap_adv_TBL.checked) {
+    tbl_adv_enum.value = ""; // Optionally reset value when disabled
+  }
+
+  col_adv_enum.disabled = !sqlmap_adv_COL.checked;
+  if (!sqlmap_adv_COL.checked) {
+    col_adv_enum.value = ""; // Optionally reset value when disabled
   }
 
   // File Access Disable/Enable
@@ -1743,17 +2047,17 @@ function DisableEnableInput() {
   // Set the disabled state of inputs based on the checkbox state
   file_read_name.disabled = !sqlmap_adv_file_read.checked;
   if (!sqlmap_adv_file_read.checked) {
-    file_read_name.value = ""; // Reset value when enabled
+    file_read_name.value = ""; 
   }
 
   file_write_name.disabled = !sqlmap_adv_file_write.checked;
   if (!sqlmap_adv_file_write.checked) {
-    file_write_name.value = ""; // Reset value when enabled
+    file_write_name.value = ""; 
   }
 
   file_dest_name.disabled = !sqlmap_adv_file_dest.checked;
   if (!sqlmap_adv_file_dest.checked) {
-    file_dest_name.value = ""; // Reset value when enabled
+    file_dest_name.value = ""; 
   }
 
   // Optimization Option Disable/Enable
@@ -1763,7 +2067,7 @@ function DisableEnableInput() {
   // Set the disabled state of input based on the checkbox state
   threads_input.disabled = !sqlmap_adv_threads.checked;
   if (!sqlmap_adv_threads.checked) {
-    threads_input.value = ""; // Reset value when enabled
+    threads_input.value = ""; 
   }
 
   // Operating System Access Disble/Enable
@@ -1778,17 +2082,17 @@ function DisableEnableInput() {
 
   os_cmd_input.disabled = !sqlmap_adv_os_cmd.checked;
   if (!sqlmap_adv_os_cmd.checked) {
-    os_cmd_input.value = ""; // Reset value when disabled
+    os_cmd_input.value = ""; 
   }
 
   msf_path_input.disabled = !sqlmap_adv_msf_path.checked;
   if (!sqlmap_adv_msf_path.checked) {
-    msf_path_input.value = ""; // Reset value when disabled
+    msf_path_input.value = ""; 
   }
 
   tmp_path_input.disabled = !sqlmap_adv_tmp_path.checked;
   if (!sqlmap_adv_tmp_path.checked) {
-    tmp_path_input.value = ""; // Reset value when disabled
+    tmp_path_input.value = ""; 
   }
 
   // Windows Registry Access Disable/Enable
@@ -1806,25 +2110,28 @@ function DisableEnableInput() {
 
   reg_key_input.disabled = !sqlmap_adv_reg_key.checked;
   if (!sqlmap_adv_reg_key.checked) {
-    reg_key_input.value = ""; // Reset value when disabled
+    reg_key_input.value = ""; 
   }
 
   reg_value_input.disabled = !sqlmap_adv_reg_value.checked;
   if (!sqlmap_adv_reg_value.checked) {
-    reg_value_input.value = ""; // Reset value when disabled
+    reg_value_input.value = ""; 
   }
 
   reg_data_input.disabled = !sqlmap_adv_reg_data.checked;
   if (!sqlmap_adv_reg_data.checked) {
-    reg_data_input.value = ""; // Reset value when disabled
+    reg_data_input.value = ""; 
   }
 
   reg_type_input.disabled = !sqlmap_adv_reg_type.checked;
   if (!sqlmap_adv_reg_type.checked) {
-    reg_type_input.value = ""; // Reset value when disabled
+    reg_type_input.value = ""; 
   }
 
   // Miscellaneous Options Disable/Enable
+  var sqlmap_adv_verbose = document.getElementById("SQLmap-adv-verbose");
+  var adv_verbosity = document.getElementById("adv-verbosity");
+
   var sqlmap_adv_mnemonics = document.getElementById("SQLmap-adv-mnemonics");
   var mnemonics_input = document.getElementById("mnemonics-input");
 
@@ -1837,29 +2144,37 @@ function DisableEnableInput() {
   var sqlmap_adv_tmp_dir = document.getElementById("SQLmap-adv-tmp-dir");
   var tmp_dir_input = document.getElementById("tmp-dir-input");
 
+
+  adv_verbosity.disabled = !sqlmap_adv_verbose.checked;
+  if (!sqlmap_adv_verbose.checked) {
+    adv_verbosity.value = ""; 
+  }
+
   mnemonics_input.disabled = !sqlmap_adv_mnemonics.checked;
   if (!sqlmap_adv_mnemonics.checked) {
-    mnemonics_input.value = ""; // Reset value when disabled
+    mnemonics_input.value = ""; 
   }
 
   alert_input.disabled = !sqlmap_adv_alert.checked;
   if (!sqlmap_adv_alert.checked) {
-    alert_input.value = ""; // Reset value when disabled
+    alert_input.value = ""; 
   }
 
   results_file_input.disabled = !sqlmap_adv_results_file.checked;
   if (!sqlmap_adv_results_file.checked) {
-    results_file_input.value = ""; // Reset value when disabled
+    results_file_input.value = ""; 
   }
 
   tmp_dir_input.disabled = !sqlmap_adv_tmp_dir.checked;
   if (!sqlmap_adv_tmp_dir.checked) {
-    tmp_dir_input.value = ""; // Reset value when disabled
+    tmp_dir_input.value = ""; 
   }
 
 
 }
 
+
+//List of DBMS Types
 function DBMSTypes() {
   var options = [
     { value: "mysql", text: "MySQL" },
@@ -1903,7 +2218,7 @@ function DBMSTypes() {
     { value: "virtuoso", text: "Virtuoso" }
   ];
 
-  // Simple Mode    <text value = extremedb> ExtremeDB </text>
+  // Simple Mode
   var dbms_types = document.getElementById("dbms-types");
 
   options.forEach(function (option) {
@@ -1930,6 +2245,7 @@ function DBMSTypes() {
 }
 
 
+//List of Tamper Types in Advanced Section
 function TamperTypes() {
   var tampersSelect = document.getElementById("injection-adv-tamper");
 
@@ -1997,6 +2313,7 @@ function TamperTypes() {
 }
 
 
+//Switch to Dark Mode
 function SwitchColorMode() {
 
   if (document.documentElement.getAttribute('data-bs-theme') === 'dark') {
@@ -2025,6 +2342,32 @@ function SwitchColorMode() {
 
   }
 }
+
+
+function clearSQLmap() {
+  // Uncheck all checkboxes
+  document.querySelectorAll('.form-check-input[type="checkbox"]').forEach(checkbox => {
+    checkbox.checked = false;
+  });
+
+  // Disable and clear all input boxes
+  document.querySelectorAll('input[type="text"], input[type="number"]').forEach(input => {
+    input.disabled = true;  // Disable the input box
+    input.value = '';       // Clear the value
+  });
+
+  // Reset and re-enable specific input fields for both modes
+  const sqlmapInputs = ['Simple-SQLmap', 'Advance-SQLmap'];
+  sqlmapInputs.forEach(inputId => {
+    const inputElement = document.getElementById(inputId);
+    if (inputElement) { // Check if the element exists to avoid errors
+      inputElement.disabled = false;  // Re-enable the input box
+      inputElement.value = "sqlmap";  // Set its value to "sqlmap"
+    }
+  });
+
+}
+
 
 function InitialSetup() {
   DBMSTypes();
@@ -2090,6 +2433,7 @@ document.addEventListener("DOMContentLoaded", function () {
     { id: "SQLmap-dump", event: "change" },
     { id: "SQLmap-dump-all", event: "change" },
     { id: "SQLmap-DB", event: "change" },
+    { id: "db-enum", event: "change" },
     { id: "SQLmap-TBL", event: "change" },
     { id: "SQLmap-COL", event: "change" },
     { id: "SQLmap-Shell", event: "change" },
@@ -2110,8 +2454,19 @@ document.addEventListener("DOMContentLoaded", function () {
     { id: "target-adv-googledork", event: "input" },
     { id: "SQLmap-adv-configfile", event: "change" },
     { id: "target-adv-configfile", event: "input" },
+    { id: "SQLmap-adv-technique", event: "change" },
+    { id: "technique-adv-options", event: "input" },  
+    { id: "SQLmap-adv-time-sec", event: "change" },
+    { id: "time-adv-sec", event: "input" },
+    { id: "SQLmap-adv-union-cols", event: "change" },
+    { id: "union-adv-cols", event: "input" },
+    { id: "SQLmap-adv-union-char", event: "change" },
+    { id: "union-adv-char", event: "input" },
+    { id: "SQLmap-adv-union-from", event: "change" },
+    { id: "union-adv-from", event: "input" },
     { id: "SQLmap-adv-agent", event: "change" },
     { id: "request-adv-agent", event: "input" },
+    { id: "SQLmap-adv-mobile", event: "change" },
     { id: "SQLmap-adv-header", event: "change" },
     { id: "request-adv-header", event: "input" },
     { id: "SQLmap-adv-method", event: "change" },
@@ -2129,6 +2484,10 @@ document.addEventListener("DOMContentLoaded", function () {
     { id: "SQLmap-adv-load-cookies", event: "change" },
     { id: "request-adv-load-cookies", event: "input" },
     { id: "SQLmap-adv-drop-set-cookie", event: "change" },
+    { id: "SQLmap-adv-delay", event: "change" },
+    { id: "request-adv-delay", event: "input" },
+    { id: "SQLmap-adv-timeout", event: "change" },
+    { id: "request-adv-timeout", event: "input" },
     { id: "SQLmap-adv-mobile", event: "change" },
     { id: "SQLmap-adv-parameter", event: "change" },
     { id: "injection-adv-parameter", event: "input" },
@@ -2178,9 +2537,15 @@ document.addEventListener("DOMContentLoaded", function () {
     { id: "SQLmap-adv-text-only", event: "change" },
     { id: "SQLmap-adv-titles", event: "change" },
     { id: "SQLmap-adv-all", event: "change" },
+    { id: "SQLmap-adv-banner", event: "change" },
     { id: "SQLmap-adv-current-user", event: "change" },
     { id: "SQLmap-adv-current-db", event: "change" },
+    { id: "SQLmap-adv-hostname", event: "change" },
+    { id: "SQLmap-adv-is-dba", event: "change" },
+    { id: "SQLmap-adv-users", event: "change" },
     { id: "SQLmap-adv-password", event: "change" },
+    { id: "SQLmap-adv-privileges", event: "change" },
+    { id: "SQLmap-adv-roles", event: "change" },
     { id: "SQLmap-adv-database", event: "change" },
     { id: "SQLmap-adv-tables", event: "change" },
     { id: "SQLmap-adv-columns", event: "change" },
@@ -2188,8 +2553,12 @@ document.addEventListener("DOMContentLoaded", function () {
     { id: "SQLmap-adv-dump", event: "change" },
     { id: "SQLmap-adv-dump-all", event: "change" },
     { id: "SQLmap-adv-DB", event: "change" },
+    { id: "db-adv-enum", event: "input" },
     { id: "SQLmap-adv-TBL", event: "change" },
+    { id: "tbl-adv-enum", event: "input" },
     { id: "SQLmap-adv-COL", event: "change" },
+    { id: "col-adv-enum", event: "input" },
+    { id: "SQLmap-adv-exclude-db", event: "change" },
     { id: "SQLmap-adv-common-tables", event: "change" },
     { id: "SQLmap-adv-common-columns", event: "change" },
     { id: "SQLmap-adv-common-files", event: "change" },
@@ -2221,6 +2590,10 @@ document.addEventListener("DOMContentLoaded", function () {
     { id: "reg-data-input", event: "input" },
     { id: "SQLmap-adv-reg-type", event: "change" },
     { id: "reg-type-input", event: "input" },
+    { id: "SQLmap-adv-verbose", event: "change" },
+    { id: "adv-verbosity", event: "input" },
+    { id: "SQLmap-adv-batch", event: "change" },
+    { id: "SQLmap-adv-flush", event: "change" },
     { id: "SQLmap-adv-mnemonics", event: "change" },
     { id: "mnemonics-input", event: "input" },
     { id: "SQLmap-adv-alert", event: "change" },

