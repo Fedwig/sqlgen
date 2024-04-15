@@ -262,57 +262,46 @@ function SetSimpleSQLmap() {
     }
   }
 
-  // Append value if sqlmap_all is checked
   if (sqlmap_all.checked) {
     sqlmap_result += " " + sqlmap_all.value;
   }
 
-  // Append value if sqlmap_current_user is checked
   if (sqlmap_current_user.checked) {
     sqlmap_result += " " + sqlmap_current_user.value;
   }
 
-  // Append value if sqlmap_current_db is checked
   if (sqlmap_current_db.checked) {
     sqlmap_result += " " + sqlmap_current_db.value;
   }
 
-  // Append value if sqlmap_password is checked
   if (sqlmap_password.checked) {
     sqlmap_result += " " + sqlmap_password.value;
   }
 
-  // Append value if sqlmap_database is checked
   if (sqlmap_database.checked) {
     sqlmap_result += " " + sqlmap_database.value;
   }
 
-  // Append value if sqlmap_tables is checked
   if (sqlmap_tables.checked) {
     sqlmap_result += " " + sqlmap_tables.value;
   }
 
-  // Append value if sqlmap_columns is checked
   if (sqlmap_columns.checked) {
     sqlmap_result += " " + sqlmap_columns.value;
   }
 
-  // Append value if sqlmap_schema is checked
   if (sqlmap_schema.checked) {
     sqlmap_result += " " + sqlmap_schema.value;
   }
 
-  // Append value if sqlmap_dump is checked
   if (sqlmap_dump.checked) {
     sqlmap_result += " " + sqlmap_dump.value;
   }
 
-  // Append value if sqlmap_dump_all is checked
   if (sqlmap_dump_all.checked) {
     sqlmap_result += " " + sqlmap_dump_all.value;
   }
 
-  // Append value if sqlmap_DB is checked
   if (sqlmap_DB.checked) {
     if (db_enum.value !== "") {
       sqlmap_result += " " + sqlmap_DB.value + " " + db_enum.value;
@@ -321,7 +310,6 @@ function SetSimpleSQLmap() {
     }
   }
 
-  // Append value if sqlmap_TBL is checked
   if (sqlmap_TBL.checked) {
     if (tbl_enum.value !== "") {
       sqlmap_result += " " + sqlmap_TBL.value + " " + tbl_enum.value;
@@ -354,12 +342,8 @@ function SetSimpleSQLmap() {
     sqlmap_result += " " + sqlmap_flush.value;
   }
 
-  // Disable or enable specific options checkboxes based on the state of sqlmap_all
-  // var specificOptionsCheckboxes = [sqlmap_current_user, sqlmap_current_db, sqlmap_password, sqlmap_database, sqlmap_tables, sqlmap_columns, sqlmap_schema, sqlmap_dump, sqlmap_dump_all, sqlmap_DB, sqlmap_TBL, sqlmap_COL];
-  // specificOptionsCheckboxes.forEach(function (checkbox) {
-  //   checkbox.disabled = sqlmap_all.checked;
-  // });
 
+  // Function to Handle Change Events for Enumeration Options
   var specificOptionsCheckboxes = [
     sqlmap_current_user, sqlmap_current_db, sqlmap_password,
     sqlmap_database, sqlmap_tables, sqlmap_columns,
@@ -367,7 +351,6 @@ function SetSimpleSQLmap() {
     sqlmap_DB, sqlmap_TBL, sqlmap_COL
   ];
 
-  // Function to handle checkbox change events
   function handleCheckboxChange() {
     var anyChecked = specificOptionsCheckboxes.some(function (checkbox) {
       return checkbox.checked;
@@ -404,8 +387,7 @@ function SetAdvanceSQLmap() {
   var sqlmap_result = "sqlmap";
 
 
-  // Target Option Variables
-
+  // Target Option Variabless
   var sqlmap_adv_target = document.getElementById("SQLmap-adv-target");
   var target_adv_url = document.getElementById("target-adv-url");
 
@@ -429,7 +411,6 @@ function SetAdvanceSQLmap() {
 
 
   // Technique Option Variables
-
   var sqlmap_adv_technique = document.getElementById("SQLmap-adv-technique");
   var technique_adv_options = document.getElementById("technique-adv-options");
 
@@ -645,7 +626,6 @@ function SetAdvanceSQLmap() {
 
 
   //Miscellaneous Options
-
   var sqlmap_adv_verbose = document.getElementById("SQLmap-adv-verbose");
   var adv_verbosity = document.getElementById("adv-verbosity");
 
@@ -721,7 +701,7 @@ function SetAdvanceSQLmap() {
   sqlmap_adv_mobile.value = "--mobile";
 
   // Injection Option Values
-  sqlmap_adv_parameter.value = "--p";
+  sqlmap_adv_parameter.value = "-p";
   sqlmap_adv_skip.value = "--skip";
   sqlmap_adv_skip_static.value = "--skip-static";
   sqlmap_adv_param_exclude.value = "--param-exclude";
@@ -829,7 +809,7 @@ function SetAdvanceSQLmap() {
   sqlmap_adv_update.value = "--update";
   sqlmap_adv_wizard.value = "--wizard";
 
-  //Target Options
+  //Target Options Conditions
   if (sqlmap_adv_target.checked) {
     if (target_adv_url.value !== "") {
       sqlmap_result += " " + sqlmap_adv_target.value + " " + "\"" + target_adv_url.value + "\"";
@@ -886,7 +866,7 @@ function SetAdvanceSQLmap() {
     }
   }
 
-  // Technique Options
+  // Technique Options Conditions
   if (sqlmap_adv_technique.checked) {
     if (technique_adv_options.value !== "") {
       sqlmap_result += " " + sqlmap_adv_technique.value + "=" + technique_adv_options.value;
@@ -927,7 +907,7 @@ function SetAdvanceSQLmap() {
     }
   }
 
-  // Request Options
+  // Request Options Conditions
   if (sqlmap_adv_agent.checked) {
     if (request_adv_agent.value !== "") {
       sqlmap_result += " " + sqlmap_adv_agent.value + " " + "\"" + request_adv_agent.value + "\"";
@@ -1030,7 +1010,7 @@ function SetAdvanceSQLmap() {
   }
 
 
-  // Injection Option
+  // Injection Option Conditions
   if (sqlmap_adv_parameter.checked) {
     if (injection_adv_parameter.value !== "") {
       sqlmap_result += " " + sqlmap_adv_parameter.value + " " + "\"" + injection_adv_parameter.value + "\"";
@@ -1129,8 +1109,7 @@ function SetAdvanceSQLmap() {
   }
 
 
-  // Optimization Options
-
+  // Optimization Options Conditions
   if (sqlmap_adv_optimization.checked) {
     sqlmap_result += " " + sqlmap_adv_optimization.value;
   }
@@ -1290,7 +1269,6 @@ function SetAdvanceSQLmap() {
     }
   }
 
-  // Append value if sqlmap_TBL is checked
   if (sqlmap_adv_TBL.checked) {
     if (tbl_adv_enum.value !== "") {
       sqlmap_result += " " + sqlmap_adv_TBL.value + " " + tbl_adv_enum.value;
@@ -1311,7 +1289,16 @@ function SetAdvanceSQLmap() {
     sqlmap_result += " " + sqlmap_adv_exclude_db.value;
   }
 
-  //Brute Force Options
+    // Function to Disable Options for Enumeration Options
+    var specificOptionsCheckboxes = [sqlmap_adv_banner, sqlmap_adv_current_user, sqlmap_adv_current_db, sqlmap_adv_hostname, sqlmap_adv_is_dba, sqlmap_adv_users,
+      sqlmap_adv_password, sqlmap_adv_privileges, sqlmap_adv_roles, sqlmap_adv_database, sqlmap_adv_tables, sqlmap_adv_columns, sqlmap_adv_schema, sqlmap_adv_dump,
+      sqlmap_adv_dump_all, sqlmap_adv_DB, sqlmap_adv_TBL, sqlmap_adv_COL, sqlmap_adv_exclude_db];
+    specificOptionsCheckboxes.forEach(function (checkbox) {
+      checkbox.disabled = sqlmap_adv_all.checked;
+    });
+
+  
+  //Brute Force Options Conditions
   if (sqlmap_adv_common_tables.checked) {
     sqlmap_result += " " + sqlmap_adv_common_tables.value;
   }
@@ -1324,16 +1311,8 @@ function SetAdvanceSQLmap() {
     sqlmap_result += " " + sqlmap_adv_common_files.value;
   }
 
-  // Disable or enable specific options checkboxes based on the state of sqlmap_all
-  var specificOptionsCheckboxes = [sqlmap_adv_banner, sqlmap_adv_current_user, sqlmap_adv_current_db, sqlmap_adv_hostname, sqlmap_adv_is_dba, sqlmap_adv_users,
-    sqlmap_adv_password, sqlmap_adv_privileges, sqlmap_adv_roles, sqlmap_adv_database, sqlmap_adv_tables, sqlmap_adv_columns, sqlmap_adv_schema, sqlmap_adv_dump,
-    sqlmap_adv_dump_all, sqlmap_adv_DB, sqlmap_adv_TBL, sqlmap_adv_COL, sqlmap_adv_exclude_db];
-  specificOptionsCheckboxes.forEach(function (checkbox) {
-    checkbox.disabled = sqlmap_adv_all.checked;
-  });
-
-  // File System Access
-
+  
+  // File System Access Conditions
   if (sqlmap_adv_file_read.checked) {
     if (file_read_name.value !== "") {
       sqlmap_result += " " + sqlmap_adv_file_read.value + "=" + "\"" + file_read_name.value + "\"";
@@ -1359,8 +1338,7 @@ function SetAdvanceSQLmap() {
   }
 
 
-  // Operating System Access
-
+  // Operating System Access Conditions
   if (sqlmap_adv_os_cmd.checked) {
     if (os_cmd_input.value !== "") {
       sqlmap_result += " " + sqlmap_adv_os_cmd.value + "=" + "\"" + os_cmd_input.value + "\"";
@@ -1408,7 +1386,7 @@ function SetAdvanceSQLmap() {
   }
 
 
-  // Windows Registry Access
+  // Windows Registry Access Conditions
   if (sqlmap_adv_reg_read.checked) {
     sqlmap_result += " " + sqlmap_adv_reg_read.value;
   }
@@ -1439,16 +1417,6 @@ function SetAdvanceSQLmap() {
     }
   }
 
-
-  if (sqlmap_adv_reg_value.checked) {
-    if (reg_value_input.value !== "") {
-      sqlmap_result += " " + sqlmap_adv_reg_value.value + "=" + "\"" + reg_value_input.value + "\"";
-    }
-    else {
-      sqlmap_result += " " + sqlmap_adv_reg_value.value;
-    }
-  }
-
   if (sqlmap_adv_reg_data.checked) {
     if (reg_data_input.value !== "") {
       sqlmap_result += " " + sqlmap_adv_reg_data.value + "=" + "\"" + reg_data_input.value + "\"";
@@ -1467,7 +1435,7 @@ function SetAdvanceSQLmap() {
     }
   }
 
-  // Miscellaneous Options
+  // Miscellaneous Options Conditions
   if (sqlmap_adv_verbose.checked) {
     if (adv_verbosity.value !== "") {
       sqlmap_result += " " + sqlmap_adv_verbose.value + " " + adv_verbosity.value;
@@ -1578,7 +1546,7 @@ function CopyToClip(event) {
 
 }
 
-// Copy button feedback reset
+// Copy Button Feedback Reset
 function ResetToClip(event) {
   var copy = event.target.querySelector(".copytext");
   copy.innerHTML = "Copy to Clipboard";
@@ -1630,10 +1598,10 @@ function DisableEnableInput() {
   var sqlmap_COL = document.getElementById("SQLmap-COL");
   var col_enum = document.getElementById("col-enum");
 
-  // Enable/disable verbosity input based on the verbose checkbox
+  
   verbosity_input.disabled = !sqlmap_verbose.checked;
   if (!sqlmap_verbose.checked) {
-    verbosity_input.value = ""; // Optionally reset value when disabled
+    verbosity_input.value = ""; 
   }
 
   // Enable/disable verbosity input based on the verbose checkbox
@@ -1674,27 +1642,27 @@ function DisableEnableInput() {
 
   level.disabled = !sqlmap_level.checked;
   if (!sqlmap_level.checked) {
-    level.value = ""; // Optionally reset value when disabled
+    level.value = ""; 
   }
 
   risk.disabled = !sqlmap_risk.checked;
   if (!sqlmap_risk.checked) {
-    risk.value = ""; // Optionally reset value when disabled
+    risk.value = ""; 
   }
 
   db_enum.disabled = !sqlmap_DB.checked;
   if (!sqlmap_DB.checked) {
-    db_enum.value = ""; // Optionally reset value when disabled
+    db_enum.value = ""; 
   }
 
   tbl_enum.disabled = !sqlmap_TBL.checked;
   if (!sqlmap_TBL.checked) {
-    tbl_enum.value = ""; // Optionally reset value when disabled
+    tbl_enum.value = ""; 
   }
 
   col_enum.disabled = !sqlmap_COL.checked;
   if (!sqlmap_COL.checked) {
-    col_enum.value = ""; // Optionally reset value when disabled
+    col_enum.value = ""; 
   }
   //Advanced Options
 
@@ -2021,17 +1989,17 @@ function DisableEnableInput() {
 
   db_adv_enum.disabled = !sqlmap_adv_DB.checked;
   if (!sqlmap_adv_DB.checked) {
-    db_adv_enum.value = ""; // Optionally reset value when disabled
+    db_adv_enum.value = ""; 
   }
 
   tbl_adv_enum.disabled = !sqlmap_adv_TBL.checked;
   if (!sqlmap_adv_TBL.checked) {
-    tbl_adv_enum.value = ""; // Optionally reset value when disabled
+    tbl_adv_enum.value = ""; 
   }
 
   col_adv_enum.disabled = !sqlmap_adv_COL.checked;
   if (!sqlmap_adv_COL.checked) {
-    col_adv_enum.value = ""; // Optionally reset value when disabled
+    col_adv_enum.value = ""; 
   }
 
   // File Access Disable/Enable
@@ -2044,7 +2012,6 @@ function DisableEnableInput() {
   var sqlmap_adv_file_dest = document.getElementById("SQLmap-adv-file-dest");
   var file_dest_name = document.getElementById("file-dest-name");
 
-  // Set the disabled state of inputs based on the checkbox state
   file_read_name.disabled = !sqlmap_adv_file_read.checked;
   if (!sqlmap_adv_file_read.checked) {
     file_read_name.value = ""; 
@@ -2064,7 +2031,6 @@ function DisableEnableInput() {
   var sqlmap_adv_threads = document.getElementById("SQLmap-adv-threads");
   var threads_input = document.getElementById("threads");
 
-  // Set the disabled state of input based on the checkbox state
   threads_input.disabled = !sqlmap_adv_threads.checked;
   if (!sqlmap_adv_threads.checked) {
     threads_input.value = ""; 
@@ -2169,12 +2135,10 @@ function DisableEnableInput() {
   if (!sqlmap_adv_tmp_dir.checked) {
     tmp_dir_input.value = ""; 
   }
-
-
 }
 
 
-//List of DBMS Types
+//List of DBMS Types for Simple and Advanced
 function DBMSTypes() {
   var options = [
     { value: "mysql", text: "MySQL" },
@@ -2365,7 +2329,6 @@ function clearSQLmap() {
       inputElement.value = "sqlmap";  // Set its value to "sqlmap"
     }
   });
-
 }
 
 
@@ -2377,25 +2340,25 @@ function InitialSetup() {
   DisableEnableInput();
 }
 
+
 document.addEventListener("DOMContentLoaded", function () {
 
   InitialSetup();
 
-  // Default Opening the first tab
+  // Default Opening the Simple Tab
   document.getElementById("SimpleOpen").click();
 
-  // to add onmouseleave and onclick into all copy button
+  // To add onmouseleave and onclick into all copy button
   var cpbtns = document.querySelectorAll("button[id^='Copy']");
   for (var i = 0; i < cpbtns.length; i++) {
     cpbtns[i].addEventListener("mouseleave", ResetToClip);
     cpbtns[i].addEventListener("click", CopyToClip);
   }
 
-
   var elementIDs = [
     { id: "SQLmap-version", event: "change" },
     { id: "SQLmap-verbose", event: "change" },
-    { id: "Verbosity", event: "input" }, // Removed trailing space
+    { id: "Verbosity", event: "input" },
     { id: "SQLmap-wizard", event: "change" },
     { id: "SQLmap-update", event: "change" },
     { id: "SQLmap-purge", event: "change" },
@@ -2466,7 +2429,7 @@ document.addEventListener("DOMContentLoaded", function () {
     { id: "union-adv-from", event: "input" },
     { id: "SQLmap-adv-agent", event: "change" },
     { id: "request-adv-agent", event: "input" },
-    { id: "SQLmap-adv-mobile", event: "change" },
+    { id: "SQLmap-adv-random-agent", event: "change" },
     { id: "SQLmap-adv-header", event: "change" },
     { id: "request-adv-header", event: "input" },
     { id: "SQLmap-adv-method", event: "change" },
@@ -2623,13 +2586,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // trigger Light/Dark mode depends on user last view
+  // Light/Dark mode depends on user last view
   var theme = window.localStorage.getItem('data-theme');
   if (theme === 'dark') {
     SwitchColorMode();
   }
-  // trigger Light/Dark mode
+  // Light/Dark mode
   document.getElementById('Switch-Color').addEventListener('click', SwitchColorMode);
-
 });
 

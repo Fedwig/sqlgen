@@ -10,9 +10,9 @@
   /* Slightly off-white background for light mode */
   --bs-border-color: #CCCCCC;
   /* Light grey borders, subtle and less intrusive */
-  --box-color: #F5F5F5;
+  --box-color: #F3F3F3;
   /* Very light grey for boxes, adds depth with minimal contrast */
-  --tab-btn-color: #EEEEEE;
+  --tab-btn-color: #EAEAEA;
   /* Very light grey for inactive tabs, slightly stands out */
   --tab-btn-hover-color: #DDDDDD;
   /* Light grey for hover, indicates interactivity */
@@ -78,7 +78,6 @@ html {
 .summary,
 .dark-mode-button {
   font-family: 'Open Sans', sans-serif;
-  /* Set font family to Open Sans */
 }
 
 /* for all 3 section */
@@ -452,7 +451,7 @@ label {
 }
 
 
-/* For vertical tabs */
+/* For vertical tabs in SQL Injection Queries*/
 .tabs-container {
   max-width: 1200px;
   min-height: 650px;
@@ -572,6 +571,7 @@ label {
 }
 
 
+/* Form Container for Home Menu */
 .form-container {
   max-width: 600px; /* Adjust this value as needed */
   width: 100%; /* Makes it responsive */
