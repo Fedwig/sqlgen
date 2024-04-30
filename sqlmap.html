@@ -298,12 +298,12 @@
                 <!-- Operating System Access end -->
 
                 <div class="col">
-                  <!-- General Options -->
-                  <h5>General Options</h5>
+                  <!-- Miscellaneous Options -->
+                  <h5>Miscellaneous Options</h5>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-General"
                       id="SQLmap-Batch" />
-                    <label class="form-check-label" for="SQLmap-Batch"> Batch (Default Behaviour) </label>
+                    <label class="form-check-label" for="SQLmap-Batch"> Batch </label>
                   </div>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" role="switch" name="SQLmap-General"
@@ -311,7 +311,7 @@
                     <label class="form-check-label" for="SQLmap-Flush"> Flush Session </label>
                   </div>
                 </div>
-                <!-- General Options -->
+                <!-- Miscellaneous Options -->
 
                 <div class="col">
                 </div>
@@ -329,13 +329,13 @@
               <!-- copy button -->
               <div class="copy">
                 <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Simple-SQLmap">
-                  <span class="copytext">Copy to clipboard</span> Copy text </button>
+                  <span class="copytext">Copy to clipboard</span> Copy </button>
               </div>
               <!-- Simple Copy button end -->
             </div>
             <div>
               </br>
-              <button class="back-button" type="button" onclick="clearSQLmap()">CLEAR</button>
+              <button class="red-button" type="button" onclick="clearSQLmap()">CLEAR</button>
             </div>
           </div>
         </div>
@@ -1053,7 +1053,7 @@
 
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" role="switch" id="SQLmap-adv-batch" />
-                    <label class="form-check-label" for="SQLmap-adv-batch"> Batch (Default Behaviour) </label>
+                    <label class="form-check-label" for="SQLmap-adv-batch"> Batch </label>
                   </div>
 
                   <div class="form-check form-switch">
@@ -1163,14 +1163,14 @@
               <!-- copy button -->
               <div class="copy">
                 <button class="btn btn-outline-secondary light" type="button" id="Copy" data-id="Advance-SQLmap">
-                  <span class="copytext">Copy to clipboard</span> Copy text </button>
+                  <span class="copytext">Copy to clipboard</span> Copy</button>
               </div>
               <!-- copy button end -->
             </div>
             <!-- Advance SQLmap Command end -->
             <div>
               </br>
-              <button class="back-button" type="button" onclick="clearSQLmap()">CLEAR</button>
+              <button class="red-button" type="button" onclick="clearSQLmap()">CLEAR</button>
             </div>
           </div>
           <!-- Advance Mode end -->
@@ -1183,9 +1183,13 @@
 
   <div class="btm">
     <form action="index.html" method="GET">
-      <button type="submit" class="back-button">&laquo; Back</button>
+      <button type="submit" class="red-button">&laquo; Back</button>
+    </form>
+    <form action="https://github.com/sqlmapproject/sqlmap/wiki/Usage" method="GET">
+      <button type="submit" class="red-button">SQLmap Usage &raquo;</button>
     </form>
   </div>
+  
 
   <!-- footer -->
   <div class="btm light footer">

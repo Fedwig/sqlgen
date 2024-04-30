@@ -1,25 +1,25 @@
-/* Root styles for light and dark mode */
+/* Root styles For light and dark mode */
 :root {
   --primary-color: #E63946;
   /* Red accent */
   --secondary-color: #333333;
-  /* Darker grey for text, provides better contrast */
+  /* Darker grey For text, provides better contrast */
   --explanation-color: #555555;
-  /* Medium grey for explanations, softer than black */
+  /* Medium grey For explanations, softer than black */
   --bg-color: #F7F7F7;
-  /* Slightly off-white background for light mode */
+  /* Slightly off-white background For light mode */
   --bs-border-color: #CCCCCC;
   /* Light grey borders, subtle and less intrusive */
   --box-color: #F3F3F3;
-  /* Very light grey for boxes, adds depth with minimal contrast */
+  /* Very light grey For boxes, adds depth with minimal contrast */
   --tab-btn-color: #EAEAEA;
-  /* Very light grey for inactive tabs, slightly stands out */
+  /* Very light grey For inactive tabs, slightly stands out */
   --tab-btn-hover-color: #DDDDDD;
-  /* Light grey for hover, indicates interactivity */
+  /* Light grey For hover, indicates interactivity */
   --icon-bg: #E63946;
-  /* Red for active icon backgrounds, matching the accent */
+  /* Red For active icon backgrounds, matching the accent */
   --icon-color: #FFFFFF;
-  /* White for icon details, ensures visibility */
+  /* White For icon details, ensures visibility */
 }
 
 /* Rest of your CSS styles remain unchanged */
@@ -29,28 +29,28 @@
   --primary-color: #E63946;
   /* Keeping the red accent */
   --secondary-color: #E0E0E0;
-  /* Lighter grey for secondary text, improves readability */
+  /* Lighter grey For secondary text, improves readability */
   --explanation-color: #BDBDBD;
-  /* Slightly darker grey for explanations, softer on the eyes */
+  /* Slightly darker grey For explanations, softer on the eyes */
   --bg-color: #121212;
-  /* Darker background for more depth */
+  /* Darker background For more depth */
   --bs-border-color: #373737;
   /* Dark grey borders, less contrast */
   --box-color: #1E1E1E;
-  /* Slightly lighter than bg-color for boxes to subtly stand out */
+  /* Slightly lighter than bg-color For boxes to subtly stand out */
   --tab-btn-color: #333;
-  /* Darker for inactive tabs, blends with the background */
+  /* Darker For inactive tabs, blends with the background */
   --tab-btn-hover-color: #454545;
-  /* Lighter grey for hover, subtle interaction feedback */
+  /* Lighter grey For hover, subtle interaction feedback */
   --icon-bg: #E63946;
-  /* Red for active icon backgrounds for consistency */
+  /* Red For active icon backgrounds For consistency */
   --icon-color: #FFFFFF;
-  /* White for icon details, stands out against the red */
+  /* White For icon details, stands out against the red */
 }
 
 
 
-/* for html and body */
+/* For html and body */
 body,
 html {
   height: 100%;
@@ -58,7 +58,6 @@ html {
   background-color: var(--bg-color) !important;
   color: var(--primary-color) !important;
   font-family: 'Open Sans', sans-serif;
-  /* Set font family to Open Sans */
 }
 
 
@@ -80,7 +79,7 @@ html {
   font-family: 'Open Sans', sans-serif;
 }
 
-/* for all 3 section */
+/* For all 3 section */
 .center {
   margin: auto;
   width: 80%;
@@ -147,7 +146,6 @@ html {
   overflow-y: auto;
   text-align: center;
   padding: 20px;
-  /* border-radius: 5%; */
 }
 
 /* Customize scrollbar track */
@@ -176,7 +174,7 @@ html {
   display: none;
 }
 
-/* for tab */
+/* For tab */
 .tab {
   overflow: hidden;
 }
@@ -280,7 +278,7 @@ html {
   display: inline-block;
 }
 
-/* for copy button */
+/* For copy button */
 .copy .copytext {
   visibility: hidden;
   width: 140px;
@@ -298,7 +296,7 @@ html {
   transition: opacity 0.3s;
 }
 
-/* for copy button */
+/* For copy button */
 .copy .copytext::after {
   content: "";
   position: absolute;
@@ -310,13 +308,13 @@ html {
   border-color: #555 transparent transparent transparent;
 }
 
-/* for copy button */
+/* For copy button */
 .copy:hover .copytext {
   visibility: visible;
   opacity: 1;
 }
 
-/* for copy button */
+/* For copy button */
 #Copy {
   height: 100%;
   border-top-left-radius: 0;
@@ -325,7 +323,7 @@ html {
   color: inherit !important;
 }
 
-/* for explanation text */
+/* For explanation text */
 .explanation {
   margin-bottom: 1rem !important;
   margin-top: .25rem;
@@ -333,13 +331,13 @@ html {
   color: var(--explanation-color) !important;
 }
 
-/* for header part */
+/* For header part */
 .top {
   padding: 1rem;
   background-color: var(--box-color) !important;
 }
 
-/* for content part */
+/* For content part */
 .mid {
   border: 1px solid;
   border-color: #dee2e6;
@@ -347,11 +345,16 @@ html {
   border-radius: 10px;
 }
 
-/* for bottom part */
+/* Styling for the container */
 .btm {
+  display: flex;
+  justify-content: space-between; /* Aligns one item to the left and the other to the right */
+  align-items: center; /* Centers items vertically within the container */
   padding: 1rem;
-  background-color: var(--box-color) !important;
+  background-color: var(--box-color) !important; /* Adjust the color as needed */
 }
+
+
 
 .footer {
   display: flex;
@@ -359,36 +362,31 @@ html {
 }
 
 
-
-/* for input group text */
+/* For input group text */
 .input-group-text {
   color: inherit !important;
 }
 
-/* for NSE port number */
-#NSE-Port-Number {
-  width: 20%;
-}
 
-/* for input group */
+/* For input group */
 .input-group {
   margin-top: 1rem;
   margin-bottom: .25rem;
 }
 
-/* for form selection */
+/* For form selection */
 .form-select {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
-/* for the explanation of NSE */
+/* For the explanation of NSE */
 .summary {
   margin-top: .5rem !important;
   margin-bottom: .5rem !important;
 }
 
-/* for GitHub icon */
+/* For GitHub icon */
 #Github-Cat {
   fill: var(--icon-bg);
   color: var(--icon-color);
@@ -422,7 +420,7 @@ html {
   }
 }
 
-/* for GitHub icon */
+/* For GitHub icon */
 @media (max-width:500px) {
   .github-corner:hover .octo-arm {
     animation: none
@@ -445,7 +443,7 @@ html {
   font-size: 20px;
 }
 
-/* for label element */
+/* For label element */
 label {
   color: var(--secondary-color);
 }
@@ -459,13 +457,13 @@ label {
   display: flex;
   border-radius: 10px;
   overflow: hidden;
-  background: var(--box-color); /* Use box color for tab background */
+  background: var(--box-color);
 }
 
 .tabs-container .tabs {
-  width: 300px; /* Fixed width for tabs */
-  background: var(--tab-btn-color); /* Updated background color for tabs */
-  color: var(--secondary-color); /* Updated text color for better contrast */
+  width: 300px;
+  background: var(--tab-btn-color);
+  color: var(--secondary-color);
   text-transform: uppercase;
   text-align: center;
   padding: 20px 0;
@@ -482,27 +480,27 @@ label {
 
 .tabs-container .tabs .tab:hover,
 .tabs-container .tabs .tab.active {
-  background: var(--tab-btn-hover-color); /* Background for hover/active state */
-  color: var(--primary-color); /* Color for text in hover/active state */
-  border-bottom: 2px solid var(--primary-color); /* Border color for hover/active state */
+  background: var(--tab-btn-hover-color);
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
 }
 
 .tabs-container .content-container {
   flex-grow: 1;
-  width: calc(100% - 200px); /* Calculate width based on tabs width */
-  max-width: calc(100% - 200px); /* Max width to prevent exceeding the container */
-  background: var(--tab-btn-color); /* Updated background color for content */
-  color: var(--secondary-color); /* Updated text color for content */
+  width: calc(100% - 200px);
+  max-width: calc(100% - 200px);
+  background: var(--tab-btn-color);
+  color: var(--secondary-color);
   padding: 20px;
   border-left: 1px solid var(--bs-border-color);
-  overflow-y: auto; /* Enable vertical scrollbar if content overflows */
+  overflow-y: auto;
 }
 
 .tabs-container .content-container .content {
   display: none;
   padding: 20px;
-  max-height: 100%; /* Ensure content container doesn't exceed available height */
-  overflow-y: auto; /* Enable vertical scrollbar if content overflows */
+  max-height: 100%;
+  overflow-y: auto;
 }
 
 .tabs-container .content-container .content.active {
@@ -511,53 +509,52 @@ label {
 
 .tabs-container .content-container h3 {
   margin-top: 0;
-  color: var(--primary-color); /* Updated color for headers to stand out */
+  color: var(--primary-color);
 }
 
 .tabs-container .content-container p {
   line-height: 1.6;
-  color: var(--explanation-color); /* Updated color for explanatory text */
+  color: var(--explanation-color);
 }
 
-/* Additional styles for explanations inside the tabs */
 .tabs-container .content-container .explanation {
   margin-top: 20px;
   padding: 15px;
-  background: var(--box-color); /* Light background for distinction */
+  background: var(--box-color);
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .tabs-container .content-container .explanation p {
-  text-align: left; /* Ensures text inside paragraphs is aligned to the left */
-  margin: 0; /* Adjust as needed */
-  color: var(--explanation-color); /* Preserved color styling for explanation text */
+  text-align: left;
+  margin: 0;
+  color: var(--explanation-color);
 }
 
 .generate-query-btn {
-  border: none; /* Remove default button border */
+  border: none;
   border-radius: 10px;
-  color: var(--icon-color); /* Use icon color for font */
-  background-color: var(--tab-btn-hover-color); /* Use primary color for background */
+  color: var(--icon-color);
+  background-color: var(--tab-btn-hover-color);
   max-width: 150px;
-  width: 150px !important; /* Set fixed width for consistency */
+  width: 150px !important;
   padding: 6px 12px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  cursor: pointer; /* Show pointer cursor on hover */
-  transition: background-color 0.3s, color 0.3s; /* Smooth transition on hover */
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .generate-query-btn:hover {
-  background-color: var(--primary-color);; /* Darker color on hover */
-  color: var(--icon-color-light); /* Lighter color on hover */
+  background-color: var(--primary-color);
+  color: var(--icon-color-light);
 }
 
-/* Additional styles for dark mode */
+/* Additional styles For dark mode */
 [data-theme="dark"] .generate-query-btn:hover {
-  background-color: var(--primary-color);; /* Lighter color on hover in dark mode */
-  color: var(--icon-color-dark); /* Darker color on hover in dark mode */
+  background-color: var(--primary-color);
+  color: var(--icon-color-dark);
 }
 
 
@@ -571,7 +568,7 @@ label {
 }
 
 
-/* Form Container for Home Menu */
+/* form Container For Home Menu */
 .form-container {
   max-width: 600px; /* Adjust this value as needed */
   width: 100%; /* Makes it responsive */
@@ -634,7 +631,7 @@ label {
   background-color: #f34a58;
 }
 
-.back-button {
+.red-button {
   bottom: 20px; /* 20px from the bottom */
   left: 20px; /* 20px from the left */
   padding: 10px 20px;
@@ -647,6 +644,6 @@ label {
   font-weight: bold;
 }
 
-.back-button:hover {
+.red-button:hover {
   background-color: #f34a58; /* Lighter yellow on hover */
 }
