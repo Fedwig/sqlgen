@@ -126,7 +126,7 @@ function SetSimpleSQLmap() {
   sqlmap_current_user.value = "--current-user";
   sqlmap_current_db.value = "--current-db";
   sqlmap_password.value = "--passwords";
-  sqlmap_database.value = "--database";
+  sqlmap_database.value = "--dbs";
   sqlmap_tables.value = "--tables";
   sqlmap_columns.value = "--columns";
   sqlmap_schema.value = "--schema";
