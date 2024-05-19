@@ -670,8 +670,8 @@ function SetAdvanceSQLmap() {
   //Target Option Values
   sqlmap_adv_target.value = "-u";
   sqlmap_adv_direct.value = "-d";
-  sqlmap_adv_logfile.value = "--l";
-  sqlmap_adv_bulkfile.value = "--b";
+  sqlmap_adv_logfile.value = "-l";
+  sqlmap_adv_bulkfile.value = "-b";
   sqlmap_adv_requestfile.value = "-r";
   sqlmap_adv_dorking.value = "-g";
   sqlmap_adv_configfile.value = "-c";

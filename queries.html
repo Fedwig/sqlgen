@@ -114,10 +114,10 @@
                     logical OR condition. The expression <code>'1'='1'</code> is a tautology that always evaluates as
                     true.
                     <br><br>
-                    <strong>Always True:</strong> The inclusion of <code>'1'='1'</code> ensures the SQL condition always
+                    The inclusion of <code>'1'='1'</code> ensures the SQL condition always
                     returns true, commonly used to bypass security mechanisms like login screens.
                     <br><br>
-                    <strong>Comment Type:</strong> Comment symbols like <code>--</code>, <code>#</code>, and
+                    Comment symbols like <code>--</code>, <code>#</code>, and
                     <code>/*</code> are strategically used to prevent further SQL execution beyond the injection point,
                     ensuring only the manipulated part of the SQL statement affects the database interaction.
                   </p>
@@ -161,11 +161,11 @@
                     open strings and introducing a condition <code>''=''</code>, a comparison of two empty strings that
                     always evaluates as true.
                     <br><br>
-                    <strong>Always True:</strong> Including <code>or ''=''</code> in the query ensures it always returns
+                    Including <code>or ''=''</code> in the query ensures it always returns
                     true, a common tactic to bypass security checks that require conditions to evaluate to true for
                     access.
                     <br><br>
-                    <strong>Comment Type:</strong> Comment symbols like <code>--</code>, <code>#</code>, and
+                    Comment symbols like <code>--</code>, <code>#</code>, and
                     <code>/*</code> are used to terminate the query, preventing further SQL execution and ensuring
                     only the intended manipulation is executed.
                   </p>
@@ -220,7 +220,7 @@
                     closing the string and appending an OR condition. It guarantees that the SQL condition evaluates as
                     true, effectively bypassing security checks designed to block unauthorized access.
                     <br><br>
-                    <strong>Comment Type:</strong> Comment symbols like <code>--</code>, <code>#</code>, and
+                    Comment symbols like <code>--</code>, <code>#</code>, and
                     <code>/*</code> terminate the SQL command, ensuring that only the manipulated part of the query
                     executes. This prevents any subsequent SQL code from running, focusing solely on exploiting the
                     vulnerability.
@@ -248,11 +248,11 @@
                     logical OR operator to introduce a condition that always evaluates as true. The digit <code>1</code>
                     serves as a universally true condition, disrupting typical authentication checks.
                     <br><br>
-                    <strong>Always True:</strong> Including <code>or 1</code> makes the overall SQL condition true, a
+                    Including <code>or 1</code> makes the overall SQL condition true, a
                     popular technique to override security validations, particularly in situations requiring a boolean
                     outcome.
                     <br><br>
-                    <strong>Null Byte:</strong> The use of <code>%00</code>, a URL-encoded null byte, is typically
+                    The use of <code>%00</code>, a URL-encoded null byte, is typically
                     employed to signify the end of data in certain back-end systems, effectively truncating the SQL
                     statement. This helps to prevent further processing of the query, ensuring only the manipulated
                     portion influences the database interaction.
@@ -300,11 +300,11 @@
                     making the rest of the SQL statement non-executable. This pattern is used to manipulate SQL logic to
                     ensure the condition always evaluates to true, bypassing authentication checks.
                     <br><br>
-                    <strong>Always True:</strong> The <code>or</code> condition disrupts the SQL command's intended
+                    The <code>or</code> condition disrupts the SQL command's intended
                     logic, forcing it to return true. This method is commonly used to bypass systems where SQL queries
                     determine access permissions.
                     <br><br>
-                    <strong>Comment Type:</strong> The choice of comment type, such as <code>/*</code>, <code>--</code>,
+                    The choice of comment type, such as <code>/*</code>, <code>--</code>,
                     or <code>#</code>, is crucial as it ends the executable part of the SQL statement. This is
                     strategically used to ensure no subsequent SQL code executes after the injection point, isolating
                     the impact to the manipulated part of the query.
@@ -358,7 +358,7 @@
                     compares a constant character string against itself, ensuring the condition always evaluates as
                     true.
                     <br><br>
-                    <strong>Always True:</strong> The structure <code>or 'a'='a'</code> forces the condition to be true,
+                    The structure <code>or 'a'='a'</code> forces the condition to be true,
                     which is a commonly exploited method to bypass authentication or access controls that rely on a
                     query's truth value. This type of injection is particularly effective in environments where input
                     sanitation is lax and where the SQL logic is incorrectly exposed to user manipulation.
@@ -414,7 +414,7 @@
                     condition that always evaluates as true. The initial and ending single quotes encapsulate the
                     condition within the SQL command structure, manipulating query logic.
                     <br><br>
-                    <strong>Always True:</strong> The condition <code>'x'='x'</code> is a tautology, always true, used
+                    The condition <code>'x'='x'</code> is a tautology, always true, used
                     here to circumvent authentication mechanisms by coercing the SQL query to return true. This is a
                     classic technique in SQL injection attacks that target logic flaws in authentication and data
                     retrieval processes.
@@ -477,7 +477,7 @@
                     true. The additional parentheses and single quotes are used to manage the syntax of nested SQL
                     statements properly.
                     <br><br>
-                    <strong>Always True:</strong> The condition <code>'x'='x'</code> within the double parentheses is a
+                    The condition <code>'x'='x'</code> within the double parentheses is a
                     logical tautology, ensuring that the statement returns true. This tactic forces the SQL query to
                     consider the overall condition as true, bypassing security checks such as authentication or data
                     validation layers.
@@ -536,7 +536,7 @@
                     and utilizing <code>1</code>, a universal truth in logical conditions, to guarantee the expression
                     always evaluates to true.
                     <br><br>
-                    <strong>Always True:</strong> Utilizing the number <code>1</code> in this context acts as a true
+                    Utilizing the number <code>1</code> in this context acts as a true
                     condition within SQL logic, rendering the entire query condition true regardless of other
                     conditions. This tactic is typically employed to bypass security mechanisms in systems where SQL
                     conditions must resolve as true for access to be granted.
@@ -594,7 +594,7 @@
                     any open strings and appending an <code>or true</code> condition. This condition inherently
                     evaluates as true, overriding any preceding conditions in the SQL statement.
                     <br><br>
-                    <strong>Always True:</strong> By inserting <code>true</code> as a condition, the query is
+                    By inserting <code>true</code> as a condition, the query is
                     manipulated to always return true, commonly used to bypass login screens or access controls that
                     depend on a true/false SQL query outcome.
                     <br><br>
@@ -652,11 +652,11 @@
                     administrator, while the subsequent <code>or '1'='2'</code> is a deliberately false condition used
                     to illustrate the use of SQL logic manipulation.
                     <br><br>
-                    <strong>Always False:</strong> The condition <code>'1'='2'</code> is inherently false, contrasting
+                    The condition <code>'1'='2'</code> is inherently false, contrasting
                     common SQL injection tactics that aim to force a true condition. This example is used to demonstrate
                     potential logic errors or improper handling of SQL query results.
                     <br><br>
-                    <strong>Practical Implications:</strong> While this specific condition is false, its inclusion
+                    While this specific condition is false, its inclusion
                     highlights the importance of correctly handling all possible logical outcomes in SQL queries to
                     prevent unauthorized actions or access, even under conditions intended to fail.
                   </p>
@@ -723,7 +723,7 @@
                     administrator, while the subsequent <code>or '1'='2'</code> is a deliberately false condition used
                     to illustrate the use of SQL logic manipulation.
                     <br><br>
-                    <strong>Always False:</strong> The condition <code>'1'='2'</code> is inherently false, contrasting
+                    The condition <code>'1'='2'</code> is inherently false, contrasting
                     common SQL injection tactics that aim to force a true condition. This example is used to demonstrate
                     potential logic errors or improper handling of SQL query results.
                   </p>
@@ -782,7 +782,7 @@
                     followed by a condition that is universally true, effectively ensuring the SQL query always returns
                     true, bypassing any logical security checks.
                     <br><br>
-                    <strong>Always True:</strong> The inclusion of <code>1=1</code> within the query is a simple, true
+                    The inclusion of <code>1=1</code> within the query is a simple, true
                     statement used to override other conditions in the SQL statement that might restrict access, such as
                     user authentication checks. This method is frequently employed to exploit vulnerabilities where the
                     result of the query determines access control.
